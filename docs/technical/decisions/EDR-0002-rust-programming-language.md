@@ -1,6 +1,6 @@
 # EDR-0002: Programming Languages
 
-* **Status:** Proposed
+* **Status:** Accepted
 * **Driver:** @miro
 * **Approver:** @miro
 * **Date:** 2026-01-13

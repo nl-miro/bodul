@@ -1,6 +1,6 @@
 # EDR-0004: Monorepo with Layered Architecture
 
-* **Status:** Proposed
+* **Status:** Accepted
 * **Driver:** @miro
 * **Approver:** @miro
 * **Date:** 2026-01-13
