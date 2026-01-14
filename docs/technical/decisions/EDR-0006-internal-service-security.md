@@ -1,6 +1,6 @@
 # EDR-0006: Internal Service Security
 
-* **Status:** Proposed
+* **Status:** Accepted
 * **Driver:** @miro
 * **Approver:** @miro
 * **Date:** 2026-01-14

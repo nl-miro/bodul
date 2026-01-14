@@ -36,7 +36,7 @@
 Build the data foundation for a Croatian & Slovenian price comparison platform—starting with electronics retailers—so consumers can find products, compare prices, and spot fake "sales" through price history tracking.
 
 - [x] Define target retailer list (initial set) [PR-0001: Target Retailers](product/requirements/PR-0001-target-retailers.md)
-- [ ] Internal service security [EDR-0006: Internal Service Security](technical/decisions/EDR-0006-internal-service-security.md)
+- [x] Internal service security [EDR-0006: Internal Service Security](technical/decisions/EDR-0006-internal-service-security.md)
 - [ ] Build page crawler/scraper
 - [ ] Handle pagination and category navigation
 - [ ] Store raw data in PostgreSQL
