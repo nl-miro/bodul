@@ -16,7 +16,7 @@ A lightweight record of technical / engineering decisions.
 
 ## Decisions
 
-|   ID | Date       | Area          | Title                              | Status   | Driver | Approver | Link                                                                 | One-line outcome                                                   |
+| ID   | Date       | Area          | Title                              | Status   | Driver | Approver | Link                                                                 | One-line outcome                                                   |
 |-----:|:-----------|:--------------|:-----------------------------------|:---------|:-------|:---------|:---------------------------------------------------------------------|:-------------------------------------------------------------------|
 | 0001 | 2026-01-12 | Documentation | Using linear for issue tracking    | Accepted | @miro  | @miro    | docs/technical/decisions/EDR-0001-using-linear-for-issue-tracking.md | We will be using publicly accessible linear.app for issue tracking |
 | 0002 | 2026-01-13 | Architecture  | Programming languages              | Accepted | @miro  | @miro    | docs/technical/decisions/EDR-0002-rust-programming-language.md       | Rust primary, Go secondary for prototypes and tooling              |
