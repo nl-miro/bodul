@@ -20,6 +20,7 @@
 | 8   | Price tracking                               | TBD     | Historical pricing     |
 | 9   | Availability tracking                        | TBD     | Stock status           |
 | 10  | Minimal customer facing website & mobile app | TBD     | MVP frontend           |
+| 11  | Auth service                                 | TBD     | Internal service auth  |
 
 ## Phase 2 Goals
 
@@ -35,6 +36,7 @@
 Build the data foundation for a Croatian & Slovenian price comparison platform—starting with electronics retailers—so consumers can find products, compare prices, and spot fake "sales" through price history tracking.
 
 - [x] Define target retailer list (initial set) [PR-0001: Target Retailers](product/requirements/PR-0001-target-retailers.md)
+- [ ] Internal service security [EDR-0006: Internal Service Security](technical/decisions/EDR-0006-internal-service-security.md)
 - [ ] Build page crawler/scraper
 - [ ] Handle pagination and category navigation
 - [ ] Store raw data in PostgreSQL
@@ -66,3 +68,7 @@ Build the data foundation for a Croatian & Slovenian price comparison platform�
 
 
 ### Launch Goal 10: Minimal customer facing website & mobile app
+
+
+### Launch Goal 11: Auth service
+
