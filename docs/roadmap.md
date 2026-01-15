@@ -72,3 +72,6 @@ Build the data foundation for a Croatian & Slovenian price comparison platformâ€
 
 ### Launch Goal 11: Auth service
 
+Centralized HTTP auth service for internal service-to-service authentication. This is the upgrade path from the current `auth_client` library (EDR-0006 Option 3) to a centralized solution (Options 1 or 2) when the platform scales and requires dynamic credential management.
+
+Note: The current `auth_client` library with hardcoded credentials is sufficient for early-phase development and is already implemented as part of Launch Goal 1.
