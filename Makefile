@@ -1,4 +1,4 @@
-.PHONY: help fix cfix clippy fmt check build buildr qbuild test qtest run runr lint clean wip align-markdown-table-columns
+.PHONY: help fix cfix clippy fmt check build buildr qbuild test qtest lint clean wip align-markdown-table-columns
 
 # Workspace folders that contain Makefiles
 WORKSPACES := shared
@@ -15,8 +15,6 @@ help:
 	@echo "  qbuild                     Quick build (suppress warnings)"
 	@echo "  test                       Run all tests"
 	@echo "  qtest                      Quick test (suppress warnings)"
-	@echo "  run                        Run binaries"
-	@echo "  runr                       Release run"
 	@echo "  lint                       Alias for clippy"
 	@echo "  clean                      Remove build artifacts"
 	@echo "  wip                        Work-in-progress commit"
@@ -80,18 +78,6 @@ qtest:
 	set -e; for ws in $(WORKSPACES); do \
 		echo "==> $$ws"; \
 		$(MAKE) -C $$ws qtest; \
-	done
-
-run:
-	set -e; for ws in $(WORKSPACES); do \
-		echo "==> $$ws"; \
-		$(MAKE) -C $$ws run; \
-	done
-
-runr:
-	set -e; for ws in $(WORKSPACES); do \
-		echo "==> $$ws"; \
-		$(MAKE) -C $$ws runr; \
 	done
 
 lint: clippy

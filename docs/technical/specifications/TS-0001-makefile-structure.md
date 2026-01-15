@@ -65,8 +65,6 @@ Declare all targets as `.PHONY` and implement them in every workspace Makefile. 
 | `qbuild` | Build        | Iterate workspaces        | `RUSTFLAGS="-Awarnings" cargo build`                                               | Suppress warnings for quick loops.                             |
 | `test`   | Testing      | Iterate workspaces        | `cargo test`                                                                       | Full suite.                                                    |
 | `qtest`  | Testing      | Iterate workspaces        | `RUSTFLAGS="-Awarnings" cargo test`                                                | Suppress warnings for speed.                                   |
-| `run`    | Execution    | Iterate workspaces        | `cargo run`                                                                        | For binaries; print a no-op message otherwise.                 |
-| `runr`   | Execution    | Iterate workspaces        | `cargo run --release`                                                              | For binaries; print a no-op message otherwise.                 |
 | `clean`  | Maintenance  | Iterate workspaces        | `cargo clean`                                                                      | Clears `target/`.                                              |
 | `wip`    | Maintenance  | **Direct** (no iteration) | Git ops: `git add TODO.md && git commit ...` + `git add . && git commit -am 'wip'` | In all Makefiles; root version direct to avoid nested commits. |
 | `help`   | Discovery    | Iterate workspaces        | Print local targets and short descriptions                                         | Keep in sync with this table.                                  |
@@ -79,8 +77,6 @@ Declare all targets as `.PHONY` and implement them in every workspace Makefile. 
   - `qbuild` must set `RUSTFLAGS="-Awarnings"` inline to avoid polluting env.
 - Testing: `test`, `qtest`
   - `qtest` mirrors `qbuild` warning suppression.
-- Execution: `run`, `runr`
-  - If no runnable binary exists, keep targets but emit a clear message instead of failing.
 - Maintenance: `clean`, `wip`
   - `wip` is root-only; never iterate it to avoid nested git commits.
 - Discovery: `help`

@@ -1,4 +1,4 @@
-.PHONY: help fix cfix clippy fmt check build buildr qbuild test qtest run runr lint clean wip
+.PHONY: help fix cfix clippy fmt check build buildr qbuild test qtest lint clean wip
 
 help:
 	@echo "Available targets:"
@@ -12,8 +12,6 @@ help:
 	@echo "  qbuild   Quick build (suppress warnings)"
 	@echo "  test     Run all tests"
 	@echo "  qtest    Quick test (suppress warnings)"
-	@echo "  run      Run binaries"
-	@echo "  runr     Release run"
 	@echo "  lint     Alias for clippy"
 	@echo "  clean    Remove build artifacts"
 	@echo "  wip      Work-in-progress commit"
@@ -47,12 +45,6 @@ test:
 
 qtest:
 	set -e; env RUSTFLAGS="-Awarnings" cargo test --workspace --target-dir target/q
-
-run:
-	set -e; cargo run
-
-runr:
-	set -e; cargo run --release
 
 lint: clippy
 
