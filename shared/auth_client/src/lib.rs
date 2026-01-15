@@ -2,6 +2,18 @@
 //!
 //! Implements Bearer token validation with hardcoded credentials.
 //! Based on EDR-0006: Internal Service Security.
+//!
+//! # Security Notice
+//!
+//! **Development/POC only.** Service tokens are hardcoded as compile-time constants.
+//! This is intentional for the initial phase per [EDR-0006].
+//!
+//! Before production deployment:
+//! 1. Move tokens to environment variables or a secrets manager
+//! 2. Implement token rotation procedures
+//! 3. Consider upgrading to centralized auth service (EDR-0006 Options 1 or 2)
+//!
+//! [EDR-0006]: ../../../docs/technical/decisions/EDR-0006-internal-service-security.md
 
 pub mod model;
 
