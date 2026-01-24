@@ -146,13 +146,13 @@ On permanent failure:
 
 ### Retry Policy
 
-| Error Type       | Retry | Max Attempts | Backoff        |
-|------------------|-------|--------------|----------------|
-| 5xx Server Error | Yes   | 3            | Exponential    |
-| Timeout          | Yes   | 3            | Exponential    |
-| Network Error    | Yes   | 3            | Exponential    |
-| 4xx Client Error | No    | -            | -              |
-| Rate Limited     | Yes   | 5            | Retry-After    |
+| Error Type       | Retry | Max Attempts | Backoff     |
+|------------------|-------|--------------|-------------|
+| 5xx Server Error | Yes   | 3            | Exponential |
+| Timeout          | Yes   | 3            | Exponential |
+| Network Error    | Yes   | 3            | Exponential |
+| 4xx Client Error | No    | -            | -           |
+| Rate Limited     | Yes   | 5            | Retry-After |
 
 ### Timeouts
 
