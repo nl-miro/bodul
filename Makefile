@@ -12,6 +12,8 @@ fmt:
 	cd apps/retailer-data-ingestion && make fmt
 	cd apps/product-information-management && make fmt
 	cd apps/retailer-offer && make fmt
+	cd lib/retailer-guild && make fmt
+	cd lib/retailer-parsing && make fmt
 
 check:
 	cd apps/retailer-management && make check
@@ -19,6 +21,8 @@ check:
 	cd apps/retailer-data-ingestion && make check
 	cd apps/product-information-management && make check
 	cd apps/retailer-offer && make check
+	cd lib/retailer-guild && make check
+	cd lib/retailer-parsing && make check
 
 test:
 	cd apps/retailer-management && make test
@@ -26,3 +30,5 @@ test:
 	cd apps/retailer-data-ingestion && make test
 	cd apps/product-information-management && make test
 	cd apps/retailer-offer && make test
+	cd lib/retailer-guild && make test
+	cd lib/retailer-parsing && make test
