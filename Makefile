@@ -1,4 +1,4 @@
-.PHONY: fmt test check
+.PHONY: fmt test check gomd wip
 
 fmt:
 	$(MAKE) -C apps/mvp fmt
@@ -14,3 +14,9 @@ check:
 	$(MAKE) -C apps/mvp check
 	$(MAKE) -C lib/money check
 	$(MAKE) -C lib/shared check
+
+gomd:
+	gomd all .
+
+wip:
+	git add . && git commit -am 'wip'
