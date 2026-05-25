@@ -13,3 +13,6 @@ eventing = { git = "https://github.com/nulllabsdev/mulac.git" }
 inbox = { git = "https://github.com/nulllabsdev/mulac.git" }
 mulac_diesel = { git = "https://github.com/nulllabsdev/mulac.git" }
 outbox = { git = "https://github.com/nulllabsdev/mulac.git" }
+poem = "0.3"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
