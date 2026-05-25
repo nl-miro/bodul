@@ -1,0 +1,10 @@
+[package]
+name = "retailer-offer"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "retailer-offer"
+path = "src/bin/retailer-offer.rs"
+
+[dependencies]
