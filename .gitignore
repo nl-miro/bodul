@@ -1,6 +1,6 @@
 .env
-.idea
-target
+.idea/
+target/
 /var/postgres_data/
 /*/var/postgres_data/
 /*/var/postgres_data_test/
