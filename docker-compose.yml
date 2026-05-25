@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "26001:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./etc/dev/postgres/create-databases.sh:/docker-entrypoint-initdb.d/create-databases.sh
+    healthcheck:
+      test:
+        - "CMD-SHELL"
+        - >-
+          pg_isready -U postgres &&
+          psql -U postgres -c '\q' retailer_sourcing &&
+          psql -U postgres -c '\q' retailer_sourcing_test
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:

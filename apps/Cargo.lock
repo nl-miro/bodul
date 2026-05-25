@@ -114,21 +114,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "commanding"
-version = "0.1.0"
-source = "git+https://github.com/nulllabsdev/mulac.git#4eee8e6a4d3fc31335cc0458b8f73da43ddd4b5d"
-dependencies = [
- "chrono",
- "diesel",
- "eventing",
- "mulac_diesel",
- "serde",
- "serde_json",
- "thiserror",
- "uuid",
-]
-
-[[package]]
 name = "core-foundation-sys"
 version = "0.8.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -220,6 +205,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "diesel_migrations"
+version = "2.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "28d0f4a98124ba6d4ca75da535f65984badec16a003b6e2f94a01e31a79490b8"
+dependencies = [
+ "diesel",
+ "migrations_internals",
+ "migrations_macros",
+]
+
+[[package]]
 name = "diesel_table_macro_syntax"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -237,6 +233,12 @@ dependencies = [
  "block-buffer",
  "crypto-common",
 ]
+
+[[package]]
+name = "dotenvy"
+version = "0.15.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1aaf95b3e5c8f23aa320147307562d361db0ae0d51242340f558153b4eb2439b"
 
 [[package]]
 name = "downcast-rs"
@@ -281,20 +283,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "eventing"
-version = "0.1.0"
-source = "git+https://github.com/nulllabsdev/mulac.git#4eee8e6a4d3fc31335cc0458b8f73da43ddd4b5d"
-dependencies = [
- "chrono",
- "diesel",
- "mulac_diesel",
- "serde",
- "serde_json",
- "thiserror",
- "uuid",
-]
-
-[[package]]
 name = "find-msvc-tools"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -335,6 +323,17 @@ name = "futures-core"
 version = "0.3.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7e3450815272ef58cec6d564423f6e755e25379b217b0bc688e295ba24df6b1d"
+
+[[package]]
+name = "futures-executor"
+version = "0.3.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "baf29c38818342a3b26b5b923639e7b1f4a61fc5e76102d4b1981c6dc7a7579d"
+dependencies = [
+ "futures-core",
+ "futures-task",
+ "futures-util",
+]
 
 [[package]]
 name = "futures-io"
@@ -483,9 +482,9 @@ checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
 
 [[package]]
 name = "http"
-version = "1.4.0"
+version = "1.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e3ba2a386d7f85a81f119ad7498ebe444d2e22c2af0b86b069416ace48b3311a"
+checksum = "8be7462df143984c4598a256ef469b251d7d7f9e271135073e78fc535414f3d0"
 dependencies = [
  "bytes",
  "itoa",
@@ -598,21 +597,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b9e0384b61958566e926dc50660321d12159025e767c18e043daf26b70104c39"
 
 [[package]]
-name = "inbox"
-version = "0.1.0"
-source = "git+https://github.com/nulllabsdev/mulac.git#4eee8e6a4d3fc31335cc0458b8f73da43ddd4b5d"
-dependencies = [
- "chrono",
- "commanding",
- "diesel",
- "mulac_diesel",
- "serde",
- "serde_json",
- "thiserror",
- "uuid",
-]
-
-[[package]]
 name = "indexmap"
 version = "2.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -676,6 +660,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f8ca58f447f06ed17d5fc4043ce1b10dd205e060fb3ce5b979b8ed8e59ff3f79"
 
 [[package]]
+name = "migrations_internals"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "36c791ecdf977c99f45f23280405d7723727470f6689a5e6dbf513ac547ae10d"
+dependencies = [
+ "serde",
+ "toml",
+]
+
+[[package]]
+name = "migrations_macros"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "36fc5ac76be324cfd2d3f2cf0fdf5d5d3c4f14ed8aaebadb09e304ba42282703"
+dependencies = [
+ "migrations_internals",
+ "proc-macro2",
+ "quote",
+]
+
+[[package]]
 name = "mime"
 version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -693,9 +698,89 @@ dependencies = [
 ]
 
 [[package]]
+name = "mulac-commanding"
+version = "0.1.1"
+source = "sparse+http://localhost:8080/"
+checksum = "1bc95e9c2d1efb4c78f5fe55e5f1453b220dd340a5f745e0dec7668acd559f3a"
+dependencies = [
+ "chrono",
+ "diesel",
+ "mulac-eventing",
+ "mulac_diesel",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "uuid",
+]
+
+[[package]]
+name = "mulac-eventing"
+version = "0.1.1"
+source = "sparse+http://localhost:8080/"
+checksum = "ed4bd17130f3dec54939f5b3dc244e9e964e6fae95ed2326f815c4091f7d9cdf"
+dependencies = [
+ "chrono",
+ "diesel",
+ "mulac_diesel",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "uuid",
+]
+
+[[package]]
+name = "mulac-inbox"
+version = "0.1.1"
+source = "sparse+http://localhost:8080/"
+checksum = "54d5aa2a8d342be2950635227fb2d2001672b6176a9cbadf0a6c3be1b26a0d3d"
+dependencies = [
+ "chrono",
+ "diesel",
+ "mulac-commanding",
+ "mulac_diesel",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "uuid",
+]
+
+[[package]]
+name = "mulac-kernel"
+version = "0.1.2"
+source = "sparse+http://localhost:8080/"
+checksum = "8f4afb92939e0baabcaf79fe91f9112ee02c2a422dab602ce0f32ec7aa0ff78c"
+dependencies = [
+ "mulac-commanding",
+ "mulac-eventing",
+ "mulac-inbox",
+ "mulac-outbox",
+ "mulac_diesel",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "tokio-util",
+ "tracing",
+]
+
+[[package]]
+name = "mulac-outbox"
+version = "0.1.1"
+source = "sparse+http://localhost:8080/"
+checksum = "44c66c684c16a46bccf2e2a78c8e600b334982b4e02e82fa64d2e498d2b22ead"
+dependencies = [
+ "chrono",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "uuid",
+]
+
+[[package]]
 name = "mulac_diesel"
-version = "0.1.0"
-source = "git+https://github.com/nulllabsdev/mulac.git#4eee8e6a4d3fc31335cc0458b8f73da43ddd4b5d"
+version = "0.1.1"
+source = "sparse+http://localhost:8080/"
+checksum = "4aa16919c6598435a69b83478ee26bfef746a73bf940061dfd83f6a17ef03a42"
 dependencies = [
  "diesel",
 ]
@@ -726,20 +811,6 @@ name = "once_cell"
 version = "1.21.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
-
-[[package]]
-name = "outbox"
-version = "0.1.0"
-source = "git+https://github.com/nulllabsdev/mulac.git#4eee8e6a4d3fc31335cc0458b8f73da43ddd4b5d"
-dependencies = [
- "chrono",
- "diesel",
- "mulac_diesel",
- "serde",
- "serde_json",
- "thiserror",
- "uuid",
-]
 
 [[package]]
 name = "parking_lot"
@@ -941,6 +1012,13 @@ name = "retailer-data-ingestion"
 version = "0.1.0"
 
 [[package]]
+name = "retailer-guild"
+version = "0.1.0"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "retailer-management"
 version = "0.1.0"
 
@@ -952,15 +1030,20 @@ version = "0.1.0"
 name = "retailer-sourcing"
 version = "0.1.0"
 dependencies = [
- "commanding",
- "eventing",
- "inbox",
- "mulac_diesel",
- "outbox",
+ "chrono",
+ "diesel",
+ "diesel_migrations",
+ "dotenvy",
+ "mulac-kernel",
  "poem",
+ "retailer-guild",
  "serde",
  "serde_json",
+ "serial_test",
+ "subtle",
+ "thiserror",
  "tokio",
+ "uuid",
 ]
 
 [[package]]
@@ -985,6 +1068,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f"
 
 [[package]]
+name = "scc"
+version = "2.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "46e6f046b7fef48e2660c57ed794263155d713de679057f2d0c169bfc6e756cc"
+dependencies = [
+ "sdd",
+]
+
+[[package]]
 name = "scheduled-thread-pool"
 version = "0.2.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -998,6 +1090,12 @@ name = "scopeguard"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49"
+
+[[package]]
+name = "sdd"
+version = "3.0.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "490dcfcbfef26be6800d11870ff2df8774fa6e86d047e3e8c8a76b25655e41ca"
 
 [[package]]
 name = "semver"
@@ -1049,6 +1147,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde_spanned"
+version = "1.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6662b5879511e06e8999a8a235d848113e942c9124f211511b16466ee2995f26"
+dependencies = [
+ "serde_core",
+]
+
+[[package]]
 name = "serde_urlencoded"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1058,6 +1165,32 @@ dependencies = [
  "itoa",
  "ryu",
  "serde",
+]
+
+[[package]]
+name = "serial_test"
+version = "3.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "911bd979bf1070a3f3aa7b691a3b3e9968f339ceeec89e08c280a8a22207a32f"
+dependencies = [
+ "futures-executor",
+ "futures-util",
+ "log",
+ "once_cell",
+ "parking_lot",
+ "scc",
+ "serial_test_derive",
+]
+
+[[package]]
+name = "serial_test_derive"
+version = "3.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0a7d91949b85b0d2fb687445e448b40d322b6b3e4af6b44a29b21d9a5f33e6d9"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -1125,6 +1258,12 @@ name = "strsim"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
+
+[[package]]
+name = "subtle"
+version = "2.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
 name = "syn"
@@ -1220,6 +1359,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "toml"
+version = "0.9.12+spec-1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cf92845e79fc2e2def6a5d828f0801e29a2f8acc037becc5ab08595c7d5e9863"
+dependencies = [
+ "serde_core",
+ "serde_spanned",
+ "toml_datetime 0.7.5+spec-1.1.0",
+ "toml_parser",
+ "winnow 0.7.15",
+]
+
+[[package]]
+name = "toml_datetime"
+version = "0.7.5+spec-1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "92e1cfed4a3038bc5a127e35a2d360f145e1f4b971b551a2ba5fd7aedf7e1347"
+dependencies = [
+ "serde_core",
+]
+
+[[package]]
 name = "toml_datetime"
 version = "1.1.1+spec-1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1235,9 +1396,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b59c4d22ed448339746c59b905d24568fcbb3ab65a500494f7b8c3e97739f2b"
 dependencies = [
  "indexmap",
- "toml_datetime",
+ "toml_datetime 1.1.1+spec-1.1.0",
  "toml_parser",
- "winnow",
+ "winnow 1.0.3",
 ]
 
 [[package]]
@@ -1246,7 +1407,7 @@ version = "1.1.2+spec-1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a2abe9b86193656635d2411dc43050282ca48aa31c2451210f4202550afb7526"
 dependencies = [
- "winnow",
+ "winnow 1.0.3",
 ]
 
 [[package]]
@@ -1507,6 +1668,12 @@ checksum = "ae137229bcbd6cdf0f7b80a31df61766145077ddf49416a728b02cb3921ff3fc"
 dependencies = [
  "windows-link",
 ]
+
+[[package]]
+name = "winnow"
+version = "0.7.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df79d97927682d2fd8adb29682d1140b343be4ac0f08fd68b7765d9c059d3945"
 
 [[package]]
 name = "winnow"

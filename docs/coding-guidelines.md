@@ -102,3 +102,50 @@ pub fn route() -> Route {
   `[dev-dependencies]`) rather than spawning the binary.
 - Never import from a feature module directly; if a test needs something,
   expose it through that feature's `io` submodule.
+
+## Rust code style
+
+### Imports in code and tests
+
+Always import individual bindings explicitly rather than using them fully
+qualified inline. Prefer:
+
+```rust
+use poem::{Route, handler, web::Json};
+
+fn example() -> Json<Foo> { … }
+```
+
+over:
+
+```rust
+fn example() -> poem::web::Json<Foo> { … }
+```
+
+This keeps call sites readable, makes the dependency surface visible at a
+glance, and reduces noise in function signatures and expressions.
+
+Additional formatting rules for import blocks:
+
+- No empty lines between import statements.
+- Multi-line imports must have a trailing `//` comment after the last binding
+  and the closing `}` on its own line. This prevents `rustfmt` from collapsing
+  the group to a single line, keeping one binding per line:
+
+  ```rust
+  use poem::{
+      EndpointExt,
+      Route,
+      handler, //
+  };
+  ```
+
+- Each line in a multi-line import must be at most 80 characters.
+
+
+
+Format all markdown text (`.md` files) with lines no longer than 80 characters
+wide. Wrap at word boundaries. This makes diffs readable, enables easy
+terminal editing, and keeps line-based review tools (git blame, grep)
+predictable. Code blocks and tables are exempt from this rule if wrapping
+would harm readability.

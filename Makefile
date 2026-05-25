@@ -1,10 +1,37 @@
-.PHONY: align-markdown-table-columns wip fmt check test
+.PHONY: align-markdown-table-columns wip fmt check test up down reset run process entry-error-tracing truncate-dev truncate-test
 
 align-markdown-table-columns:
 	./etc/dev/align-markdown-table-columns/align-markdown-table-columns .
 
 wip:
 	git add . && git commit -am 'wip'
+
+up:
+	docker compose up -d --wait
+	cd apps/retailer-sourcing && make migrate
+
+run:
+	cd apps/retailer-sourcing && cargo run --bin retailer-sourcing
+
+process:
+	cd apps/retailer-sourcing && make process
+
+entry-error-tracing:
+	cd apps/retailer-sourcing && make entry-error-tracing
+
+truncate-dev:
+	cd apps/retailer-sourcing && make truncate-dev
+
+truncate-test:
+	cd apps/retailer-sourcing && make truncate-test
+
+down:
+	docker compose down
+
+reset:
+	docker compose down -v
+	docker compose up -d --wait
+	cd apps/retailer-sourcing && make migrate
 
 fmt:
 	cd apps/retailer-management && make fmt
