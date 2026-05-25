@@ -1,0 +1,21 @@
+meta {
+  name: daily-sourcing-wrong-token
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{host}}/daily-sourcing/
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: definitely-not-the-real-token
+}
+
+tests {
+  test("returns 401 Unauthorized when bearer token is wrong", function() {
+    expect(res.getStatus()).to.equal(401);
+  });
+}

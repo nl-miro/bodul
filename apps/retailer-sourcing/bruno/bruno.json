@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "retailer-sourcing",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
