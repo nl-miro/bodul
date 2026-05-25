@@ -5,6 +5,8 @@ members = [
     "retailer-data-ingestion",
     "product-information-management",
     "retailer-offer",
+    "../lib/retailer-guild",
+    "../lib/retailer-parsing",
 ]
 
 resolver = "2"
