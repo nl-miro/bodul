@@ -1,0 +1,28 @@
+meta {
+  name: daily-sourcing
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}/daily-sourcing/
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{bearer_token}}
+}
+
+tests {
+  test("returns 202 Accepted", function() {
+    expect(res.getStatus()).to.equal(202);
+  });
+
+  test("body contains a command_id uuid", function() {
+    const body = res.getBody();
+    expect(body.command_id).to.match(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+    );
+  });
+}

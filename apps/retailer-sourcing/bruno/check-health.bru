@@ -1,0 +1,23 @@
+meta {
+  name: check-health
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{host}}/health
+}
+
+tests {
+  test("returns 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("status is ok", function() {
+    expect(res.getBody().status).to.equal("ok");
+  });
+
+  test("service is retailer-sourcing", function() {
+    expect(res.getBody().service).to.equal("retailer-sourcing");
+  });
+}

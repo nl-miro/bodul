@@ -1,0 +1,17 @@
+meta {
+  name: daily-sourcing-missing-auth
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}/daily-sourcing/
+  body: none
+  auth: none
+}
+
+tests {
+  test("returns 401 Unauthorized when no Authorization header", function() {
+    expect(res.getStatus()).to.equal(401);
+  });
+}
