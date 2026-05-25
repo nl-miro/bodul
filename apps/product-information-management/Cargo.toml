@@ -1,0 +1,10 @@
+[package]
+name = "product-information-management"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "product-information-management"
+path = "src/bin/product-information-management.rs"
+
+[dependencies]
