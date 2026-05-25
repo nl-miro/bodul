@@ -1,22 +1,28 @@
-.PHONY: fmt test check gomd wip
+.PHONY: align-markdown-table-columns wip fmt check test
 
-fmt:
-	$(MAKE) -C apps/mvp fmt
-	$(MAKE) -C lib/money fmt
-	$(MAKE) -C lib/shared fmt
-
-test:
-	$(MAKE) -C apps/mvp test
-	$(MAKE) -C lib/money test
-	$(MAKE) -C lib/shared test
-
-check:
-	$(MAKE) -C apps/mvp check
-	$(MAKE) -C lib/money check
-	$(MAKE) -C lib/shared check
-
-gomd:
-	gomd all .
+align-markdown-table-columns:
+	./etc/dev/align-markdown-table-columns/align-markdown-table-columns .
 
 wip:
 	git add . && git commit -am 'wip'
+
+fmt:
+	cd apps/retailer-management && make fmt
+	cd apps/retailer-sourcing && make fmt
+	cd apps/retailer-data-ingestion && make fmt
+	cd apps/product-information-management && make fmt
+	cd apps/retailer-offer && make fmt
+
+check:
+	cd apps/retailer-management && make check
+	cd apps/retailer-sourcing && make check
+	cd apps/retailer-data-ingestion && make check
+	cd apps/product-information-management && make check
+	cd apps/retailer-offer && make check
+
+test:
+	cd apps/retailer-management && make test
+	cd apps/retailer-sourcing && make test
+	cd apps/retailer-data-ingestion && make test
+	cd apps/product-information-management && make test
+	cd apps/retailer-offer && make test
