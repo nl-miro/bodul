@@ -5,3 +5,4 @@ target
 /*/var/postgres_data/
 /*/var/postgres_data_test/
 /apps/mvp/data
+datagrip/

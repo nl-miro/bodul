@@ -1,0 +1,195 @@
+// Template: HTTP-triggered command/event feature.
+//
+// See docs/guides/intention-and-implementation.md for the rationale and
+// docs/coding-guidelines.md for the surrounding repository conventions.
+//
+// How to use this template:
+//   1. Copy this file to apps/<crate>/src/<feature_action>.rs (drop the
+//      trailing .txt so cargo picks it up).
+//   2. Do the search-and-replace below.
+//   3. Delete any mods you do not need yet. `domain` is often empty in
+//      early features — delete the empty `mod domain {}` until you have
+//      something pure to put in it.
+//   4. Declare `mod <feature_action>;` in the crate's lib.rs.
+//   5. Add `pub use crate::<feature_action>::io::*;` inside the crate's
+//      top-level `pub mod io`.
+//   6. Add a `<FeatureRequested>` variant to the crate's event enum (see
+//      `app_event.rs` in retailer-sourcing for the pattern).
+//   7. Wire the route in `app()`, and register the handler in your
+//      assembly's `start_mulac()` (or equivalent kernel boot wiring).
+//
+// Search-and-replace (case-sensitive; do each line as one substitution):
+//   Feature              -> PascalCase feature noun     (e.g. DailySourcing)
+//   FEATURE_REQUESTED    -> SCREAMING_SNAKE of the noun (e.g. DAILY_SOURCING_REQUESTED)
+//   FEATURE_ACTION_PATH  -> route constant name         (e.g. DAILY_SOURCING_PATH)
+//   feature_action       -> snake_case module name      (e.g. daily_sourcing)
+//   /feature-action/     -> URL path                    (e.g. /daily-sourcing/)
+//   CrateEvent           -> crate's event enum          (e.g. RetailerSourcingEvent)
+//   <crate>              -> crate identifier            (e.g. retailer-sourcing)
+
+// Intention — re-exported to the rest of the codebase.
+pub mod io {
+    pub use super::application::{
+        COMMAND_TYPE,
+        EVENT_TYPE_FEATURE_REQUESTED,
+        FeatureRequested,
+        StartFeature, //
+    };
+    pub use super::handler::FeatureHandler;
+    pub use super::http::{FEATURE_ACTION_PATH, FeatureResponse, register, trigger};
+}
+
+// Exposed service — HTTP adapter.
+mod http {
+    use super::application::{FeatureError, StartFeature};
+    use crate::assembly::io::BearerAuth;
+    use chrono::Utc;
+    use kernel::{
+        NewCommandEnvelope,
+        NewCommandMetadata,
+        PersistentKernelState, //
+    };
+    use poem::error::ResponseError;
+    use poem::web::Json;
+    use poem::{
+        EndpointExt,
+        IntoResponse,
+        Response,
+        Result,
+        Route,
+        handler,
+        http::StatusCode,
+        middleware::AddData,
+        post,
+        web::Data, //
+    };
+    use serde::Serialize;
+    use std::sync::Arc;
+    use tokio::task::spawn_blocking;
+    use uuid::Uuid;
+
+    pub const FEATURE_ACTION_PATH: &str = "/feature-action/";
+
+    #[derive(Debug, Serialize)]
+    pub struct FeatureResponse {
+        pub command_id: Uuid,
+    }
+
+    impl ResponseError for FeatureError {
+        fn status(&self) -> StatusCode {
+            StatusCode::INTERNAL_SERVER_ERROR
+        }
+    }
+
+    #[handler]
+    pub async fn trigger(state: Data<&PersistentKernelState>) -> Result<Response> {
+        let state = state.0.clone();
+        let command_id = Uuid::now_v7();
+        let envelope = NewCommandEnvelope {
+            command: StartFeature::new(Utc::now()),
+            metadata: NewCommandMetadata {
+                command_id,
+                correlation_id: Some(command_id),
+                causation_id: None,
+                source: Some("<crate>.http".to_string()),
+            },
+        };
+
+        spawn_blocking(move || state.dispatch_command(envelope))
+            .await
+            .map_err(|e| FeatureError::Infra(e.to_string()))?
+            .map_err(|e| FeatureError::Infra(e.to_string()))?;
+
+        Ok((StatusCode::ACCEPTED, Json(FeatureResponse { command_id })).into_response())
+    }
+
+    pub fn register(route: Route, state: Arc<PersistentKernelState>, bearer: Arc<String>) -> Route {
+        route.at(
+            FEATURE_ACTION_PATH,
+            post(trigger)
+                .with(AddData::new((*state).clone()))
+                .with(BearerAuth::new((*bearer).clone())),
+        )
+    }
+}
+
+// Exposed service — command handler port implementation.
+mod handler {
+    use super::application::{FeatureRequested, StartFeature};
+    use crate::app_event::io::CrateEvent;
+    use chrono::Utc;
+    use kernel::io::{CommandError, CommandHandlerPort};
+
+    pub struct FeatureHandler;
+
+    impl FeatureHandler {
+        pub fn new() -> Self {
+            Self
+        }
+    }
+
+    impl Default for FeatureHandler {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
+    impl CommandHandlerPort<StartFeature, CrateEvent> for FeatureHandler {
+        fn execute(&self, _cmd: StartFeature) -> Result<Vec<CrateEvent>, CommandError> {
+            let event = FeatureRequested {
+                requested_at: Utc::now(),
+            };
+            Ok(vec![CrateEvent::FeatureRequested(event)])
+        }
+    }
+}
+
+// Models — commands, events, errors, and type-name constants.
+mod application {
+    use chrono::{DateTime, Utc};
+    use kernel::{ApplicationCommand, ApplicationEvent};
+    use serde::{Deserialize, Serialize};
+    use thiserror::Error;
+
+    pub const COMMAND_TYPE: &str = "StartFeature";
+    pub const EVENT_TYPE_FEATURE_REQUESTED: &str = "FeatureRequested";
+
+    #[derive(Debug, Serialize, Deserialize)]
+    pub struct StartFeature {
+        triggered_at: DateTime<Utc>,
+    }
+
+    impl ApplicationCommand for StartFeature {
+        fn command_type(&self) -> &'static str {
+            COMMAND_TYPE
+        }
+    }
+
+    impl StartFeature {
+        pub fn new(triggered_at: DateTime<Utc>) -> Self {
+            Self { triggered_at }
+        }
+    }
+
+    #[derive(Debug, Clone, Serialize, Deserialize)]
+    pub struct FeatureRequested {
+        pub requested_at: DateTime<Utc>,
+    }
+
+    impl ApplicationEvent for FeatureRequested {
+        fn event_type(&self) -> &'static str {
+            EVENT_TYPE_FEATURE_REQUESTED
+        }
+    }
+
+    #[derive(Debug, Error)]
+    pub enum FeatureError {
+        #[error("Infrastructure error: {0}")]
+        Infra(String),
+    }
+}
+
+// Pure types with no infrastructure dependencies. Add types here when the
+// feature grows logic that does not belong in `application`. Delete the
+// empty body until the feature actually has pure types to host.
+mod domain {}

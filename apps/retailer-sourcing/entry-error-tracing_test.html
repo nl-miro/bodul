@@ -1,0 +1,455 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Retailer Sourcing Entry Error Trace</title><style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#111827;color:#e5e7eb;margin:0;padding:2rem;line-height:1.5;}a{color:#93c5fd;}h1,h2,h3{margin-top:0;}.summary{background:#1f2937;border:1px solid #374151;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;}.summary code{color:#d1fae5;}.trace{margin-bottom:1.5rem;}.trace ul{list-style:none;margin:0;padding-left:1.5rem;border-left:1px solid #374151;}.trace > ul{padding-left:0;border-left:none;}.trace li{margin:0.75rem 0;}.entry-card{background:#1f2937;border:1px solid #374151;border-left-width:6px;border-radius:12px;padding:0.9rem 1rem;}.status-error{border-left-color:#dc2626;color:#fecaca;}.status-completed{border-left-color:#16a34a;color:#bbf7d0;}.status-reserved{border-left-color:#f59e0b;color:#fde68a;}.status-neutral{border-left-color:#6b7280;color:#e5e7eb;}.entry-header{display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:0.5rem;}.entry-kind{font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem;}.status-pill{display:inline-block;padding:0.2rem 0.55rem;border-radius:999px;background:#0f172a;border:1px solid currentColor;font-size:0.85rem;}.relation{display:inline-block;margin-bottom:0.35rem;font-size:0.82rem;color:#9ca3af;}.entry-table{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:0.75rem;}.entry-table th,.entry-table td{padding:0.45rem 0.55rem;border:1px solid #374151;vertical-align:top;word-break:break-word;}.entry-table th{font-size:0.78rem;color:#9ca3af;font-weight:600;text-align:left;background:#111827;}.entry-table td{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0f172a;}details{margin-top:0.5rem;background:#0f172a;border:1px solid #374151;border-radius:8px;padding:0.5rem 0.75rem;}pre{white-space:pre-wrap;word-break:break-word;margin:0.5rem 0 0;}.empty{padding:1rem 1.25rem;background:#1f2937;border:1px solid #374151;border-radius:12px;}.cycle{margin-top:0.5rem;color:#fca5a5;font-size:0.9rem;}.error-alert{margin:0.75rem 0;background:#7f1d1d;border:2px solid #ef4444;border-radius:10px;padding:0.75rem 0.9rem;color:#fee2e2;box-shadow:0 0 0 1px rgba(239,68,68,0.25) inset;}.error-alert strong{display:block;margin-bottom:0.35rem;color:#fecaca;text-transform:uppercase;letter-spacing:0.04em;font-size:0.82rem;}.error-alert pre{margin:0;white-space:pre-wrap;word-break:break-word;font-weight:600;}</style></head><body><div class="summary"><h1>Retailer Sourcing Entry Error Trace</h1><p>Generated at <code>2026-05-27T17:22:19.147318794+00:00</code>.</p><p>Scanned <strong>14</strong> entries and found <strong>12</strong> errors. Report path: <code>/home/nulllabs/work/labs/bodul/apps/retailer-sourcing/entry-error-tracing_test.html</code>.</p></div><div class="summary"><h2>Error roots</h2><ul><li><a href="#command-019e69b9-b241-7652-a6a9-9594b12c413b">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b244-7870-8bdf-296251e238b9">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b248-70c3-a3ad-43393e76e67a">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b24c-7a41-8aa6-fe9446810cb6">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b250-71e2-b006-217320eaacf5">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b253-77b3-9c70-f4e1552cbb64">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b259-7782-a2f7-2d3db4c03135">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b25f-7430-86b9-47373b193b07">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b264-7b73-8ac5-3cc5f28b5029">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b269-7813-adbd-ee0ee6963a2f">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b26e-7b32-9a2f-c452112dc68b">command SourceRetailer (failed)</a></li><li><a href="#command-019e69b9-b271-70e1-a0ee-1e1bc72a1997">command SourceRetailer (failed)</a></li></ul></div><section class="trace" id="command-019e69b9-b241-7652-a6a9-9594b12c413b"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b241-7652-a6a9-9594b12c413b</td><td>2026-05-27 17:23:54.623452+00</td><td>2026-05-27 13:57:18.017237+00</td><td>2026-05-27 17:21:54.622999+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;WebScraping&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumEU&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b241-7652-a6a9-9594b12c413b&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b244-7870-8bdf-296251e238b9"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b244-7870-8bdf-296251e238b9</td><td>2026-05-27 17:23:54.629897+00</td><td>2026-05-27 13:57:18.021158+00</td><td>2026-05-27 17:21:54.629502+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;Sitemap&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumEU&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b244-7870-8bdf-296251e238b9&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b248-70c3-a3ad-43393e76e67a"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b248-70c3-a3ad-43393e76e67a</td><td>2026-05-27 17:23:54.636783+00</td><td>2026-05-27 13:57:18.024569+00</td><td>2026-05-27 17:21:54.63642+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;WebScraping&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumUS&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b248-70c3-a3ad-43393e76e67a&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b24c-7a41-8aa6-fe9446810cb6"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b24c-7a41-8aa6-fe9446810cb6</td><td>2026-05-27 17:23:54.64373+00</td><td>2026-05-27 13:57:18.028343+00</td><td>2026-05-27 17:21:54.643352+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;Sitemap&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumUS&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b24c-7a41-8aa6-fe9446810cb6&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b250-71e2-b006-217320eaacf5"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b250-71e2-b006-217320eaacf5</td><td>2026-05-27 17:23:54.647944+00</td><td>2026-05-27 13:57:18.03218+00</td><td>2026-05-27 17:21:54.647503+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;WebScraping&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumUK&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b250-71e2-b006-217320eaacf5&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b253-77b3-9c70-f4e1552cbb64"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b253-77b3-9c70-f4e1552cbb64</td><td>2026-05-27 17:23:54.654868+00</td><td>2026-05-27 13:57:18.036149+00</td><td>2026-05-27 17:21:54.654536+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;Sitemap&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumUK&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b253-77b3-9c70-f4e1552cbb64&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b259-7782-a2f7-2d3db4c03135"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b259-7782-a2f7-2d3db4c03135</td><td>2026-05-27 17:23:54.658031+00</td><td>2026-05-27 13:57:18.042037+00</td><td>2026-05-27 17:21:54.65767+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;WebScraping&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumFR&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b259-7782-a2f7-2d3db4c03135&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b25f-7430-86b9-47373b193b07"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b25f-7430-86b9-47373b193b07</td><td>2026-05-27 17:23:54.661496+00</td><td>2026-05-27 13:57:18.048133+00</td><td>2026-05-27 17:21:54.661035+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;Sitemap&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumFR&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b25f-7430-86b9-47373b193b07&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b264-7b73-8ac5-3cc5f28b5029"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b264-7b73-8ac5-3cc5f28b5029</td><td>2026-05-27 17:23:54.651479+00</td><td>2026-05-27 13:57:18.053522+00</td><td>2026-05-27 17:21:54.650978+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;WebScraping&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumCA&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b264-7b73-8ac5-3cc5f28b5029&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b269-7813-adbd-ee0ee6963a2f"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b269-7813-adbd-ee0ee6963a2f</td><td>2026-05-27 17:23:54.664838+00</td><td>2026-05-27 13:57:18.057793+00</td><td>2026-05-27 17:21:54.664445+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>5</td><td>retry</td><td>4</td><td>3h 26m 37s</td><td>3h 24m 37s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;Sitemap&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumCA&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b269-7813-adbd-ee0ee6963a2f&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b26e-7b32-9a2f-c452112dc68b"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b26e-7b32-9a2f-c452112dc68b</td><td>2026-05-27 17:22:10.692347+00</td><td>2026-05-27 13:57:18.062769+00</td><td>2026-05-27 17:20:10.691727+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>4</td><td>retry</td><td>3</td><td>3h 24m 53s</td><td>3h 22m 53s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;WebScraping&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumAU&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b26e-7b32-9a2f-c452112dc68b&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section><section class="trace" id="command-019e69b9-b271-70e1-a0ee-1e1bc72a1997"><h2>command SourceRetailer — failed</h2><ul><li><article class="entry-card status-error"><div class="entry-header"><span class="entry-kind">command</span><strong>SourceRetailer</strong><span class="status-pill">failed (4)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>correlation_id</th><th>causation_id</th><th>source</th></tr><tr><td>019e69b9-b271-70e1-a0ee-1e1bc72a1997</td><td>2026-05-27 17:22:10.700564+00</td><td>2026-05-27 13:57:18.06585+00</td><td>2026-05-27 17:20:10.700155+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>event:DailySourcingRequested</td></tr></table><div class="error-alert"><strong>Extra info errors</strong><pre>no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;
+no handler registered for command type &#39;SourceRetailer&#39;</pre></div><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th></tr><tr><td>4</td><td>retry</td><td>3</td><td>3h 24m 53s</td><td>3h 22m 53s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;method&quot;: &quot;Sitemap&quot;,
+  &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+  &quot;retailer_code&quot;: &quot;MinisForumAU&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;command_id&quot;: &quot;019e69b9-b271-70e1-a0ee-1e1bc72a1997&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;event:DailySourcingRequested&quot;
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">event</span><strong>DailySourcingRequested</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>causation_id</th><th>event_id</th></tr><tr><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:17.023047+00</td><td>2026-05-27 13:57:18.068867+00</td><td>2026-05-27 13:57:18.068867+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>019e69b9-ae5e-7522-99f5-41c18ec8653f</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;payload&quot;: {
+    &quot;requested_at&quot;: &quot;2026-05-27T13:57:17.022773508Z&quot;,
+    &quot;retailer_codes&quot;: [
+      &quot;MinisForumEU&quot;,
+      &quot;MinisForumUS&quot;,
+      &quot;MinisForumUK&quot;,
+      &quot;MinisForumFR&quot;,
+      &quot;MinisForumCA&quot;,
+      &quot;MinisForumAU&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;DailySourcingRequested&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;event_id&quot;: &quot;019e69b9-ae5e-7522-99f5-41c18ec8653f&quot;,
+  &quot;source&quot;: null
+}</pre></details></article><ul><li><div class="relation">trace via causation_id</div><article class="entry-card status-completed"><div class="entry-header"><span class="entry-kind">command</span><strong>StartDailySourcing</strong><span class="status-pill">completed (5)</span></div><table class="entry-table"><tr><th>id</th><th>scheduled_at</th><th>received_at</th><th>updated_at</th><th>processed_at</th><th>correlation_id</th><th>source</th></tr><tr><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:16.00937+00</td><td>2026-05-27 13:57:17.027737+00</td><td>2026-05-27 13:57:17.027737+00</td><td>019e69b9-aa68-7ab3-85a9-39f353fa33e2</td><td>test</td></tr></table><table class="entry-table"><tr><th>attempts</th><th>attempt_phase</th><th>retry_count</th><th>scheduled_delay</th><th>time_in_system</th><th>processing_latency</th></tr><tr><td>1</td><td>initial</td><td>0</td><td>0s</td><td>1s</td><td>1s</td></tr></table><details open><summary>payload</summary><pre>{
+  &quot;triggered_at&quot;: &quot;2026-05-27T13:57:16.008897136Z&quot;
+}</pre></details><details open><summary>meta</summary><pre>{
+  &quot;causation_id&quot;: null,
+  &quot;command_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;correlation_id&quot;: &quot;019e69b9-aa68-7ab3-85a9-39f353fa33e2&quot;,
+  &quot;source&quot;: &quot;test&quot;
+}</pre></details></article></li></ul></li></ul></li></ul></section></body></html>
