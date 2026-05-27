@@ -43,8 +43,6 @@ path = "src/bin/truncate_test.rs"
 diesel = { version = "2", features = ["postgres", "r2d2", "uuid"] }
 diesel_migrations = "2"
 dotenvy = "0.15"
-#inbox = { git = "https://github.com/nulllabsdev/mulac.git" }
-#kernel = { git = "https://github.com/nulllabsdev/mulac.git" }
 kernel = { version = "0.2.0", registry = "margo", default-features = false, package = "mulac-kernel" }
 lapin = "4.5.0"
 outbox = { version = "0.2.0", registry = "margo", default-features = false, features = ["diesel", "amqp"], package = "mulac-outbox" }
