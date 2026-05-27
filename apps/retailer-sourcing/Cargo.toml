@@ -11,44 +11,32 @@ path = "src/bin/retailer-sourcing.rs"
 name = "migrate"
 path = "src/bin/migrate.rs"
 
-[[bin]]
-name = "process-inbox"
-path = "src/bin/process_inbox.rs"
-
-[[bin]]
-name = "process-commands"
-path = "src/bin/process_commands.rs"
-
-[[bin]]
-name = "process-events"
-path = "src/bin/process_events.rs"
-
-[[bin]]
-name = "process-outbox"
-path = "src/bin/process_outbox.rs"
 
 [[bin]]
 name = "entry-error-tracing"
 path = "src/bin/entry_error_tracing.rs"
 
-[[bin]]
-name = "truncate-dev"
-path = "src/bin/truncate_dev.rs"
 
 [[bin]]
-name = "truncate-test"
-path = "src/bin/truncate_test.rs"
+name = "dev"
+path = "src/bin/dev.rs"
+
+[[bin]]
+name = "test"
+path = "src/bin/test.rs"
 
 [dependencies]
-diesel = { version = "2", features = ["postgres", "r2d2", "uuid"] }
+clap = { version = "4", features = ["derive"] }
+diesel = { version = "2", features = ["postgres", "r2d2", "uuid", "chrono"] }
 diesel_migrations = "2"
 dotenvy = "0.15"
-kernel = { version = "0.2.0", registry = "margo", default-features = false, package = "mulac-kernel" }
+kernel = { version = "0.3.0", registry = "margo", default-features = false, package = "mulac-kernel" }
 lapin = "4.5.0"
-outbox = { version = "0.2.0", registry = "margo", default-features = false, features = ["diesel", "amqp"], package = "mulac-outbox" }
+outbox = { version = "0.3.0", registry = "margo", default-features = false, features = ["diesel", "amqp"], package = "mulac-outbox" }
 retailer-guild = { path = "../../lib/retailer-guild" }
 
 poem = "3"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "rustls-tls"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 subtle = "2"

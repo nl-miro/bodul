@@ -49,7 +49,7 @@ it is served, then the data shapes it manipulates.
 | `http`        | Route path constants, request/response DTOs, `#[handler]` fns, `ResponseError` impls, `pub fn register` |
 | `handler`     | `CommandHandlerPort` / `EventHandlerPort` implementations                                               |
 | `eventing`    | `EventSubscriberPort` implementations (e.g. fan-out subscribers)                                        |
-| `application` | Command structs, event structs, error enums, type-name constants                                       |
+| `application` | Command structs, event structs, error enums, type-name constants                                        |
 | `domain`      | Pure types with no infrastructure dependencies                                                          |
 
 Every mod except `io` is private to the feature.

@@ -102,7 +102,9 @@ async fn start_daily_sourcing_is_consumed_and_emits_daily_sourcing_requested() {
         "exactly one DailySourcingRequested event caused by this command",
     );
     let wrapped: RetailerSourcingEvent = serde_json::from_str(&events[0].payload).unwrap();
-    let RetailerSourcingEvent::DailySourcingRequested(event) = wrapped;
+    let RetailerSourcingEvent::DailySourcingRequested(event) = wrapped else {
+        panic!("expected DailySourcingRequested variant");
+    };
     assert_eq!(event.retailer_codes, ActiveRetailers::list());
 
     drop(conn);

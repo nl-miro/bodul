@@ -1,4 +1,4 @@
-.PHONY: align-markdown-table-columns wip fmt check test up down reset run process process-test entry-error-tracing truncate-dev truncate-test
+.PHONY: align-markdown-table-columns wip fmt cfix check test up down reset run process process-test entry-error-tracing truncate-dev truncate-test
 
 align-markdown-table-columns:
 	./etc/dev/align-markdown-table-columns/align-markdown-table-columns .
@@ -45,6 +45,29 @@ fmt:
 	cd apps/retailer-offer && make fmt
 	cd lib/retailer-guild && make fmt
 	cd lib/retailer-parsing && make fmt
+
+cfix:
+	cd apps/retailer-management && cargo fix
+	cd apps/retailer-management && cargo fix --tests
+
+	cd apps/retailer-sourcing && cargo fix
+	cd apps/retailer-sourcing && cargo fix --tests
+
+	cd apps/retailer-data-ingestion && cargo fix
+	cd apps/retailer-data-ingestion && cargo fix --tests
+
+	cd apps/product-information-management && cargo fix
+	cd apps/product-information-management && cargo fix --tests
+
+	cd apps/retailer-offer && cargo fix
+	cd apps/retailer-offer && cargo fix --tests
+
+	cd lib/retailer-guild && cargo fix
+	cd lib/retailer-guild && cargo fix --tests
+
+	cd lib/retailer-parsing && cargo fix
+	cd lib/retailer-parsing && cargo fix --tests
+
 
 check:
 	cd apps/retailer-management && make check

@@ -21,17 +21,13 @@ run:
 
 process:
 	cargo build
-	cargo run --bin process-inbox
-	cargo run --bin process-commands
-	cargo run --bin process-events
-	cargo run --bin process-outbox
+	cargo run --bin dev process-commands
+	cargo run --bin dev process-events
 
 process-test:
 	cargo build
-	DATABASE_URL=$(DATABASE_URL_TEST) cargo run --bin process-inbox
-	DATABASE_URL=$(DATABASE_URL_TEST) cargo run --bin process-commands
-	DATABASE_URL=$(DATABASE_URL_TEST) cargo run --bin process-events
-	DATABASE_URL=$(DATABASE_URL_TEST) cargo run --bin process-outbox
+	DATABASE_URL=$(DATABASE_URL_TEST) cargo run --bin test process-commands
+	DATABASE_URL=$(DATABASE_URL_TEST) cargo run --bin test process-events
 
 entry-error-tracing:
 	DATABASE_URL=$(DATABASE_URL) TEST_DATABASE_URL=$(DATABASE_URL_TEST) cargo run --bin entry-error-tracing

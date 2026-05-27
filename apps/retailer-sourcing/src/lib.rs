@@ -4,6 +4,7 @@ mod app_event;
 mod assembly;
 mod check_health;
 mod daily_sourcing;
+pub mod discovery;
 mod entry_error_tracing;
 mod source_retailer;
 
