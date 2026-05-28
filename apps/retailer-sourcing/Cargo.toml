@@ -8,3 +8,5 @@ name = "retailer-sourcing"
 path = "src/bin/retailer-sourcing.rs"
 
 [dependencies]
+kernel = { version = "0.3.0", registry = "margo", default-features = false, package = "mulac-kernel" }
+uuid = { version = "1.23.1", features = ["v4"] }
