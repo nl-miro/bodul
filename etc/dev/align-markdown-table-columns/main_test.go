@@ -39,10 +39,29 @@ func TestAlignTablePadsWideEmojiByDisplayWidth(t *testing.T) {
 	got := alignTable(lines)
 	want := []string{
 		"| Draft | 1 Intake | 2 Disc |",
-		"|-------|----------|--------|",
+		"| ----- | -------- | ------ |",
 		"| a     | ✅       | ◐      |",
 		"| b     | ◐        | ✅     |",
 		"| c     | ✗        | ✗      |",
+	}
+
+	if strings.Join(got, "\n") != strings.Join(want, "\n") {
+		t.Fatalf("alignTable() =\n%s\nwant\n%s", strings.Join(got, "\n"), strings.Join(want, "\n"))
+	}
+}
+
+func TestAlignTableSpacesAroundSeparators(t *testing.T) {
+	lines := []string{
+		"| Name | Count | Note |",
+		"|:---|---:|:---:|",
+		"| a | 1 | x |",
+	}
+
+	got := alignTable(lines)
+	want := []string{
+		"| Name | Count | Note |",
+		"| :--- | ----: | :--: |",
+		"| a    | 1     | x    |",
 	}
 
 	if strings.Join(got, "\n") != strings.Join(want, "\n") {

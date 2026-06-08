@@ -317,9 +317,7 @@ func buildSeparatorRow(originalLine string, cells []string, widths []int) string
 		leftColon := strings.HasPrefix(original, ":")
 		rightColon := strings.HasSuffix(original, ":")
 
-		// Add 2 to width to account for spaces in data rows
-		totalWidth := width + 2
-		dashCount := totalWidth
+		dashCount := width
 		if leftColon {
 			dashCount--
 		}
@@ -338,7 +336,7 @@ func buildSeparatorRow(originalLine string, cells []string, widths []int) string
 			cell = cell + ":"
 		}
 
-		parts = append(parts, cell)
+		parts = append(parts, " "+cell+" ")
 	}
 
 	return "|" + strings.Join(parts, "|") + "|"
