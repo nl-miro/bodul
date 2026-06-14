@@ -121,7 +121,7 @@ Discovery uses two paths:
                |
                v
 +------------------------------+
-|     Visit product pages      |
+|     Visit product pages      |ho
 |           in order           |
 +--------------+---------------+
                |
