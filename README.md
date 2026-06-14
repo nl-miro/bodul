@@ -5,47 +5,43 @@
 Phase 1 focuses on building a reliable product discovery pipeline for multiple Minisforum storefronts, all of them running on Shopify.
 
 ```text
-                             +-------------------+
-                             |  Trigger updates  |
-                             +---------+---------+
-                                       |
-                                       v
-                 +---------------------+---------------------+
-                 |                                           |
-                 v                                           v
-        +-------------------+                       +-------------------+
-        | Discover sitemap  |                       | Discover catalog  |
-        |  files and URLs   |                       |  leaves and URLs  |
-        +---------+---------+                       +---------+---------+
-                  |                                           |
-                  +---------------------+---------------------+
+                         +------------------------------+
+                         |       Trigger updates        |
+                         +--------------+---------------+
                                         |
                                         v
-                             +---------------------+
-                             |    Fetch product    |
-                             |    detail pages     |
-                             +----------+----------+
+                         +--------------+---------------+
+                         |                              |
+                         v                              v
+          +------------------------------+  +------------------------------+
+          |   Discover sitemap files     |  |   Discover catalog leaves    |
+          |          and URLs            |  |          and URLs            |
+          +--------------+---------------+  +--------------+---------------+
+                         |                              |
+                         +--------------+---------------+
                                         |
                                         v
-                             +---------------------+
-                             |  Process retrieved  |
-                             |     information     |
-                             +----------+----------+
+                         +------------------------------+
+                         |     Fetch product pages      |
+                         +--------------+---------------+
                                         |
                                         v
-                             +---------------------+
-                             | Classify and match  |
-                             |      products       |
-                             +----------+----------+
+                         +------------------------------+
+                         |   Process retrieved data     |
+                         +--------------+---------------+
                                         |
                                         v
-                 +----------------------+----------------------+
-                 |                                             |
-                 v                                             v
-        +--------------------+                       +--------------------+
-        |  Product catalog   |                       |   Store catalog    |
-        | matched or created |                       |     persisted      |
-        +--------------------+                       +--------------------+
+                         +------------------------------+
+                         | Classify and match products  |
+                         +--------------+---------------+
+                                        |
+                         +--------------+---------------+
+                         |                              |
+                         v                              v
+          +------------------------------+  +------------------------------+
+          | Product catalog matched or   |  |   Store catalog persisted    |
+          |           created            |  |                              |
+          +------------------------------+  +------------------------------+
 ```
 
 Discovery uses two paths:
@@ -59,38 +55,37 @@ Discovery uses two paths:
   - Iterate over product pages to scrape images, descriptions, availability, and other core product details.
 
 ```text
-                   +------------------------------+
-                   |      Fetch sitemap.xml       |
-                   +--------------+---------------+
-                                  |
-                                  v
-                   +------------------------------+
-                   |  Extract all sitemap files   |
-                   +--------------+---------------+
-                                  |
-                                  v
-                   +------------------------------+
-                   |  Ignore non-default locales  |
-                   +--------------+---------------+
-                                  |
-                                  v
-                   +------------------------------+
-                   | Download and store sitemaps  |
-                   +--------------+---------------+
-                                  |
-                                  v
-               +------------------+-------------------+
-               |                                      |
-               v                                      v
-+------------------------------+       +------------------------------+
-|    Iterate catalog pages     |       |    Iterate product pages     |
-+--------------+---------------+       +--------------+---------------+
-               |                                      |
-               v                                      v
-+------------------------------+       +------------------------------+
-|    Price and availability    |       |  Images, descriptions, and   |
-|  Newly discovered products   |       |         availability         |
-+------------------------------+       +------------------------------+
+                         +------------------------------+
+                         |      Fetch sitemap.xml       |
+                         +--------------+---------------+
+                                        |
+                                        v
+                         +------------------------------+
+                         |   Extract sitemap files      |
+                         +--------------+---------------+
+                                        |
+                                        v
+                         +------------------------------+
+                         | Ignore non-default locales   |
+                         +--------------+---------------+
+                                        |
+                                        v
+                         +------------------------------+
+                         | Download and store sitemaps  |
+                         +--------------+---------------+
+                                        |
+                         +--------------+---------------+
+                         |                              |
+                         v                              v
+          +------------------------------+  +------------------------------+
+          |   Iterate catalog pages      |  |   Iterate product pages      |
+          +--------------+---------------+  +--------------+---------------+
+                         |                              |
+                         v                              v
+          +------------------------------+  +------------------------------+
+          | Price and availability       |  | Images, descriptions, and    |
+          | Newly discovered products    |  | availability                 |
+          +------------------------------+  +------------------------------+
 ```
 
 - Web scraping fallback when sitemap coverage is incomplete.
@@ -99,37 +94,37 @@ Discovery uses two paths:
   - Visit product pages in order and scrape images, descriptions, availability, and other core product details.
 
 ```text
-+------------------------------+
-|      Iterate site menu       |
-+--------------+---------------+
-               |
-               v
-+------------------------------+
-|    Gather catalog leaves     |
-+--------------+---------------+
-               |
-               v
-+------------------------------+
-|    Iterate catalog pages     |
-+--------------+---------------+
-               |
-               v
-+------------------------------+
-|   Collect product details    |
-|           and URLs           |
-+--------------+---------------+
-               |
-               v
-+------------------------------+
-|     Visit product pages      |ho
-|           in order           |
-+--------------+---------------+
-               |
-               v
-+------------------------------+
-|        Scrape images,        |
-|  descriptions, availability  |
-+------------------------------+
+                         +------------------------------+
+                         |      Iterate site menu       |
+                         +--------------+---------------+
+                                        |
+                                        v
+                         +------------------------------+
+                         |    Gather catalog leaves     |
+                         +--------------+---------------+
+                                        |
+                                        v
+                         +------------------------------+
+                         |    Iterate catalog pages     |
+                         +--------------+---------------+
+                                        |
+                                        v
+                         +------------------------------+
+                         |   Collect product details    |
+                         |           and URLs           |
+                         +--------------+---------------+
+                                        |
+                                        v
+                         +------------------------------+
+                         |     Visit product pages      |
+                         |           in order           |
+                         +--------------+---------------+
+                                        |
+                                        v
+                         +------------------------------+
+                         |      Scrape images and       |
+                         |   descriptions, availability |
+                         +------------------------------+
 ```
 
 Updates support multiple strategies.

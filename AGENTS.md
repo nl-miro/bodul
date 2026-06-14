@@ -18,9 +18,15 @@ Bodul scrapes multiple Minisforum Shopify storefronts via two paths:
 ### ASCII Flowcharts
 
 - Use fenced `text` blocks for ASCII flowcharts.
-- Use a 30-character content width for standard boxes when practical.
+- Always use a 30-character inner width for standard boxes.
 - Center the flowchart within columns 0-80 so it reads well in terminals,
   Markdown previews, and code review panes.
+- Keep all boxes centered within the 0-80 span of the flowchart block.
+- Center the text inside each box.
+- Center each line in the flowchart block so the diagram itself sits balanced
+  across the page.
+- Center branch connectors and merge lines on the same axis as the boxes they
+  connect.
 - Keep the flow direction consistent. Prefer top-to-bottom for most docs.
 - Use one box style and one arrow style throughout a chart.
 - Keep box labels short. Prefer a few words that name the action or state.
