@@ -5,7 +5,7 @@
 | Priority                 | high                              |
 | File                     | `docs/documentation-structure.md` |
 | Decision                 | accepted                          |
-| Implementation reference |                                   |
+| Implementation reference | `documentation-structure-proposal-v1.md` |
 | Created at               | 2026-06-15                        |
 | Author                   | Codex, gpt-5, medium              |
 | Reviewer                 |                                   |

@@ -21,19 +21,31 @@ The risk: mixing resources into the document creates confusion for readers. But 
 ├── document.md              ← The actual deliverable (clean, readable)
 │
 └── _resources/              ← Everything that fed into it
-    ├── INDEX.md             ← Master log: what was used, when, why
-    ├── research/
-    │   ├── source-1.md
-    │   └── source-2.pdf
-    ├── reviews/
-    │   ├── review-round-1.md
-    │   └── feedback-alice.md
-    └── drafts/
-        ├── draft-v1.md
-        └── draft-v2.md
+    └── document/            ← Document-scoped namespace (one per deliverable)
+        ├── INDEX.md         ← Master log: what was used, when, why
+        ├── suggestions/     ← Actionable review feedback
+        │   ├── S001_....md
+        │   └── S002_....md
+        ├── proposals/       ← Working copies updated before the deliverable
+        │   ├── document-proposal-v1.md
+        │   └── document-proposal-v2.md
+        ├── research/
+        │   ├── source-1.md
+        │   └── source-2.pdf
+        ├── reviews/
+        │   ├── review-round-1.md
+        │   └── feedback-alice.md
+        └── drafts/
+            ├── draft-v1.md
+            └── draft-v2.md
 ```
 
-The `_resources/` prefix signals "supporting material" visually — present but clearly separate from the deliverable.
+The `_resources/` prefix signals "supporting material" visually — present but
+clearly separate from the deliverable. Within it, each deliverable gets its own
+namespace folder named after the target filename **without its extension** (so
+`document.md` → `_resources/document/`). This keeps the structure compatible
+with the suggestion-driven workflow and avoids collisions when several documents
+share one `_resources/` parent.
 
 ---
 
