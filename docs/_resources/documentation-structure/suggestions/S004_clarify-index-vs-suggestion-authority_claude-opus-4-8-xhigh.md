@@ -1,14 +1,14 @@
 # S004 - Clarify INDEX vs suggestion authority
 
-| Field                    | Value                                |
-|--------------------------|--------------------------------------|
-| Priority                 | low                                  |
-| File                     | `docs/documentation-structure.md`    |
-| Decision                 | pending                              |
-| Implementation reference |                                      |
-| Created at               | 2026-06-15                           |
-| Author                   | Claude Code, claude-opus-4-8, xhigh  |
-| Reviewer                 |                                      |
+| Field                    | Value                                                                                      |
+|--------------------------|--------------------------------------------------------------------------------------------|
+| Priority                 | low                                                                                        |
+| File                     | `docs/documentation-structure.md`                                                          |
+| Decision                 | completed                                                                                  |
+| Implementation reference | `docs/_resources/documentation-structure/proposals/documentation-structure-proposal-v1.md` |
+| Created at               | 2026-06-15                                                                                 |
+| Author                   | Claude Code, claude-opus-4-8, xhigh                                                        |
+| Reviewer                 | User                                                                                       |
 
 ## Issue
 

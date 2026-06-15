@@ -57,10 +57,10 @@ This file solves the confusion problem. It's a lightweight log that *links* the 
 # Resource Index — [Document Name]
 
 ## Sources Used
-| Resource         | Type     | Used For          | Section in Doc |
-|------------------|----------|-------------------|----------------|
-| source-1.md      | Research | Background stats  | Introduction   |
-| feedback-alice.md| Review   | Restructured §3   | Methods        |
+| Resource          | Type     | Used For         | Section in Doc |
+|-------------------|----------|------------------|----------------|
+| source-1.md       | Research | Background stats | Introduction   |
+| feedback-alice.md | Review   | Restructured §3  | Methods        |
 
 ## Decision Log
 - Dropped source-2 — outdated (2019), superseded by source-1
@@ -85,12 +85,12 @@ document-scoped namespace before reaching the reader-facing file:
   `_resources/{document-name}/proposals/`, where suggestions are applied and
   reviewed first.
 - **Controlled updates** — the deliverable is updated only after pending
-  suggestions are accepted, rejected, or deferred; an accepted suggestion is
+  suggestions are accepted, refused, or deferred; an accepted suggestion is
   applied to a proposal copy, then the proposal is copied back over the
   original.
-- **Traceability** — `INDEX.md` links each accepted suggestion to its
-  implementation reference and records rejected or deferred suggestions in the
-  decision log.
+- **Traceability** — each suggestion document is the source of truth for its
+  own decision. `INDEX.md` links to or summarizes accepted, refused, and
+  deferred suggestions without restating their status.
 
 This gives reviewers and LLM tools a clear path from feedback to controlled
 document updates. See `suggestion-driven-documentation.md` for the full
@@ -100,12 +100,12 @@ lifecycle and file-naming rules.
 
 ## Principles
 
-| Principle | How it's achieved |
-|---|---|
-| Document stays clean | Readers never see the scaffolding |
-| Trail is explicit | INDEX records decisions, not just files |
-| Investigation-friendly | Future you can reconstruct every choice |
-| Scalable | Works for solo work and team collaboration |
+| Principle              | How it's achieved                          |
+|------------------------|--------------------------------------------|
+| Document stays clean   | Readers never see the scaffolding          |
+| Trail is explicit      | INDEX links decisions, not just files      |
+| Investigation-friendly | Future you can reconstruct every choice    |
+| Scalable               | Works for solo work and team collaboration |
 
 ---
 

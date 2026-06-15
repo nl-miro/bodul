@@ -1,14 +1,14 @@
 # S002 - Add suggestion and proposal lifecycle
 
-| Field                    | Value                             |
-|--------------------------|-----------------------------------|
-| Priority                 | medium                            |
-| File                     | `docs/documentation-structure.md` |
-| Decision                 | accepted                          |
-| Implementation reference | `documentation-structure-proposal-v1.md` |
-| Created at               | 2026-06-15                        |
-| Author                   | Codex, gpt-5, medium              |
-| Reviewer                 |                                   |
+| Field                    | Value                                                                                      |
+|--------------------------|--------------------------------------------------------------------------------------------|
+| Priority                 | medium                                                                                     |
+| File                     | `docs/documentation-structure.md`                                                          |
+| Decision                 | completed                                                                                  |
+| Implementation reference | `docs/_resources/documentation-structure/proposals/documentation-structure-proposal-v1.md` |
+| Created at               | 2026-06-15                                                                                 |
+| Author                   | Codex, gpt-5, medium                                                                       |
+| Reviewer                 | User                                                                                       |
 
 ## Issue
 

@@ -1,14 +1,14 @@
 # S003 - Add decision/triage step
 
-| Field                    | Value                                      |
-|--------------------------|--------------------------------------------|
-| Priority                 | medium                                     |
-| File                     | `docs/suggestion-driven-documentation.md`  |
-| Decision                 | pending                                    |
-| Implementation reference |                                            |
-| Created at               | 2026-06-15                                 |
-| Author                   | Claude Code, claude-opus-4-8, xhigh        |
-| Reviewer                 |                                            |
+| Field                    | Value                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------|
+| Priority                 | medium                                                                                                     |
+| File                     | `docs/suggestion-driven-documentation.md`                                                                  |
+| Decision                 | completed                                                                                                  |
+| Implementation reference | `docs/_resources/suggestion-driven-documentation/proposals/suggestion-driven-documentation-proposal-v1.md` |
+| Created at               | 2026-06-15                                                                                                 |
+| Author                   | Claude Code, claude-opus-4-8, xhigh                                                                        |
+| Reviewer                 | User                                                                                                       |
 
 ## Issue
 

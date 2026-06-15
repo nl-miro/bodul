@@ -1,14 +1,14 @@
 # S002 - Reconcile decision state vocabulary
 
-| Field                    | Value                                      |
-|--------------------------|--------------------------------------------|
-| Priority                 | high                                       |
-| File                     | `docs/suggestion-driven-documentation.md`  |
-| Decision                 | pending                                    |
-| Implementation reference |                                            |
-| Created at               | 2026-06-15                                 |
-| Author                   | Claude Code, claude-opus-4-8, xhigh        |
-| Reviewer                 |                                            |
+| Field                    | Value                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------|
+| Priority                 | high                                                                                                       |
+| File                     | `docs/suggestion-driven-documentation.md`                                                                  |
+| Decision                 | completed                                                                                                  |
+| Implementation reference | `docs/_resources/suggestion-driven-documentation/proposals/suggestion-driven-documentation-proposal-v1.md` |
+| Created at               | 2026-06-15                                                                                                 |
+| Author                   | Claude Code, claude-opus-4-8, xhigh                                                                        |
+| Reviewer                 | User                                                                                                       |
 
 ## Issue
 
@@ -38,3 +38,10 @@ Define a single canonical state set and use it everywhere:
 - Update line 54 to reference only states that exist in the set.
 - Align the existing suggestion files, or note explicitly that legacy `refused`
   maps to `rejected`.
+
+
+## Implement 
+
+pending -> accepted -> completed
+        -> refused
+        -> deffered
