@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Align markdown table columns before committing, then re-stage anything changed.
+# See AGENTS.md / CLAUDE.md for the documented rule.
+
+root="$(git rev-parse --show-toplevel)"
+~/work/labs/align-markdown-table-columns "$root"
+
+# Re-stage only markdown files that were already staged and got reformatted.
+staged_md="$(git diff --cached --name-only --diff-filter=ACM -- '*.md')"
+if [ -n "$staged_md" ]; then
+  printf '%s\n' "$staged_md" | xargs -r git add --
+fi
