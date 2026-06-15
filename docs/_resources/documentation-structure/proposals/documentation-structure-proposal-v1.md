@@ -74,6 +74,30 @@ The decision log is especially valuable for workflow review — it captures *why
 
 ---
 
+## Suggestion and Proposal Workflow
+
+Review feedback never edits the deliverable directly. It flows through the
+document-scoped namespace before reaching the reader-facing file:
+
+- **Suggestions** — actionable review feedback goes into
+  `_resources/{document-name}/suggestions/`, one document per suggestion.
+- **Proposals** — proposal copies of the deliverable go into
+  `_resources/{document-name}/proposals/`, where suggestions are applied and
+  reviewed first.
+- **Controlled updates** — the deliverable is updated only after pending
+  suggestions are accepted, rejected, or deferred; an accepted suggestion is
+  applied to a proposal copy, then the proposal is copied back over the
+  original.
+- **Traceability** — `INDEX.md` links each accepted suggestion to its
+  implementation reference and records rejected or deferred suggestions in the
+  decision log.
+
+This gives reviewers and LLM tools a clear path from feedback to controlled
+document updates. See `suggestion-driven-documentation.md` for the full
+lifecycle and file-naming rules.
+
+---
+
 ## Principles
 
 | Principle | How it's achieved |
