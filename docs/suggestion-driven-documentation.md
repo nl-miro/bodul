@@ -5,7 +5,7 @@
 | Version | 0.1        |
 | Date    | 2026-04-12 |
 
-Instead of making documentation changes on the fly during a pull request review, ask LLM reviewers to write each actionable suggestion down in a suggestion document. Review those documents afterward, decide which suggestions to implement, and keep them as the record of what was proposed, accepted, rejected, or deferred.
+Instead of making documentation changes on the fly during a pull request review, ask LLM reviewers to write each actionable suggestion down in a suggestion document. Review those documents afterward, decide which suggestions to implement, and keep them as the record of what was proposed, completed, rejected, or deferred.
 
 The default is one suggestion per document. A single document may contain multiple suggestions only for small editorial-only batches such as typos, formatting fixes, or similar non-behavioral wording changes.
 
@@ -51,13 +51,13 @@ Describe the proposed change clearly and concretely.
 - `Implementation reference` links to the commit, pull request, or document change that implemented the suggestion.
 - `Created at` records when the suggestion was written.
 - `Author` records who created the suggestion. For tools, include the tool name, model, and effort level.
-- `Reviewer` records who reviewed the suggestion. Leave it blank while `Decision` is `pending`. Populate it with the reviewer identity when `Decision` is `accepted`, `rejected`, or `deferred`.
+- `Reviewer` records who reviewed the suggestion. Leave it blank while `Decision` is `pending`. Populate it with the reviewer identity when `Decision` is `completed`, `rejected`, or `deferred`.
 
 ## Creating suggestions
 
 When an LLM tool is given a file to review:
 
-1. Review the target document and write suggestions into `docs/suggestions/{filename}` folder, where `{filename}` is the name of the file being reviewed without its extension or directory path (for example, suggestions for `docs/contracts.md` go into `docs/suggestions/contracts/`).
+1. Review the target document and write suggestions into `_resources/{document-name}/suggestions/{filename}` folder, where `{filename}` is the name of the file being reviewed without its extension or directory path (for example, suggestions for `docs/contracts.md` go into `docs/suggestions/contracts/`).
 2. Commit the suggestion documents.
 
 ## Applying suggestions
