@@ -21,19 +21,31 @@ The risk: mixing resources into the document creates confusion for readers. But 
 ├── document.md              ← The actual deliverable (clean, readable)
 │
 └── _resources/              ← Everything that fed into it
-    ├── INDEX.md             ← Master log: what was used, when, why
-    ├── research/
-    │   ├── source-1.md
-    │   └── source-2.pdf
-    ├── reviews/
-    │   ├── review-round-1.md
-    │   └── feedback-alice.md
-    └── drafts/
-        ├── draft-v1.md
-        └── draft-v2.md
+    └── document/            ← Document-scoped namespace (one per deliverable)
+        ├── INDEX.md         ← Master log: what was used, when, why
+        ├── suggestions/     ← Actionable review feedback
+        │   ├── S001_....md
+        │   └── S002_....md
+        ├── proposals/       ← Working copies updated before the deliverable
+        │   ├── document-proposal-v1.md
+        │   └── document-proposal-v2.md
+        ├── research/
+        │   ├── source-1.md
+        │   └── source-2.pdf
+        ├── reviews/
+        │   ├── review-round-1.md
+        │   └── feedback-alice.md
+        └── drafts/
+            ├── draft-v1.md
+            └── draft-v2.md
 ```
 
-The `_resources/` prefix signals "supporting material" visually — present but clearly separate from the deliverable.
+The `_resources/` prefix signals "supporting material" visually — present but
+clearly separate from the deliverable. Within it, each deliverable gets its own
+namespace folder named after the target filename **without its extension** (so
+`document.md` → `_resources/document/`). This keeps the structure compatible
+with the suggestion-driven workflow and avoids collisions when several documents
+share one `_resources/` parent.
 
 ---
 
@@ -59,6 +71,30 @@ This file solves the confusion problem. It's a lightweight log that *links* the 
 ```
 
 The decision log is especially valuable for workflow review — it captures *why* things were included or dropped, not just *what*.
+
+---
+
+## Suggestion and Proposal Workflow
+
+Review feedback never edits the deliverable directly. It flows through the
+document-scoped namespace before reaching the reader-facing file:
+
+- **Suggestions** — actionable review feedback goes into
+  `_resources/{document-name}/suggestions/`, one document per suggestion.
+- **Proposals** — proposal copies of the deliverable go into
+  `_resources/{document-name}/proposals/`, where suggestions are applied and
+  reviewed first.
+- **Controlled updates** — the deliverable is updated only after pending
+  suggestions are accepted, rejected, or deferred; an accepted suggestion is
+  applied to a proposal copy, then the proposal is copied back over the
+  original.
+- **Traceability** — `INDEX.md` links each accepted suggestion to its
+  implementation reference and records rejected or deferred suggestions in the
+  decision log.
+
+This gives reviewers and LLM tools a clear path from feedback to controlled
+document updates. See `suggestion-driven-documentation.md` for the full
+lifecycle and file-naming rules.
 
 ---
 
