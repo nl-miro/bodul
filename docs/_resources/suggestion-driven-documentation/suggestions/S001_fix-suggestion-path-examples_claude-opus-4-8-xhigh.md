@@ -12,8 +12,9 @@
 
 ## Issue
 
-The canonical location for suggestions is `_resources/{document-name}/suggestions/`
-(stated on line 12 and used in practice, e.g.
+The canonical location for suggestions is
+`_resources/{document-name}/suggestions/` (stated on line 12 and used in
+practice, e.g.
 `docs/_resources/documentation-structure/suggestions/S001_...md`). Several
 examples contradict that canonical form:
 

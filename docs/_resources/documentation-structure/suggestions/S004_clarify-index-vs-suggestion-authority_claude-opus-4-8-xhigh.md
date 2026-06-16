@@ -13,11 +13,11 @@
 ## Issue
 
 After adding the "Suggestion and Proposal Workflow" section, the guide now
-records suggestion decisions in two places: each suggestion document's `Decision`
-field, and the `INDEX.md` "Decision Log". The Traceability bullet says `INDEX.md`
-"records rejected or deferred suggestions in the decision log." This risks
-divergence — a rejected suggestion's status would live both in its own document
-and, restated, in `INDEX.md`, with no defined source of truth.
+records suggestion decisions in two places: each suggestion document's
+`Decision` field, and the `INDEX.md` "Decision Log". The Traceability bullet
+says `INDEX.md` "records rejected or deferred suggestions in the decision log."
+This risks divergence — a rejected suggestion's status would live both in its
+own document and, restated, in `INDEX.md`, with no defined source of truth.
 
 ## Suggestion
 

@@ -17,10 +17,10 @@ request, or document change that implemented the suggestion." But "Applying
 suggestions" step 5 says to fill in the field and *then* commit ("fill in the
 `Implementation reference` field, and commit before moving to the next
 suggestion"). At fill time the implementing commit does not exist yet, so the
-field cannot hold that commit's hash without a follow-up amend — a chicken-and-egg
-ordering. (This already surfaced when applying the `documentation-structure`
-suggestions, where the field was set to the proposal filename instead of a
-commit.)
+field cannot hold that commit's hash without a follow-up amend — a
+chicken-and-egg ordering. (This already surfaced when applying the
+`documentation-structure` suggestions, where the field was set to the proposal
+filename instead of a commit.)
 
 ## Suggestion
 

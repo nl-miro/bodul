@@ -20,6 +20,7 @@ stay outside the reader-facing document by default.
 ## Suggestion
 
 Rewrite the single-file alternative as an exception, not a peer default. State
-that it should be used only when a separate `_resources/` folder is impossible or
-too heavy for the document's lifecycle. Also mention that suggestion documents
-remain preferred when an LLM or reviewer is producing actionable feedback.
+that it should be used only when a separate `_resources/` folder is impossible
+or too heavy for the document's lifecycle. Also mention that suggestion
+documents remain preferred when an LLM or reviewer is producing actionable
+feedback.

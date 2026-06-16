@@ -14,8 +14,8 @@
 
 The workflow defines "Creating suggestions" (which produces documents with
 `Decision: pending`) and "Applying suggestions" (which reads documents that are
-already decided), but never describes the step in between: where a reviewer reads
-the pending suggestions and sets `Decision` to `accepted`, `rejected`, or
+already decided), but never describes the step in between: where a reviewer
+reads the pending suggestions and sets `Decision` to `accepted`, `rejected`, or
 `deferred`.
 
 In practice this step happens — the existing suggestions were marked

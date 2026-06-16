@@ -5,9 +5,12 @@
 
 ## The Core Problem
 
-You want the **document itself to stay readable**, while keeping a full **audit trail of resources** accessible but out of the way.
+You want the **document itself to stay readable**, while keeping a full **audit
+trail of resources** accessible but out of the way.
 
-The risk: mixing resources into the document creates confusion for readers. But discarding them loses the "road travelled" — valuable for investigating and improving workflows later.
+The risk: mixing resources into the document creates confusion for readers. But
+discarding them loses the "road travelled" — valuable for investigating and
+improving workflows later.
 
 **Solution: two-layer approach.**
 
@@ -51,7 +54,8 @@ share one `_resources/` parent.
 
 ## The Key: `INDEX.md` as the Bridge
 
-This file solves the confusion problem. It's a lightweight log that *links* the document to its resources without cluttering the document itself.
+This file solves the confusion problem. It's a lightweight log that *links* the
+document to its resources without cluttering the document itself.
 
 ```markdown
 # Resource Index — [Document Name]
@@ -70,7 +74,8 @@ This file solves the confusion problem. It's a lightweight log that *links* the 
 - [ ] Verify stat in §2 against primary source
 ```
 
-The decision log is especially valuable for workflow review — it captures *why* things were included or dropped, not just *what*.
+The decision log is especially valuable for workflow review — it captures *why*
+things were included or dropped, not just *what*.
 
 ---
 
@@ -111,7 +116,8 @@ lifecycle and file-naming rules.
 
 ## Lighter Alternative (Single-File Documents)
 
-If you're working in a single document rather than a folder, add a collapsible appendix at the end:
+If you're working in a single document rather than a folder, add a collapsible
+appendix at the end:
 
 ```markdown
 # My Document
@@ -130,7 +136,8 @@ If you're working in a single document rather than a folder, add a collapsible a
 - ...
 ```
 
-This keeps everything in one file while visually separating the deliverable from the supporting material.
+This keeps everything in one file while visually separating the deliverable from
+the supporting material.
 
 ---
 

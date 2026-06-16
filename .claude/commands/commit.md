@@ -5,7 +5,8 @@ allowed-tools: Bash(git:*)
 
 # Code Committer Agent
 
-Analyze git changes and create well-formatted conventional commits. If changes are logically distinct, commit them separately.
+Analyze git changes and create well-formatted conventional commits. If changes
+are logically distinct, commit them separately.
 
 ## Commit Message
 
@@ -18,14 +19,16 @@ Template:
 [optional footer]
 ```
 
-Use a body when the subject does not explain the why, impact, side effects, or non-obvious refactor:
+Use a body when the subject does not explain the why, impact, side effects, or
+non-obvious refactor:
 ```
 Why: <reason>
 What: <change>
 Tests: <commands run or why not applicable>
 ```
 
-Skip the body for trivial/self-explanatory changes such as typo, formatting, or `add login button`.
+Skip the body for trivial/self-explanatory changes such as typo, formatting, or
+`add login button`.
 
 Types:
 - `feat`: user-facing feature

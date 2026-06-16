@@ -2,45 +2,46 @@
 
 ## Phase 1
 
-Phase 1 focuses on building a reliable product discovery pipeline for multiple Minisforum storefronts, all of them running on Shopify.
+Phase 1 focuses on building a reliable product discovery pipeline for multiple
+Minisforum storefronts, all of them running on Shopify.
 
 ```text
                         +------------------------------+
-                        |       Trigger updates        |
+| Trigger updates |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                       +----------------+----------------+
-                      |                                 |
+|-----|
                       v                                 v
        +------------------------------+  +------------------------------+
-       |    Discover sitemap files    |  |   Discover catalog leaves    |
-       |           and URLs           |  |           and URLs           |
+| Discover sitemap files |     | Discover catalog leaves |
+| and URLs               |     | and URLs                |
        +------------------------------+  +------------------------------+
-                      |                                 |
+|-----|
                       +----------------+----------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |     Fetch product pages      |
+| Fetch product pages |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |    Process retrieved data    |
+| Process retrieved data |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        | Classify and match products  |
+| Classify and match products |
                         +------------------------------+
-                                       |
+|-----|
                       +----------------+----------------+
-                      |                                 |
+|-----|
                       v                                 v
        +------------------------------+  +------------------------------+
-       |  Product catalog matched or  |  |   Store catalog persisted    |
-       |           created            |  |                              |
+| Product catalog matched or |     | Store catalog persisted |
+| created                    |     |                         |
        +------------------------------+  +------------------------------+
 ```
 
@@ -56,36 +57,36 @@ Discovery uses two paths:
 
 ```text
                         +------------------------------+
-                        |      Fetch sitemap.xml       |
+| Fetch sitemap.xml |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |    Extract sitemap files     |
+| Extract sitemap files |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |  Ignore non-default locales  |
+| Ignore non-default locales |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        | Download and store sitemaps  |
+| Download and store sitemaps |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                       +----------------+----------------+
-                      |                                 |
+|-----|
                       v                                 v
        +------------------------------+  +------------------------------+
-       |    Iterate catalog pages     |  |    Iterate product pages     |
+| Iterate catalog pages |     | Iterate product pages |
        +------------------------------+  +------------------------------+
-                      |                                 |
+|-----|
                       v                                 v
        +------------------------------+  +------------------------------+
-       |    Price and availability    |  |  Images, descriptions, and   |
-       |  Newly discovered products   |  |         availability         |
+| Price and availability    |     | Images, descriptions, and |
+| Newly discovered products |     | availability              |
        +------------------------------+  +------------------------------+
 ```
 
@@ -96,76 +97,76 @@ Discovery uses two paths:
 
 ```text
                         +------------------------------+
-                        |      Iterate site menu       |
+| Iterate site menu |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |    Gather catalog leaves     |
+| Gather catalog leaves |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |    Iterate catalog pages     |
+| Iterate catalog pages |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |   Collect product details    |
-                        |           and URLs           |
+| Collect product details |
+| and URLs                |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |     Visit product pages      |
-                        |           in order           |
+| Visit product pages |
+| in order            |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |      Scrape images and       |
-                        |  descriptions, availability  |
+| Scrape images and          |
+| descriptions, availability |
                         +------------------------------+
 ```
 
 ## Processing retrieved catalog data
 
-Each fetched catalog page is sliced into individual product items and each
-slice is processed independently.
+Each fetched catalog page is sliced into individual product items and each slice
+is processed independently.
 
 ```text
                         +------------------------------+
-                        |    Retrieved catalog page    |
+| Retrieved catalog page |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |  Slice into product items    |
+| Slice into product items |
                         +------------------------------+
-                                       |
+|-----|
                               for each item
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |   Extract mandatory fields   |
-                        | product_url, title, price,   |
-                        |            image             |
+| Extract mandatory fields   |
+| product_url, title, price, |
+| image                      |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |   Extract optional fields    |
-                        |    id, category, and more    |
+| Extract optional fields |
+| id, category, and more  |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |    Create product record     |
+| Create product record |
                         +------------------------------+
-                                       |
+|-----|
                                        v
                         +------------------------------+
-                        |      Emit product event      |
+| Emit product event |
                         +------------------------------+
 ```
 
