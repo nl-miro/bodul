@@ -3,12 +3,12 @@ name: money CI
 # CI for the `lib/money` crate. Triggers only when the crate (or this workflow)
 # changes, so unrelated commits don't spend CI minutes.
 on:
+  # Run on every pull request, whatever its base branch — so the check always
+  # reports (and can be made required) regardless of which files changed.
+  pull_request:
+  # On direct pushes, only bother when the crate (or this workflow) changes.
   push:
     branches: ["**"]
-    paths:
-      - "lib/money/**"
-      - ".github/workflows/money-ci.yml"
-  pull_request:
     paths:
       - "lib/money/**"
       - ".github/workflows/money-ci.yml"
