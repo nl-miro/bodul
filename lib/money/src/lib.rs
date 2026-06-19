@@ -2,9 +2,9 @@
 //!
 //! Exact, currency-aware money value type for USD, EUR, CAD, and AUD.
 //!
-//! **This is the Phase 1 _skeleton_.** Every public item below has its inputs and
-//! outputs (types and signatures) fixed, but every function body is `todo!()`.
-//! The crate compiles and exposes the contract; it implements no behaviour yet.
+//! This crate implements the Phase 1 scrape → parse → store path: exact
+//! minor-unit storage, construction/accessors, positive price parsing, and
+//! canonical wire serialization.
 //!
 //! See the specs under `docs/`:
 //! - `TS001_money-type.md` — authoritative behaviour (governs on any conflict).

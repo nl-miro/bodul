@@ -20,7 +20,27 @@ impl Currency {
     /// truth for fraction handling in parsing and formatting (TS001 §2.1/§2.2).
     /// Returns `2` for every currently supported currency.
     pub fn exponent(self) -> u8 {
-        // TODO(phase-1): return the minor-unit exponent (2 for USD/EUR/CAD/AUD).
-        todo!("Currency::exponent — TS001 §2.2")
+        match self {
+            Currency::USD | Currency::EUR | Currency::CAD | Currency::AUD => 2,
+        }
+    }
+
+    pub(crate) fn iso_code(self) -> &'static str {
+        match self {
+            Currency::USD => "USD",
+            Currency::EUR => "EUR",
+            Currency::CAD => "CAD",
+            Currency::AUD => "AUD",
+        }
+    }
+
+    pub(crate) fn from_iso_code(code: &str) -> Option<Self> {
+        match code {
+            "USD" => Some(Currency::USD),
+            "EUR" => Some(Currency::EUR),
+            "CAD" => Some(Currency::CAD),
+            "AUD" => Some(Currency::AUD),
+            _ => None,
+        }
     }
 }

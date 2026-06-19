@@ -27,9 +27,10 @@ impl Money {
     /// Infallible: every `i64` paired with a supported currency is a valid
     /// `Money` (TS001 §2.9).
     pub fn new(amount_minor: i64, currency: Currency) -> Money {
-        // TODO(phase-1): construct Money { amount_minor, currency }.
-        let _ = (amount_minor, currency);
-        todo!("Money::new — TS001 §2.9")
+        Money {
+            amount_minor,
+            currency,
+        }
     }
 
     /// Combine whole major units and a signed fractional minor-unit component
@@ -44,20 +45,32 @@ impl Money {
         fractional_minor: i64,
         currency: Currency,
     ) -> Result<Money, MoneyError> {
-        // TODO(phase-1): validate sign/magnitude, assemble minor units (overflow-checked).
-        let _ = (units, fractional_minor, currency);
-        todo!("Money::from_major — TS001 §2.9")
+        let scale = 10_i64.pow(u32::from(currency.exponent()));
+        if fractional_minor <= -scale || fractional_minor >= scale {
+            return Err(MoneyError::InvalidArgument);
+        }
+
+        let signs_conflict =
+            (units > 0 && fractional_minor < 0) || (units < 0 && fractional_minor > 0);
+        if signs_conflict {
+            return Err(MoneyError::InvalidArgument);
+        }
+
+        let major = units.checked_mul(scale).ok_or(MoneyError::Overflow)?;
+        let amount_minor = major
+            .checked_add(fractional_minor)
+            .ok_or(MoneyError::Overflow)?;
+
+        Ok(Money::new(amount_minor, currency))
     }
 
     /// The signed minor-unit (cents) count.
     pub fn minor_units(&self) -> i64 {
-        // TODO(phase-1): return self.amount_minor.
-        todo!("Money::minor_units — TS001 §2.9")
+        self.amount_minor
     }
 
     /// The currency of this value.
     pub fn currency(&self) -> Currency {
-        // TODO(phase-1): return self.currency.
-        todo!("Money::currency — TS001 §2.9")
+        self.currency
     }
 }
