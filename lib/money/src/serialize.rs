@@ -110,7 +110,8 @@ struct Fields {
 
 /// Minimal hand-rolled JSON object scanner (no serde dependency — TS001 §2.10 /
 /// IS001 keep the skeleton dependency-free). Returns `None` on any structural
-/// malformation. Unknown keys are ignored.
+/// malformation, including unknown keys and duplicate `amount_minor`/`currency`
+/// keys (canonical v1 has exactly those two fields).
 fn scan_object(wire: &str) -> Option<Fields> {
     let mut sc = Scanner::new(wire);
     sc.skip_ws();
@@ -134,10 +135,13 @@ fn scan_object(wire: &str) -> Option<Fields> {
             }
             sc.skip_ws();
             let value = sc.parse_value()?;
+            // Canonical v1 has exactly `amount_minor` and `currency`. Reject unknown
+            // keys and duplicates (both structural malformations → MalformedWireValue
+            // via the `None` return).
             match key.as_str() {
-                "amount_minor" => amount_minor = Some(value),
-                "currency" => currency = Some(value),
-                _ => {}
+                "amount_minor" if amount_minor.is_none() => amount_minor = Some(value),
+                "currency" if currency.is_none() => currency = Some(value),
+                _ => return None,
             }
             sc.skip_ws();
             match sc.next()? {
