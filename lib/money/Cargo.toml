@@ -1,0 +1,10 @@
+[package]
+name = "money"
+version = "0.1.0"
+edition = "2021"
+description = "Exact, currency-aware money value type (USD, EUR, CAD, AUD). Phase 1 skeleton."
+publish = false
+
+# Phase 1 skeleton has no dependencies. serde integration (TS001 implementation
+# notes) is deferred; serialize/deserialize are hand-rolled stubs for now.
+[dependencies]
