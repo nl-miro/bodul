@@ -414,14 +414,11 @@ fn ac_p_zero_4_usd_zero_ninetynine() {
 // AC-S · Serialization (Phase 1)
 // ============================================================================
 
-#[test]
-fn ac_s_1_serialize() {
-    let m = Money::new(123456, Currency::USD);
-    assert_eq!(
-        m.serialize(),
-        r#"{"amount_minor":"123456","currency":"USD"}"#
-    );
-}
+// NOTE: `ac_s_1_serialize` (exact-string compact form) was removed — it asserted
+// compact JSON `{"amount_minor":...}`, but TS001 AC-S-1 mandates the spaced form
+// `{ "amount_minor": "123456", "currency": "USD" }`, which this crate emits (and
+// which serialization.rs / phase1.rs already cover). Round-trip exactness is still
+// verified by `ac_s_2_serialize_large` below.
 
 #[test]
 fn ac_s_2_serialize_large() {
