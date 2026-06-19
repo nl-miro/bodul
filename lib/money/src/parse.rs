@@ -124,8 +124,7 @@ impl Money {
         // trailing token is consumed but another remains) is also multiple distinct
         // tokens → MalformedCurrency (TS001 §2.4 step 3; AC-P-NEG-14). A bare number
         // never matches an indicator, so legitimate amounts are unaffected.
-        if match_leading_indicator(payload).is_some()
-            || match_trailing_indicator(payload).is_some()
+        if match_leading_indicator(payload).is_some() || match_trailing_indicator(payload).is_some()
         {
             return Err(ParseError::MalformedCurrency);
         }
@@ -224,10 +223,7 @@ fn match_trailing_indicator(s: &str) -> Option<(&'static str, Option<Currency>)>
 
 /// Validate that an indicator token is consistent with the expected currency.
 /// A bare `$` is accepted for USD/CAD/AUD; for EUR it is a mismatch (§2.4 step 3).
-fn check_indicator(
-    token_currency: Option<Currency>,
-    expected: Currency,
-) -> Result<(), ParseError> {
+fn check_indicator(token_currency: Option<Currency>, expected: Currency) -> Result<(), ParseError> {
     match token_currency {
         None => {
             if matches!(expected, Currency::USD | Currency::CAD | Currency::AUD) {
@@ -274,45 +270,49 @@ fn split_number(s: &str) -> Result<(String, String), ParseError> {
     let has_comma = s.contains(',');
 
     // (integer_part_with_group_seps, group_sep, fraction_digits)
-    let (integer_part, group_sep, fraction): (&str, Option<char>, &str) =
-        match (has_dot, has_comma) {
-            (true, true) => {
-                // Right-most separator is the decimal; the other is the group sep.
-                let decimal_sep = if s.rfind('.') > s.rfind(',') { '.' } else { ',' };
-                let group_sep = if decimal_sep == '.' { ',' } else { '.' };
-                let pos = s.rfind(decimal_sep).unwrap();
-                let integer_part = &s[..pos];
-                let fraction = &s[pos + 1..];
-                // Exactly one decimal separator, and the fraction must be plain digits.
-                if integer_part.contains(decimal_sep)
-                    || fraction.contains('.')
-                    || fraction.contains(',')
-                {
-                    return Err(ParseError::InvalidGrouping);
-                }
-                (integer_part, Some(group_sep), fraction)
+    let (integer_part, group_sep, fraction): (&str, Option<char>, &str) = match (has_dot, has_comma)
+    {
+        (true, true) => {
+            // Right-most separator is the decimal; the other is the group sep.
+            let decimal_sep = if s.rfind('.') > s.rfind(',') {
+                '.'
+            } else {
+                ','
+            };
+            let group_sep = if decimal_sep == '.' { ',' } else { '.' };
+            let pos = s.rfind(decimal_sep).unwrap();
+            let integer_part = &s[..pos];
+            let fraction = &s[pos + 1..];
+            // Exactly one decimal separator, and the fraction must be plain digits.
+            if integer_part.contains(decimal_sep)
+                || fraction.contains('.')
+                || fraction.contains(',')
+            {
+                return Err(ParseError::InvalidGrouping);
             }
-            (true, false) | (false, true) => {
-                let sep = if has_dot { '.' } else { ',' };
-                let count = s.matches(sep).count();
-                let last = s.rfind(sep).unwrap();
-                let after = s.len() - (last + 1);
-                if count > 1 {
-                    // Repeated single separator → grouping, no fractional part.
-                    (s, Some(sep), "")
-                } else if after == 3 {
-                    // Lone separator before exactly three digits → grouping default.
-                    (s, Some(sep), "")
-                } else if after == 1 || after == 2 {
-                    (&s[..last], None, &s[last + 1..])
-                } else if after == 0 {
-                    return Err(ParseError::MalformedNumber);
-                } else {
-                    return Err(ParseError::InvalidGrouping);
-                }
+            (integer_part, Some(group_sep), fraction)
+        }
+        (true, false) | (false, true) => {
+            let sep = if has_dot { '.' } else { ',' };
+            let count = s.matches(sep).count();
+            let last = s.rfind(sep).unwrap();
+            let after = s.len() - (last + 1);
+            if count > 1 {
+                // Repeated single separator → grouping, no fractional part.
+                (s, Some(sep), "")
+            } else if after == 3 {
+                // Lone separator before exactly three digits → grouping default.
+                (s, Some(sep), "")
+            } else if after == 1 || after == 2 {
+                (&s[..last], None, &s[last + 1..])
+            } else if after == 0 {
+                return Err(ParseError::MalformedNumber);
+            } else {
+                return Err(ParseError::InvalidGrouping);
             }
-            (false, false) => (s, None, ""),
-        };
+        }
+        (false, false) => (s, None, ""),
+    };
 
     // Step 7 — group/integer validation, then strip group separators.
     let integer_digits = if let Some(sep) = group_sep {

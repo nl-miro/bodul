@@ -43,7 +43,9 @@ impl Money {
         let amount_value = fields
             .amount_minor
             .ok_or(DeserializeError::MalformedWireValue)?;
-        let currency_value = fields.currency.ok_or(DeserializeError::MalformedWireValue)?;
+        let currency_value = fields
+            .currency
+            .ok_or(DeserializeError::MalformedWireValue)?;
 
         // `amount_minor` MUST be a JSON string; a number form is rejected, never
         // coerced (TS001 §2.10; AC-S-4).

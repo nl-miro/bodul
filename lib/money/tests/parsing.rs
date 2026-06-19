@@ -96,8 +96,14 @@ fn can_dollar_indicator_is_recognised() {
 
 #[test]
 fn ac_p_zero_positive() {
-    assert_eq!(parse("0,50 €", Currency::EUR), Ok(Money::new(50, Currency::EUR))); // AC-P-ZERO-3
-    assert_eq!(parse("0.99", Currency::USD), Ok(Money::new(99, Currency::USD))); // AC-P-ZERO-4
+    assert_eq!(
+        parse("0,50 €", Currency::EUR),
+        Ok(Money::new(50, Currency::EUR))
+    ); // AC-P-ZERO-3
+    assert_eq!(
+        parse("0.99", Currency::USD),
+        Ok(Money::new(99, Currency::USD))
+    ); // AC-P-ZERO-4
 }
 
 // ----- AC-P-NEG · error rows reachable in Phase 1 -----
@@ -105,27 +111,63 @@ fn ac_p_zero_positive() {
 #[test]
 fn ac_p_neg_empty_and_invalid_chars() {
     assert_eq!(parse("", Currency::USD), Err(ParseError::EmptyInput)); // NEG-1
-    assert_eq!(parse("abc", Currency::USD), Err(ParseError::InvalidCharacter)); // NEG-2
-    assert_eq!(parse("1'234.56", Currency::USD), Err(ParseError::InvalidCharacter)); // NEG-8 (Swiss)
+    assert_eq!(
+        parse("abc", Currency::USD),
+        Err(ParseError::InvalidCharacter)
+    ); // NEG-2
+    assert_eq!(
+        parse("1'234.56", Currency::USD),
+        Err(ParseError::InvalidCharacter)
+    ); // NEG-8 (Swiss)
 }
 
 #[test]
 fn ac_p_neg_currency_mismatch() {
-    assert_eq!(parse("$5.00", Currency::EUR), Err(ParseError::CurrencyMismatch)); // NEG-3
-    assert_eq!(parse("€5,00", Currency::USD), Err(ParseError::CurrencyMismatch)); // NEG-4
-    assert_eq!(parse("US$5.00", Currency::CAD), Err(ParseError::CurrencyMismatch)); // NEG-20
+    assert_eq!(
+        parse("$5.00", Currency::EUR),
+        Err(ParseError::CurrencyMismatch)
+    ); // NEG-3
+    assert_eq!(
+        parse("€5,00", Currency::USD),
+        Err(ParseError::CurrencyMismatch)
+    ); // NEG-4
+    assert_eq!(
+        parse("US$5.00", Currency::CAD),
+        Err(ParseError::CurrencyMismatch)
+    ); // NEG-20
 }
 
 #[test]
 fn ac_p_neg_invalid_grouping() {
-    assert_eq!(parse("1.2.3", Currency::USD), Err(ParseError::InvalidGrouping)); // NEG-5
-    assert_eq!(parse("1,23,456", Currency::USD), Err(ParseError::InvalidGrouping)); // NEG-6
-    assert_eq!(parse("12,34,567", Currency::USD), Err(ParseError::InvalidGrouping)); // NEG-7 (Indian)
-    assert_eq!(parse("1.0000", Currency::USD), Err(ParseError::InvalidGrouping)); // NEG-15
-    assert_eq!(parse("1,2345", Currency::USD), Err(ParseError::InvalidGrouping)); // NEG-16
-    assert_eq!(parse("1,234.567,89", Currency::USD), Err(ParseError::InvalidGrouping)); // NEG-17
+    assert_eq!(
+        parse("1.2.3", Currency::USD),
+        Err(ParseError::InvalidGrouping)
+    ); // NEG-5
+    assert_eq!(
+        parse("1,23,456", Currency::USD),
+        Err(ParseError::InvalidGrouping)
+    ); // NEG-6
+    assert_eq!(
+        parse("12,34,567", Currency::USD),
+        Err(ParseError::InvalidGrouping)
+    ); // NEG-7 (Indian)
+    assert_eq!(
+        parse("1.0000", Currency::USD),
+        Err(ParseError::InvalidGrouping)
+    ); // NEG-15
+    assert_eq!(
+        parse("1,2345", Currency::USD),
+        Err(ParseError::InvalidGrouping)
+    ); // NEG-16
+    assert_eq!(
+        parse("1,234.567,89", Currency::USD),
+        Err(ParseError::InvalidGrouping)
+    ); // NEG-17
     assert_eq!(parse("00", Currency::USD), Err(ParseError::InvalidGrouping)); // NEG-18
-    assert_eq!(parse("007", Currency::USD), Err(ParseError::InvalidGrouping)); // NEG-19
+    assert_eq!(
+        parse("007", Currency::USD),
+        Err(ParseError::InvalidGrouping)
+    ); // NEG-19
     assert_eq!(
         parse("12\u{00A0}34,56 €", Currency::EUR),
         Err(ParseError::InvalidGrouping)
@@ -162,7 +204,10 @@ fn ac_p_neg_overflow() {
 fn ac_p_neg_malformed_number() {
     assert_eq!(parse("1,", Currency::USD), Err(ParseError::MalformedNumber)); // NEG-11
     assert_eq!(parse("$", Currency::USD), Err(ParseError::MalformedNumber)); // NEG-23
-    assert_eq!(parse("USD", Currency::USD), Err(ParseError::MalformedNumber)); // NEG-24
+    assert_eq!(
+        parse("USD", Currency::USD),
+        Err(ParseError::MalformedNumber)
+    ); // NEG-24
 }
 
 #[test]
@@ -194,7 +239,10 @@ fn ac_p_neg_input_too_long() {
     // i64, but that is a different, later error — the point is it is not rejected as
     // too long).
     let at_limit = "1".repeat(256);
-    assert_ne!(parse(&at_limit, Currency::USD), Err(ParseError::InputTooLong));
+    assert_ne!(
+        parse(&at_limit, Currency::USD),
+        Err(ParseError::InputTooLong)
+    );
 }
 
 // ----- AC-NFR-1 · determinism -----

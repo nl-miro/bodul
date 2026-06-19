@@ -1,0 +1,64 @@
+name: money CI
+
+# CI for the `lib/money` crate. Triggers only when the crate (or this workflow)
+# changes, so unrelated commits don't spend CI minutes.
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "lib/money/**"
+      - ".github/workflows/money-ci.yml"
+  pull_request:
+    paths:
+      - "lib/money/**"
+      - ".github/workflows/money-ci.yml"
+
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: money-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-D warnings"
+
+defaults:
+  run:
+    working-directory: lib/money
+
+jobs:
+  ci:
+    name: fmt · clippy · test · doc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install stable toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Cache cargo artifacts
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: lib/money
+
+      - name: Format check
+        run: cargo fmt --check
+
+      - name: Clippy
+        run: cargo clippy --all-targets -- -D warnings
+
+      - name: Test
+        run: cargo test --all-targets
+
+      - name: Doc tests
+        run: cargo test --doc
+
+      - name: Build docs
+        run: cargo doc --no-deps
+        env:
+          RUSTDOCFLAGS: "-D warnings"

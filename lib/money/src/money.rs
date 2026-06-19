@@ -58,8 +58,8 @@ impl Money {
         // `units` and `fractional_minor` must agree in sign unless either is zero,
         // so `from_major(0, -34)` is allowed but `from_major(12, -34)` is not
         // (TS001 §2.9; AC-A-18, AC-A-19).
-        let mixed_signs = (units > 0 && fractional_minor < 0)
-            || (units < 0 && fractional_minor > 0);
+        let mixed_signs =
+            (units > 0 && fractional_minor < 0) || (units < 0 && fractional_minor > 0);
         if mixed_signs {
             return Err(MoneyError::InvalidArgument);
         }

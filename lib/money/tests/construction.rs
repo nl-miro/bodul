@@ -30,8 +30,14 @@ fn equality_and_hash_are_total_over_amount_and_currency() {
     use std::collections::HashSet;
 
     // Same amount, different currency → not equal (TS001 §2.6, INV-3).
-    assert_ne!(Money::new(500, Currency::USD), Money::new(500, Currency::EUR));
-    assert_eq!(Money::new(500, Currency::USD), Money::new(500, Currency::USD));
+    assert_ne!(
+        Money::new(500, Currency::USD),
+        Money::new(500, Currency::EUR)
+    );
+    assert_eq!(
+        Money::new(500, Currency::USD),
+        Money::new(500, Currency::USD)
+    );
 
     // Safe as a hash key: the two distinct values coexist in a set.
     let mut set = HashSet::new();
