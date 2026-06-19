@@ -38,30 +38,41 @@ impl Money {
             return Err(DeserializeError::MalformedWireValue);
         }
 
-        let inner = &wire[1..wire.len() - 1];
+        let inner = wire[1..wire.len() - 1].trim();
+        let bytes = inner.as_bytes();
+        let mut pos = 0;
         let mut amount_minor_str: Option<&str> = None;
         let mut currency_str: Option<&str> = None;
+        let mut first = true;
 
-        // Simple key-value parser for the two known fields.
-        // We look for "amount_minor" and "currency" keys with string values.
-        let mut pos = 0;
-        let bytes = inner.as_bytes();
-
-        for _ in 0..2 {
-            // Skip whitespace
+        loop {
             pos = skip_whitespace(bytes, pos);
 
-            // Expect '"'
+            // End of object
+            if pos >= bytes.len() {
+                break;
+            }
+
+            // Comma between fields
+            if !first {
+                if pos >= bytes.len() || bytes[pos] != b',' {
+                    return Err(DeserializeError::MalformedWireValue);
+                }
+                pos += 1;
+                pos = skip_whitespace(bytes, pos);
+            }
+            first = false;
+
+            // Expect '"' for key
             if pos >= bytes.len() || bytes[pos] != b'"' {
                 return Err(DeserializeError::MalformedWireValue);
             }
-            pos += 1; // skip opening '"'
+            pos += 1;
 
-            // Read key
+            // Read key name
             let key_start = pos;
             while pos < bytes.len() && bytes[pos] != b'"' {
                 if bytes[pos] == b'\\' {
-                    // We don't support escape sequences for these simple keys
                     return Err(DeserializeError::MalformedWireValue);
                 }
                 pos += 1;
@@ -73,27 +84,25 @@ impl Money {
                 .map_err(|_| DeserializeError::MalformedWireValue)?;
             pos += 1; // skip closing '"'
 
-            // Skip whitespace, expect ':'
+            // Expect ':'
             pos = skip_whitespace(bytes, pos);
             if pos >= bytes.len() || bytes[pos] != b':' {
                 return Err(DeserializeError::MalformedWireValue);
             }
-            pos += 1; // skip ':'
+            pos += 1;
 
-            // Skip whitespace
+            // Skip whitespace before value
             pos = skip_whitespace(bytes, pos);
 
             match key {
                 "amount_minor" => {
-                    if pos >= bytes.len() {
+                    if amount_minor_str.is_some() {
+                        return Err(DeserializeError::MalformedWireValue); // duplicate key
+                    }
+                    if pos >= bytes.len() || bytes[pos] != b'"' {
                         return Err(DeserializeError::MalformedWireValue);
                     }
-                    if bytes[pos] != b'"' {
-                        // Not a string value — could be a JSON number
-                        // Any non-string value is MalformedWireValue
-                        return Err(DeserializeError::MalformedWireValue);
-                    }
-                    pos += 1; // skip opening '"'
+                    pos += 1;
                     let val_start = pos;
                     while pos < bytes.len() && bytes[pos] != b'"' {
                         if bytes[pos] == b'\\' {
@@ -106,10 +115,13 @@ impl Money {
                     }
                     let val = std::str::from_utf8(&bytes[val_start..pos])
                         .map_err(|_| DeserializeError::MalformedWireValue)?;
-                    pos += 1; // skip closing '"'
+                    pos += 1;
                     amount_minor_str = Some(val);
                 }
                 "currency" => {
+                    if currency_str.is_some() {
+                        return Err(DeserializeError::MalformedWireValue); // duplicate key
+                    }
                     if pos >= bytes.len() || bytes[pos] != b'"' {
                         return Err(DeserializeError::MalformedWireValue);
                     }
@@ -130,34 +142,9 @@ impl Money {
                     currency_str = Some(val);
                 }
                 _ => {
-                    // Unknown key — skip its value (must be a string)
-                    if pos < bytes.len() && bytes[pos] == b'"' {
-                        pos += 1;
-                        while pos < bytes.len() && bytes[pos] != b'"' {
-                            if bytes[pos] == b'\\' {
-                                return Err(DeserializeError::MalformedWireValue);
-                            }
-                            pos += 1;
-                        }
-                        if pos < bytes.len() {
-                            pos += 1;
-                        }
-                    } else {
-                        // Unknown value type, try to skip
-                        while pos < bytes.len()
-                            && bytes[pos] != b','
-                            && bytes[pos] != b'}'
-                        {
-                            pos += 1;
-                        }
-                    }
+                    // Unknown key — reject; canonical v1 only knows two fields
+                    return Err(DeserializeError::MalformedWireValue);
                 }
-            }
-
-            // Skip whitespace, then expect ',' or '}'
-            pos = skip_whitespace(bytes, pos);
-            if pos < bytes.len() && bytes[pos] == b',' {
-                pos += 1; // skip ','
             }
         }
 
@@ -182,7 +169,9 @@ impl Money {
 }
 
 fn skip_whitespace(bytes: &[u8], mut pos: usize) -> usize {
-    while pos < bytes.len() && (bytes[pos] == b' ' || bytes[pos] == b'\t' || bytes[pos] == b'\n' || bytes[pos] == b'\r') {
+    while pos < bytes.len()
+        && (bytes[pos] == b' ' || bytes[pos] == b'\t' || bytes[pos] == b'\n' || bytes[pos] == b'\r')
+    {
         pos += 1;
     }
     pos

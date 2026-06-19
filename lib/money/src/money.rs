@@ -48,22 +48,21 @@ impl Money {
         let exp = currency.exponent() as u32;
         let scale = 10i64.pow(exp); // 100 for all current currencies
 
-        // fractional_minor magnitude must be less than scale
-        if fractional_minor.abs() >= scale {
+        // fractional_minor magnitude must be less than scale.
+        // Avoid .abs() — it panics on i64::MIN in debug builds.
+        if fractional_minor <= -scale || fractional_minor >= scale {
             return Err(MoneyError::InvalidArgument);
         }
 
         // sign rule: units and fractional_minor must share sign unless either is zero
         match (units.signum(), fractional_minor.signum()) {
-            (0, _) | (_, 0) => {} // ok — one is zero
+            (0, _) | (_, 0) => {}  // ok — one is zero
             (a, b) if a == b => {} // ok — same sign
             _ => return Err(MoneyError::InvalidArgument),
         }
 
         // overflow-checked assembly: units * scale + fractional_minor
-        let major_minor = units
-            .checked_mul(scale)
-            .ok_or(MoneyError::Overflow)?;
+        let major_minor = units.checked_mul(scale).ok_or(MoneyError::Overflow)?;
         let amount_minor = major_minor
             .checked_add(fractional_minor)
             .ok_or(MoneyError::Overflow)?;

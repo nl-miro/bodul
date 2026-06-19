@@ -68,7 +68,7 @@ fn ends_with_indicator(s: &str, suffix: &str) -> bool {
         return false;
     }
     let candidate = &s[start..];
-    if suffix.chars().all(|c| c.is_ascii()) {
+    if suffix.is_ascii() {
         candidate.eq_ignore_ascii_case(suffix)
     } else {
         candidate == suffix
@@ -86,7 +86,7 @@ fn starts_with_indicator(s: &str, prefix: &str) -> bool {
         return false;
     }
     let candidate = &s[..prefix.len()];
-    if prefix.chars().all(|c| c.is_ascii()) {
+    if prefix.is_ascii() {
         candidate.eq_ignore_ascii_case(prefix)
     } else {
         candidate == prefix
@@ -166,10 +166,7 @@ fn extract_sign(s: &mut String) -> Result<bool, ParseError> {
     // Check for conflicting signs: after extracting one sign, we shouldn't find another
     if sign_found {
         // Check that no additional sign markers remain
-        if s.starts_with('-')
-            || s.starts_with('+')
-            || (s.starts_with('(') && s.ends_with(')'))
-        {
+        if s.starts_with('-') || s.starts_with('+') || (s.starts_with('(') && s.ends_with(')')) {
             return Err(ParseError::MalformedSign);
         }
         // Check trailing minus
@@ -250,10 +247,7 @@ fn match_trailing_indicator(s: &str) -> Option<IndicatorMatch> {
 /// Extract currency indicators from `s`, modifying it in place. Validates that
 /// indicators match the expected `currency` and that at most one distinct
 /// indicator token is consumed per side.
-fn extract_currency_indicators(
-    s: &mut String,
-    currency: Currency,
-) -> Result<(), ParseError> {
+fn extract_currency_indicators(s: &mut String, currency: Currency) -> Result<(), ParseError> {
     let leading = match_leading_indicator(s);
     let trailing = match_trailing_indicator(s);
 
@@ -301,10 +295,8 @@ fn extract_currency_indicators(
             *s = s.trim_start().to_string();
 
             // Check for an adjacent trailing indicator (two indicators at same end)
-            if !s.is_empty() {
-                if match_trailing_indicator(s).is_some() {
-                    return Err(ParseError::MalformedCurrency);
-                }
+            if !s.is_empty() && match_trailing_indicator(s).is_some() {
+                return Err(ParseError::MalformedCurrency);
             }
         }
         (None, Some(trail)) => {
@@ -314,10 +306,8 @@ fn extract_currency_indicators(
             *s = s.trim_end().to_string();
 
             // Check for an adjacent trailing indicator (two at same end)
-            if !s.is_empty() {
-                if match_trailing_indicator(s).is_some() {
-                    return Err(ParseError::MalformedCurrency);
-                }
+            if !s.is_empty() && match_trailing_indicator(s).is_some() {
+                return Err(ParseError::MalformedCurrency);
             }
         }
     }
@@ -325,10 +315,7 @@ fn extract_currency_indicators(
     Ok(())
 }
 
-fn validate_indicator(
-    matched: &IndicatorMatch,
-    expected: Currency,
-) -> Result<(), ParseError> {
+fn validate_indicator(matched: &IndicatorMatch, expected: Currency) -> Result<(), ParseError> {
     if matched.ambiguous {
         // Bare `$` — must be USD, CAD, or AUD
         if expected == Currency::EUR {
@@ -380,10 +367,7 @@ fn remove_space_groups(s: &mut String) -> Result<(), ParseError> {
 
     // Integer group digits (everything before the last part, plus the integer
     // portion of the last part)
-    let mut integer_parts: Vec<&str> = parts[..parts.len() - 1]
-        .iter()
-        .copied()
-        .collect();
+    let mut integer_parts: Vec<&str> = parts[..parts.len() - 1].to_vec();
 
     let last_int_part = if let Some(sep_pos) = decimal_sep {
         &last[..sep_pos]
@@ -479,15 +463,17 @@ fn detect_decimal(s: &str) -> Result<NumberParts, ParseError> {
             (None, None) => unreachable!(),
         };
 
-        let group_sep = if decimal_pos == last_dot.unwrap_or(0) { ',' } else { '.' };
+        let group_sep = if decimal_pos == last_dot.unwrap_or(0) {
+            ','
+        } else {
+            '.'
+        };
 
         // Check: all separators before decimal_pos must be the group separator
         let before_decimal = &s[..decimal_pos];
         for c in before_decimal.chars() {
-            if c == '.' || c == ',' {
-                if c != group_sep {
-                    return Err(ParseError::InvalidGrouping);
-                }
+            if (c == '.' || c == ',') && c != group_sep {
+                return Err(ParseError::InvalidGrouping);
             }
         }
 
@@ -627,9 +613,7 @@ fn assemble_minor_units(
     let digits = format!("{}{}", integer_digits, fraction_digits);
 
     // Parse as unsigned to handle i64::MIN edge case
-    let unsigned: u64 = digits
-        .parse()
-        .map_err(|_| ParseError::Overflow)?;
+    let unsigned: u64 = digits.parse().map_err(|_| ParseError::Overflow)?;
 
     if negative {
         // Zero is canonical: -0 yields 0
@@ -666,8 +650,10 @@ impl Money {
     /// exact i64 assembly. Returns a typed [`ParseError`] on any malformed input.
     ///
     /// Phase 1 delivers positive baseline parsing (AC-P baseline rows, AC-P-AMB,
-    /// AC-P-NEG, AC-P-ZERO-3/4); negative amounts and rounding-enabled parsing are
-    /// Phase 2.
+    /// AC-P-NEG, AC-P-ZERO-3/4). Sign extraction is implemented for error-path
+    /// coverage (e.g. `-$` → `MalformedNumber`), but successful negative-parsing
+    /// results are gated (→ `MalformedSign`) and deferred to Phase 2. Rounding-
+    /// enabled parsing is Phase 2.
     pub fn parse(
         raw: &str,
         currency: Currency,
@@ -695,6 +681,14 @@ impl Money {
 
         if s.is_empty() {
             return Err(ParseError::MalformedNumber);
+        }
+
+        // Phase 1: reject negative amounts (Phase 2 will handle them).
+        // Sign extraction runs so that error-path cases like "-$" (AC-P-NEG-25)
+        // reach MalformedNumber through the empty-input check above; actual
+        // negative amounts hit this gate.
+        if negative {
+            return Err(ParseError::MalformedSign);
         }
 
         // Step 4: validate and remove space groupings

@@ -256,7 +256,11 @@ fn ac_p_neg_9_ambiguity_default_grouping() {
 #[test]
 fn ac_p_neg_10_overflow_parse() {
     assert_eq!(
-        Money::parse("99999999999999999999", Currency::USD, ParseOptions::default()),
+        Money::parse(
+            "99999999999999999999",
+            Currency::USD,
+            ParseOptions::default()
+        ),
         Err(ParseError::Overflow)
     );
 }
@@ -518,12 +522,18 @@ fn ac_a_19_from_major_invalid() {
 
 #[test]
 fn structural_equality_different_currency() {
-    assert_ne!(Money::new(500, Currency::USD), Money::new(500, Currency::EUR));
+    assert_ne!(
+        Money::new(500, Currency::USD),
+        Money::new(500, Currency::EUR)
+    );
 }
 
 #[test]
 fn structural_equality_same() {
-    assert_eq!(Money::new(500, Currency::USD), Money::new(500, Currency::USD));
+    assert_eq!(
+        Money::new(500, Currency::USD),
+        Money::new(500, Currency::USD)
+    );
 }
 
 // ============================================================================
@@ -586,7 +596,12 @@ fn parse_case_insensitive_currency() {
 #[test]
 fn parse_fullwidth_chars() {
     // AC-P-26: U+FF10-U+FF19 full-width digits, U+FF0E full-width full stop
-    let m = Money::parse("\u{FF04}\u{FF11}\u{FF12}\u{FF0E}\u{FF13}\u{FF10}", Currency::USD, ParseOptions::default()).unwrap();
+    let m = Money::parse(
+        "\u{FF04}\u{FF11}\u{FF12}\u{FF0E}\u{FF13}\u{FF10}",
+        Currency::USD,
+        ParseOptions::default(),
+    )
+    .unwrap();
     assert_eq!(m.minor_units(), 1230);
 }
 
@@ -628,6 +643,47 @@ fn parse_cad_without_indicator() {
     // AC-P-33
     let m = Money::parse("1234.56", Currency::CAD, ParseOptions::default()).unwrap();
     assert_eq!(m.minor_units(), 123456);
+}
+
+#[test]
+fn from_major_i64min_no_panic() {
+    // i64::MIN.abs() would panic in debug builds — from_major must use
+    // comparison instead of .abs() to avoid the overflow.
+    assert_eq!(
+        Money::from_major(0, i64::MIN, Currency::USD),
+        Err(MoneyError::InvalidArgument)
+    );
+}
+
+#[test]
+fn deserialize_rejects_extra_fields() {
+    // Canonical v1 wire format: only amount_minor and currency are allowed.
+    assert_eq!(
+        Money::deserialize(r#"{"amount_minor":"5","currency":"USD","x":"y"}"#),
+        Err(DeserializeError::MalformedWireValue)
+    );
+}
+
+#[test]
+fn deserialize_rejects_duplicate_keys() {
+    assert_eq!(
+        Money::deserialize(r#"{"amount_minor":"5","currency":"USD","currency":"EUR"}"#),
+        Err(DeserializeError::MalformedWireValue)
+    );
+}
+
+#[test]
+fn phase1_rejects_negative_amount() {
+    // Phase 1 gates negative results (sign is extracted for error-path
+    // coverage, but successful parsing of negative amounts is Phase 2).
+    assert_eq!(
+        Money::parse("-$5.00", Currency::USD, ParseOptions::default()),
+        Err(ParseError::MalformedSign)
+    );
+    assert_eq!(
+        Money::parse("($5.00)", Currency::USD, ParseOptions::default()),
+        Err(ParseError::MalformedSign)
+    );
 }
 
 #[test]
