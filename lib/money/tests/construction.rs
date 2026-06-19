@@ -92,6 +92,21 @@ fn from_major_is_overflow_checked() {
 }
 
 #[test]
+fn from_major_handles_extreme_fraction_without_panic() {
+    // The fractional-magnitude guard must not compute abs(i64::MIN), which would
+    // overflow and panic in debug builds. Both extremes exceed one major unit and
+    // must return InvalidArgument.
+    assert_eq!(
+        Money::from_major(0, i64::MIN, Currency::USD),
+        Err(MoneyError::InvalidArgument)
+    );
+    assert_eq!(
+        Money::from_major(0, i64::MAX, Currency::USD),
+        Err(MoneyError::InvalidArgument)
+    );
+}
+
+#[test]
 fn operations_do_not_mutate_inputs() {
     // AC-NFR-3: accessors and constructors return values without mutating inputs.
     let original = Money::new(777, Currency::AUD);

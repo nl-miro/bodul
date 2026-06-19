@@ -48,8 +48,10 @@ impl Money {
         let scale = 10_i64.pow(currency.exponent() as u32);
 
         // `fractional_minor` is a sub-major remainder, so its magnitude must be
-        // strictly less than one major unit (TS001 §2.9; AC-A-19 `12,100`).
-        if fractional_minor.abs() >= scale {
+        // strictly less than one major unit (TS001 §2.9; AC-A-19 `12,100`). Compare
+        // against `±scale` directly rather than via `abs()`, which would overflow
+        // (panic in debug) for `i64::MIN`.
+        if fractional_minor <= -scale || fractional_minor >= scale {
             return Err(MoneyError::InvalidArgument);
         }
 

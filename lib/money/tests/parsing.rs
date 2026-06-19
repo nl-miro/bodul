@@ -79,6 +79,19 @@ fn ac_p_large_grouped_value() {
     assert_minor("1.000.000,00 €", Currency::EUR, 100000000); // AC-P-13
 }
 
+#[test]
+fn ac_p_26_full_width_characters() {
+    // AC-P-26: full-width dollar, digits, and full stop fold to ASCII in step 0.
+    assert_minor("＄１２．３０", Currency::USD, 1230);
+}
+
+#[test]
+fn can_dollar_indicator_is_recognised() {
+    // TS001 §2.2 lists `Can$` as a CAD indicator; longest-match must prefer it over
+    // the shorter `CA$`.
+    assert_minor("Can$5.00", Currency::CAD, 500);
+}
+
 // ----- AC-P-ZERO · positive zero (Phase 1 rows) -----
 
 #[test]

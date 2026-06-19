@@ -63,17 +63,27 @@ impl Money {
             return Err(ParseError::InputTooLong);
         }
 
-        // Step 0b — version-stable fold map. Phase 1 folds only the five §2.3 space
-        // characters to ASCII space, so group-spacing validation (step 4) sees a
-        // single space character regardless of which Unicode space the source used.
+        // Step 0b — version-stable fold map (explicit, runtime-independent). Phase 1
+        // folds every §2.4 step-0 entry that affects the positive parse path: the
+        // five §2.3 spaces to ASCII space (so step 4 sees one space character
+        // regardless of source), full-width digits to ASCII digits, and the
+        // full-width `＄`/`．`/`，` to their ASCII forms (AC-P-26).
         //
-        // Phase 2 owns the rest of the §2.4 step-0 map (full-width digits, `＄`,
-        // `．`, `，`, and the U+2212 minus). Until then those characters are left
-        // unchanged and fail the step-5 whitelist as `InvalidCharacter`.
+        // The U+2212 minus fold is deliberately deferred: it is purely a sign
+        // character with no positive-path effect, so it ships with §2.4 step-2 sign
+        // extraction in Phase 2. Until then a U+2212 survives to fail the step-5
+        // whitelist as `InvalidCharacter`, exactly like a leading ASCII `-`.
         let folded: String = raw
             .chars()
             .map(|c| match c {
                 '\u{00A0}' | '\u{2009}' | '\u{202F}' | '\u{2007}' => ' ',
+                '\u{FF10}'..='\u{FF19}' => {
+                    // Full-width digit → ASCII digit (offset by the block distance).
+                    char::from_u32(c as u32 - 0xFF10 + 0x30).unwrap()
+                }
+                '\u{FF04}' => '$',
+                '\u{FF0E}' => '.',
+                '\u{FF0C}' => ',',
                 other => other,
             })
             .collect();
