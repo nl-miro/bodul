@@ -62,22 +62,40 @@ pub enum DeserializeError {
 
 impl fmt::Display for ParseError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        // TODO(phase-1): human-readable messages per variant.
-        write!(f, "{self:?}")
+        f.write_str(match self {
+            ParseError::EmptyInput => "input is empty",
+            ParseError::InputTooLong => "input exceeds the maximum length",
+            ParseError::InvalidCharacter => "input contains an invalid character",
+            ParseError::MalformedSign => "input contains a malformed sign",
+            ParseError::MalformedCurrency => "input contains malformed currency indicators",
+            ParseError::CurrencyMismatch => "input currency does not match the expected currency",
+            ParseError::MalformedNumber => "input contains a malformed number",
+            ParseError::InvalidGrouping => "input contains invalid digit grouping",
+            ParseError::TooManyFractionalDigits => "input contains too many fractional digits",
+            ParseError::Overflow => "amount is outside the supported range",
+        })
     }
 }
 
 impl fmt::Display for MoneyError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        // TODO(phase-1): human-readable messages per variant.
-        write!(f, "{self:?}")
+        f.write_str(match self {
+            MoneyError::CurrencyMismatch => "money values have different currencies",
+            MoneyError::Overflow => "money operation overflowed",
+            MoneyError::DivisionByZero => "division by zero",
+            MoneyError::InvalidArgument => "invalid money operation argument",
+        })
     }
 }
 
 impl fmt::Display for DeserializeError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        // TODO(phase-1): human-readable messages per variant.
-        write!(f, "{self:?}")
+        f.write_str(match self {
+            DeserializeError::UnknownCurrency => "unknown currency code",
+            DeserializeError::InvalidAmountMinor => "invalid amount_minor string",
+            DeserializeError::AmountOutOfRange => "amount_minor is outside the supported range",
+            DeserializeError::MalformedWireValue => "malformed money wire value",
+        })
     }
 }
 
