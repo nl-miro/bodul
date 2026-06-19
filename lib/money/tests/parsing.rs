@@ -1,11 +1,12 @@
 //! Phase 1 parsing tests (TS001 §2.4, positive baseline).
 //!
 //! Covers the Phase 1 AC-P baseline positives, AC-P-AMB ambiguity resolution,
-//! AC-P-ZERO-3/4, the Phase 1 AC-P-NEG error rows (those not depending on
-//! negative-amount *syntax*), and AC-NFR-1 (repeat-parse determinism).
+//! AC-P-ZERO-3/4, the Phase 1 AC-P-NEG error rows, and AC-NFR-1 (repeat-parse
+//! determinism).
 //!
-//! Negative amounts, accounting parentheses, and the full-width fold are Phase 2
-//! and are intentionally not exercised here.
+//! Sign markers are detected (so `-$` → `MalformedNumber` and a negative value is
+//! gated to `MalformedSign`), but *successful* negative parsing — returning a
+//! negative `Money` — remains Phase 2.
 
 use money::{Currency, Money, ParseError, ParseOptions};
 
@@ -228,6 +229,30 @@ fn ac_p_neg_malformed_currency() {
         parse("CAD$5.00 CAD", Currency::CAD),
         Err(ParseError::MalformedCurrency)
     ); // NEG-26
+}
+
+#[test]
+fn sign_only_inputs_are_malformed_number() {
+    // Sign + indicator with no digits → no digit present → MalformedNumber (NEG-25).
+    assert_eq!(parse("-$", Currency::USD), Err(ParseError::MalformedNumber));
+}
+
+#[test]
+fn negative_values_are_gated_to_phase2() {
+    // Sign extraction detects negativity; a well-formed negative amount is gated
+    // (MalformedSign) until Phase 2 delivers signed results.
+    assert_eq!(
+        parse("-$5.00", Currency::USD),
+        Err(ParseError::MalformedSign)
+    );
+    assert_eq!(
+        parse("($5.00)", Currency::USD),
+        Err(ParseError::MalformedSign)
+    );
+    assert_eq!(
+        parse("−5,00 €", Currency::EUR),
+        Err(ParseError::MalformedSign)
+    ); // U+2212 folds to '-'
 }
 
 #[test]

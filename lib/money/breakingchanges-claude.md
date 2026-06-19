@@ -54,6 +54,25 @@ default above only if rounding mode changes how 3-trailing-digit inputs are
 interpreted. Phase 2 should resolve this explicitly (and ideally correct or remove
 AC-P-NEG-9 in TS001).
 
+## Update — sign extraction added (§2.4 step 2), negatives gated
+
+Initially this implementation deferred §2.4 step-2 sign extraction entirely, so
+sign-bearing inputs fell through to the step-5 whitelist as `InvalidCharacter`. To
+align with the shared cross-implementation acceptance suite (and the sibling PRs),
+step-2 sign extraction is now implemented: leading/trailing `-`, leading `+`,
+accounting parentheses, and U+2212 are detected and stripped (conflicting/duplicate
+markers → `MalformedSign`). A **successful negative value is gated** — it returns
+`MalformedSign` rather than a signed `Money`, because returning negative amounts is
+Phase 2. Net effect on error classification:
+
+- `-$` → `MalformedNumber` (sign + indicator stripped, no digit remains) — was
+  `InvalidCharacter`.
+- `-$5.00`, `($5.00)`, `−5,00 €` → `MalformedSign` (negative gated) — was
+  `InvalidCharacter`.
+
+The full-width fold (digits, `＄`/`．`/`，`, plus U+2212 → `-`) is also implemented, so
+AC-P-26 (`＄１２．３０` → 1230) parses.
+
 ## Non-deviations worth noting (resolved within Phase 1, no change needed)
 
 - **AC-P-NEG-14** (`1.234,56 € EUR` → `MalformedCurrency`): §2.4 step 3 consumes at

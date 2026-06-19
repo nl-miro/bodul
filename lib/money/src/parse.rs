@@ -63,16 +63,11 @@ impl Money {
             return Err(ParseError::InputTooLong);
         }
 
-        // Step 0b — version-stable fold map (explicit, runtime-independent). Phase 1
-        // folds every §2.4 step-0 entry that affects the positive parse path: the
-        // five §2.3 spaces to ASCII space (so step 4 sees one space character
-        // regardless of source), full-width digits to ASCII digits, and the
-        // full-width `＄`/`．`/`，` to their ASCII forms (AC-P-26).
-        //
-        // The U+2212 minus fold is deliberately deferred: it is purely a sign
-        // character with no positive-path effect, so it ships with §2.4 step-2 sign
-        // extraction in Phase 2. Until then a U+2212 survives to fail the step-5
-        // whitelist as `InvalidCharacter`, exactly like a leading ASCII `-`.
+        // Step 0b — version-stable fold map (explicit, runtime-independent): the five
+        // §2.3 spaces to ASCII space (so step 4 sees one space character regardless of
+        // source), full-width digits to ASCII digits, full-width `＄`/`．`/`，` to
+        // their ASCII forms (AC-P-26), and the U+2212 minus to ASCII `-` so step-2
+        // sign detection treats it like a leading hyphen.
         let folded: String = raw
             .chars()
             .map(|c| match c {
@@ -84,6 +79,7 @@ impl Money {
                 '\u{FF04}' => '$',
                 '\u{FF0E}' => '.',
                 '\u{FF0C}' => ',',
+                '\u{2212}' => '-',
                 other => other,
             })
             .collect();
@@ -94,13 +90,15 @@ impl Money {
             return Err(ParseError::EmptyInput);
         }
 
-        // Step 2 — sign extraction is Phase 2. With no handling here, a leading or
-        // trailing `-`, `+`, or accounting parentheses survive to the step-5
-        // whitelist and become `InvalidCharacter` (an error, never a panic).
+        // Step 2 — sign extraction (TS001 §2.4 step 2). Detect and strip the sign
+        // markers so sign-only inputs classify correctly (`-$` → MalformedNumber via
+        // the step-5 digit check). A *successful* negative value is gated to Phase 2
+        // below; only the detection/stripping happens here.
+        let (negative, base) = extract_sign(trimmed)?;
 
         // Step 3 — currency-indicator extraction (longest match, at most one leading
         // and one trailing token), ignoring spaces between indicator and number.
-        let mut payload = trimmed;
+        let mut payload: &str = &base;
         let mut leading: Option<&str> = None;
         let mut trailing: Option<&str> = None;
 
@@ -148,6 +146,14 @@ impl Money {
         }
         if !despaced.chars().any(|c| c.is_ascii_digit()) {
             return Err(ParseError::MalformedNumber);
+        }
+
+        // Phase 1 gate: a well-formed negative amount is deferred to Phase 2
+        // (`MalformedSign`). Sign-only inputs such as `-$` already returned
+        // `MalformedNumber` at the digit-presence check above, so only genuine
+        // negative values reach here.
+        if negative {
+            return Err(ParseError::MalformedSign);
         }
 
         // Steps 6–7 — decimal-separator disambiguation and integer/group validation.
@@ -235,6 +241,58 @@ fn check_indicator(token_currency: Option<Currency>, expected: Currency) -> Resu
         Some(c) if c == expected => Ok(()),
         Some(_) => Err(ParseError::CurrencyMismatch),
     }
+}
+
+/// TS001 §2.4 step 2 sign extraction (Phase 1 subset). Returns `(negative,
+/// remainder)` after stripping the sign markers. At most one sign marker may be
+/// present — leading `-`/`+`, a trailing `-`, or accounting parentheses wrapping the
+/// whole value — otherwise `MalformedSign`. Negative values are gated to Phase 2 by
+/// the caller; this runs in Phase 1 only so sign-only inputs classify correctly.
+fn extract_sign(input: &str) -> Result<(bool, String), ParseError> {
+    let s = input.trim();
+
+    // Accounting parentheses must wrap the whole value, with no other sign marker
+    // inside.
+    if s.contains('(') || s.contains(')') {
+        let wrapped = s.starts_with('(') && s.ends_with(')') && s.len() >= 2;
+        if !wrapped {
+            return Err(ParseError::MalformedSign);
+        }
+        let inner = s[1..s.len() - 1].trim();
+        if inner.contains(['(', ')', '-', '+']) {
+            return Err(ParseError::MalformedSign);
+        }
+        return Ok((true, inner.to_string()));
+    }
+
+    let mut negative = false;
+    let mut markers = 0u32;
+    let mut rest = s.to_string();
+
+    // Leading sign.
+    if let Some(r) = rest.strip_prefix('-') {
+        negative = true;
+        markers += 1;
+        rest = r.trim_start().to_string();
+    } else if let Some(r) = rest.strip_prefix('+') {
+        markers += 1;
+        rest = r.trim_start().to_string();
+    }
+
+    // Trailing minus (the last non-space character).
+    let tail = rest.trim_end();
+    if let Some(r) = tail.strip_suffix('-') {
+        negative = true;
+        markers += 1;
+        rest = r.trim_end().to_string();
+    }
+
+    // At most one sign marker may be present (TS001 §2.4 step 2).
+    if markers > 1 {
+        return Err(ParseError::MalformedSign);
+    }
+
+    Ok((negative, rest))
 }
 
 /// Step 4 grouping rule for space-separated groups: first group 1–3 digits, every
