@@ -27,9 +27,10 @@ impl Money {
     /// Infallible: every `i64` paired with a supported currency is a valid
     /// `Money` (TS001 §2.9).
     pub fn new(amount_minor: i64, currency: Currency) -> Money {
-        // TODO(phase-1): construct Money { amount_minor, currency }.
-        let _ = (amount_minor, currency);
-        todo!("Money::new — TS001 §2.9")
+        Money {
+            amount_minor,
+            currency,
+        }
     }
 
     /// Combine whole major units and a signed fractional minor-unit component
@@ -44,20 +45,42 @@ impl Money {
         fractional_minor: i64,
         currency: Currency,
     ) -> Result<Money, MoneyError> {
-        // TODO(phase-1): validate sign/magnitude, assemble minor units (overflow-checked).
-        let _ = (units, fractional_minor, currency);
-        todo!("Money::from_major — TS001 §2.9")
+        let exp = currency.exponent() as u32;
+        let scale = 10i64.pow(exp); // 100 for all current currencies
+
+        // fractional_minor magnitude must be less than scale
+        if fractional_minor.abs() >= scale {
+            return Err(MoneyError::InvalidArgument);
+        }
+
+        // sign rule: units and fractional_minor must share sign unless either is zero
+        match (units.signum(), fractional_minor.signum()) {
+            (0, _) | (_, 0) => {} // ok — one is zero
+            (a, b) if a == b => {} // ok — same sign
+            _ => return Err(MoneyError::InvalidArgument),
+        }
+
+        // overflow-checked assembly: units * scale + fractional_minor
+        let major_minor = units
+            .checked_mul(scale)
+            .ok_or(MoneyError::Overflow)?;
+        let amount_minor = major_minor
+            .checked_add(fractional_minor)
+            .ok_or(MoneyError::Overflow)?;
+
+        Ok(Money {
+            amount_minor,
+            currency,
+        })
     }
 
     /// The signed minor-unit (cents) count.
     pub fn minor_units(&self) -> i64 {
-        // TODO(phase-1): return self.amount_minor.
-        todo!("Money::minor_units — TS001 §2.9")
+        self.amount_minor
     }
 
     /// The currency of this value.
     pub fn currency(&self) -> Currency {
-        // TODO(phase-1): return self.currency.
-        todo!("Money::currency — TS001 §2.9")
+        self.currency
     }
 }

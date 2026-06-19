@@ -62,22 +62,40 @@ pub enum DeserializeError {
 
 impl fmt::Display for ParseError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        // TODO(phase-1): human-readable messages per variant.
-        write!(f, "{self:?}")
+        match self {
+            ParseError::EmptyInput => write!(f, "input is empty"),
+            ParseError::InputTooLong => write!(f, "input exceeds maximum length"),
+            ParseError::InvalidCharacter => write!(f, "input contains an invalid character"),
+            ParseError::MalformedSign => write!(f, "input has conflicting or duplicate sign markers"),
+            ParseError::MalformedCurrency => write!(f, "input has multiple distinct currency indicators"),
+            ParseError::CurrencyMismatch => write!(f, "embedded currency does not match the expected currency"),
+            ParseError::MalformedNumber => write!(f, "input does not contain a valid number"),
+            ParseError::InvalidGrouping => write!(f, "digit grouping is malformed"),
+            ParseError::TooManyFractionalDigits => write!(f, "input has too many fractional digits"),
+            ParseError::Overflow => write!(f, "amount is outside the representable range"),
+        }
     }
 }
 
 impl fmt::Display for MoneyError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        // TODO(phase-1): human-readable messages per variant.
-        write!(f, "{self:?}")
+        match self {
+            MoneyError::CurrencyMismatch => write!(f, "currencies must match"),
+            MoneyError::Overflow => write!(f, "result is outside the representable range"),
+            MoneyError::DivisionByZero => write!(f, "division by zero"),
+            MoneyError::InvalidArgument => write!(f, "invalid argument"),
+        }
     }
 }
 
 impl fmt::Display for DeserializeError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        // TODO(phase-1): human-readable messages per variant.
-        write!(f, "{self:?}")
+        match self {
+            DeserializeError::UnknownCurrency => write!(f, "unknown currency code"),
+            DeserializeError::InvalidAmountMinor => write!(f, "amount_minor string is not a canonical base-10 signed integer"),
+            DeserializeError::AmountOutOfRange => write!(f, "amount_minor is outside the signed 64-bit range"),
+            DeserializeError::MalformedWireValue => write!(f, "wire value is structurally malformed"),
+        }
     }
 }
 

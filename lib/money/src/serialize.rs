@@ -8,6 +8,7 @@
 //!
 //! These functions are **exact** and MUST NOT use the free-form §2.4 parser.
 
+use crate::currency::Currency;
 use crate::error::DeserializeError;
 use crate::money::Money;
 
@@ -15,8 +16,11 @@ impl Money {
     /// Serialize to the canonical v1 wire format (TS001 §2.10). Exact; never lossy.
     /// (AC-S-1, AC-S-2.)
     pub fn serialize(&self) -> String {
-        // TODO(phase-1): emit { "amount_minor": "<i64>", "currency": "<ISO>" }.
-        todo!("Money::serialize — TS001 §2.10")
+        format!(
+            r#"{{"amount_minor":"{}","currency":"{}"}}"#,
+            self.minor_units(),
+            self.currency().iso_code()
+        )
     }
 
     /// Deserialize from the canonical v1 wire format (TS001 §2.10).
@@ -27,8 +31,212 @@ impl Money {
     /// unknown currency code as [`DeserializeError::UnknownCurrency`]. Exact; MUST
     /// NOT use the §2.4 parser. (AC-S-3 … AC-S-10.)
     pub fn deserialize(wire: &str) -> Result<Money, DeserializeError> {
-        // TODO(phase-1): parse the canonical wire object exactly per §2.10.
-        let _ = wire;
-        todo!("Money::deserialize — TS001 §2.10")
+        let wire = wire.trim();
+
+        // Must be a JSON object: starts with `{` and ends with `}`
+        if !wire.starts_with('{') || !wire.ends_with('}') {
+            return Err(DeserializeError::MalformedWireValue);
+        }
+
+        let inner = &wire[1..wire.len() - 1];
+        let mut amount_minor_str: Option<&str> = None;
+        let mut currency_str: Option<&str> = None;
+
+        // Simple key-value parser for the two known fields.
+        // We look for "amount_minor" and "currency" keys with string values.
+        let mut pos = 0;
+        let bytes = inner.as_bytes();
+
+        for _ in 0..2 {
+            // Skip whitespace
+            pos = skip_whitespace(bytes, pos);
+
+            // Expect '"'
+            if pos >= bytes.len() || bytes[pos] != b'"' {
+                return Err(DeserializeError::MalformedWireValue);
+            }
+            pos += 1; // skip opening '"'
+
+            // Read key
+            let key_start = pos;
+            while pos < bytes.len() && bytes[pos] != b'"' {
+                if bytes[pos] == b'\\' {
+                    // We don't support escape sequences for these simple keys
+                    return Err(DeserializeError::MalformedWireValue);
+                }
+                pos += 1;
+            }
+            if pos >= bytes.len() {
+                return Err(DeserializeError::MalformedWireValue);
+            }
+            let key = std::str::from_utf8(&bytes[key_start..pos])
+                .map_err(|_| DeserializeError::MalformedWireValue)?;
+            pos += 1; // skip closing '"'
+
+            // Skip whitespace, expect ':'
+            pos = skip_whitespace(bytes, pos);
+            if pos >= bytes.len() || bytes[pos] != b':' {
+                return Err(DeserializeError::MalformedWireValue);
+            }
+            pos += 1; // skip ':'
+
+            // Skip whitespace
+            pos = skip_whitespace(bytes, pos);
+
+            match key {
+                "amount_minor" => {
+                    if pos >= bytes.len() {
+                        return Err(DeserializeError::MalformedWireValue);
+                    }
+                    if bytes[pos] != b'"' {
+                        // Not a string value — could be a JSON number
+                        // Any non-string value is MalformedWireValue
+                        return Err(DeserializeError::MalformedWireValue);
+                    }
+                    pos += 1; // skip opening '"'
+                    let val_start = pos;
+                    while pos < bytes.len() && bytes[pos] != b'"' {
+                        if bytes[pos] == b'\\' {
+                            return Err(DeserializeError::MalformedWireValue);
+                        }
+                        pos += 1;
+                    }
+                    if pos >= bytes.len() {
+                        return Err(DeserializeError::MalformedWireValue);
+                    }
+                    let val = std::str::from_utf8(&bytes[val_start..pos])
+                        .map_err(|_| DeserializeError::MalformedWireValue)?;
+                    pos += 1; // skip closing '"'
+                    amount_minor_str = Some(val);
+                }
+                "currency" => {
+                    if pos >= bytes.len() || bytes[pos] != b'"' {
+                        return Err(DeserializeError::MalformedWireValue);
+                    }
+                    pos += 1;
+                    let val_start = pos;
+                    while pos < bytes.len() && bytes[pos] != b'"' {
+                        if bytes[pos] == b'\\' {
+                            return Err(DeserializeError::MalformedWireValue);
+                        }
+                        pos += 1;
+                    }
+                    if pos >= bytes.len() {
+                        return Err(DeserializeError::MalformedWireValue);
+                    }
+                    let val = std::str::from_utf8(&bytes[val_start..pos])
+                        .map_err(|_| DeserializeError::MalformedWireValue)?;
+                    pos += 1;
+                    currency_str = Some(val);
+                }
+                _ => {
+                    // Unknown key — skip its value (must be a string)
+                    if pos < bytes.len() && bytes[pos] == b'"' {
+                        pos += 1;
+                        while pos < bytes.len() && bytes[pos] != b'"' {
+                            if bytes[pos] == b'\\' {
+                                return Err(DeserializeError::MalformedWireValue);
+                            }
+                            pos += 1;
+                        }
+                        if pos < bytes.len() {
+                            pos += 1;
+                        }
+                    } else {
+                        // Unknown value type, try to skip
+                        while pos < bytes.len()
+                            && bytes[pos] != b','
+                            && bytes[pos] != b'}'
+                        {
+                            pos += 1;
+                        }
+                    }
+                }
+            }
+
+            // Skip whitespace, then expect ',' or '}'
+            pos = skip_whitespace(bytes, pos);
+            if pos < bytes.len() && bytes[pos] == b',' {
+                pos += 1; // skip ','
+            }
+        }
+
+        let amount_str = amount_minor_str.ok_or(DeserializeError::MalformedWireValue)?;
+        let curr_str = currency_str.ok_or(DeserializeError::MalformedWireValue)?;
+
+        // Validate amount_minor string grammar (TS001 §2.10):
+        // Grammar: -?[0-9]+ , no leading +, no leading zeros except literal "0", no "-0"
+        validate_amount_minor_string(amount_str)?;
+
+        // Parse the integer
+        let amount: i64 = amount_str
+            .parse()
+            .map_err(|_| DeserializeError::AmountOutOfRange)?;
+
+        // Parse currency
+        let currency =
+            Currency::from_iso_code(curr_str).ok_or(DeserializeError::UnknownCurrency)?;
+
+        Ok(Money::new(amount, currency))
     }
+}
+
+fn skip_whitespace(bytes: &[u8], mut pos: usize) -> usize {
+    while pos < bytes.len() && (bytes[pos] == b' ' || bytes[pos] == b'\t' || bytes[pos] == b'\n' || bytes[pos] == b'\r') {
+        pos += 1;
+    }
+    pos
+}
+
+/// Validate the `amount_minor` string per TS001 §2.10 grammar:
+/// - Must be `-?[0-9]+`
+/// - No leading `+`
+/// - No leading zeros except the single literal `0`
+/// - `-0` is rejected (zero serializes as `"0"`)
+/// - Non-empty, no surrounding/internal whitespace
+fn validate_amount_minor_string(s: &str) -> Result<(), DeserializeError> {
+    if s.is_empty() {
+        return Err(DeserializeError::InvalidAmountMinor);
+    }
+
+    // Check for whitespace
+    if s.chars().any(|c| c.is_whitespace()) {
+        return Err(DeserializeError::InvalidAmountMinor);
+    }
+
+    let bytes = s.as_bytes();
+    let mut pos = 0;
+
+    // Optional leading minus
+    let negative = bytes[pos] == b'-';
+    if negative {
+        pos += 1;
+    }
+
+    // Must have at least one digit
+    if pos >= bytes.len() || !bytes[pos].is_ascii_digit() {
+        return Err(DeserializeError::InvalidAmountMinor);
+    }
+
+    // Leading zero check
+    if bytes[pos] == b'0' {
+        if pos + 1 < bytes.len() {
+            // Leading zero with more digits → invalid (e.g. "007", "0", "-0")
+            return Err(DeserializeError::InvalidAmountMinor);
+        }
+        if negative {
+            // "-0" is invalid
+            return Err(DeserializeError::InvalidAmountMinor);
+        }
+        return Ok(());
+    }
+
+    // All remaining characters must be ASCII digits
+    for &b in &bytes[pos..] {
+        if !b.is_ascii_digit() {
+            return Err(DeserializeError::InvalidAmountMinor);
+        }
+    }
+
+    Ok(())
 }
