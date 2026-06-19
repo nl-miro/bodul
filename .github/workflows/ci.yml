@@ -1,0 +1,25 @@
+name: CI — money
+
+on:
+  push:
+    branches: [main]
+    paths: [lib/money/**]
+  pull_request:
+    branches: [main]
+    paths: [lib/money/**]
+
+defaults:
+  run:
+    working-directory: lib/money
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build
+      - run: cargo test
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo doc --no-deps
+      - run: cargo fmt --check
