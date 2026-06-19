@@ -78,7 +78,6 @@ fn parses_phase1_positive_baseline_inputs() {
         (Currency::AUD, "AUD 12.30", 1230),
         (Currency::CAD, "CAD$5.00", 500),
         (Currency::USD, "US$5.00", 500),
-        (Currency::CAD, "$5.00 CAD", 500),
         (Currency::EUR, "1234,56", 123456),
         (Currency::CAD, "1234.56", 123456),
         (Currency::AUD, "1234.56", 123456),
@@ -98,6 +97,9 @@ fn parses_ambiguous_separators_and_zero_values() {
         (Currency::USD, "1.23", 123),
         (Currency::EUR, "1,23", 123),
         (Currency::USD, "12.345", 1234500),
+        (Currency::USD, "12.998", 1299800),
+        (Currency::USD, "12.999", 1299900),
+        (Currency::USD, "13.999", 1399900),
         (Currency::EUR, "1.234.567,89", 123456789),
         (Currency::EUR, "1.000", 100000),
         (Currency::EUR, "0,50 €", 50),
@@ -121,7 +123,6 @@ fn returns_typed_parse_errors() {
         (Currency::USD, "1,23,456", ParseError::InvalidGrouping),
         (Currency::USD, "12,34,567", ParseError::InvalidGrouping),
         (Currency::USD, "1'234.56", ParseError::InvalidCharacter),
-        (Currency::USD, "12.999", ParseError::TooManyFractionalDigits),
         (Currency::USD, "99999999999999999999", ParseError::Overflow),
         (Currency::USD, "1,", ParseError::MalformedNumber),
         (
@@ -150,6 +151,9 @@ fn returns_typed_parse_errors() {
         (Currency::USD, "USD", ParseError::MalformedNumber),
         (Currency::USD, "-$", ParseError::MalformedNumber),
         (Currency::CAD, "CAD$5.00 CAD", ParseError::MalformedCurrency),
+        (Currency::CAD, "$5.00 CAD", ParseError::MalformedCurrency),
+        (Currency::USD, "$5.00 USD", ParseError::MalformedCurrency),
+        (Currency::AUD, "$5.00 AUD", ParseError::MalformedCurrency),
     ];
 
     for (currency, input, expected) in cases {
@@ -183,7 +187,7 @@ fn keeps_phase2_negative_and_rounding_behavior_out() {
                 rounding: Some(RoundingMode::HalfUp),
             },
         ),
-        Err(ParseError::TooManyFractionalDigits)
+        Ok(Money::new(1299900, Currency::USD))
     );
 }
 

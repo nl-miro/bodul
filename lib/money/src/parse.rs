@@ -127,6 +127,11 @@ const CURRENCY_TOKENS: &[CurrencyToken] = &[
         ambiguous_dollar: false,
     },
     CurrencyToken {
+        text: "US$",
+        currency: Some(Currency::USD),
+        ambiguous_dollar: false,
+    },
+    CurrencyToken {
         text: "USD",
         currency: Some(Currency::USD),
         ambiguous_dollar: false,
@@ -144,11 +149,6 @@ const CURRENCY_TOKENS: &[CurrencyToken] = &[
     CurrencyToken {
         text: "AUD",
         currency: Some(Currency::AUD),
-        ambiguous_dollar: false,
-    },
-    CurrencyToken {
-        text: "US$",
-        currency: Some(Currency::USD),
         ambiguous_dollar: false,
     },
     CurrencyToken {
@@ -251,13 +251,8 @@ fn extract_currency_indicators(input: &str, expected: Currency) -> Result<String
         }
     }
 
-    if let (Some(left), Some(right)) = (leading, trailing) {
-        let allowed_cad_bare_then_iso = left.ambiguous_dollar
-            && right.currency == Some(Currency::CAD)
-            && expected == Currency::CAD;
-        if !allowed_cad_bare_then_iso {
-            return Err(ParseError::MalformedCurrency);
-        }
+    if leading.is_some() && trailing.is_some() {
+        return Err(ParseError::MalformedCurrency);
     }
 
     Ok(payload)
@@ -409,11 +404,6 @@ fn split_single_separator(input: &str) -> Result<(&str, &str, Option<char>), Par
     match digits_after {
         0 => Err(ParseError::MalformedNumber),
         1 | 2 => Ok((&input[..index], &input[index + 1..], None)),
-        3 if input == "12.999" => {
-            // TS001 AC-P-NEG-9 explicitly classifies this input as excess
-            // fractional precision, despite the general 3-digit grouping rule.
-            Ok((&input[..index], &input[index + 1..], None))
-        }
         3 => Ok((input, "", Some(separator))),
         _ => Err(ParseError::InvalidGrouping),
     }
