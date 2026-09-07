@@ -20,7 +20,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut enqueued = 0usize;
     let mut skipped = 0usize;
 
-    let retailer_codes = RetailerCode::ALL;
+    // let retailer_codes = RetailerCode::ALL;
+    // TODO
+    let retailer_codes = vec![RetailerCode::AnkerCa];
 
     for retailer_code in retailer_codes {
         if sitemap_config(&retailer_code).is_none() {
