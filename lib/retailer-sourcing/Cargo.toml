@@ -5,7 +5,7 @@ edition = "2024"
 publish = false
 
 [dependencies]
-bodul_shared = { path = "../bodul_shared" }
+bodul_shared = { version = "0.1.1", registry = "null-labs-hq" }
 money = { path = "../money" }
 regex = "1.12.4"
 chrono = { version = "0.4", features = ["serde"] }

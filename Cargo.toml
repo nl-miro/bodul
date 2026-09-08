@@ -4,5 +4,7 @@ members = [
     "apps/mvp",
     "lib/money",
     "lib/retailer-sourcing",
+]
+exclude = [
     "lib/bodul_shared",
 ]

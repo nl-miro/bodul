@@ -1,7 +1,21 @@
 [package]
 name = "bodul_shared"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
+# Declared, not measured: 1.96.0 is the only toolchain this crate has been
+# built with. The edition alone requires 1.85, and no CI job verifies the
+# floor yet — that is Phase 8d.
+rust-version = "1.96.0"
+description = "TODO"
+repository = "https://github.com/null-labs-hq/bodul-html-extractor"
+# Not docs.rs: this crate publishes to a local margo registry, not crates.io,
+# so docs.rs would never build it and the URL would 404.
+documentation = "https://github.com/null-labs-hq/bodul-html--extractor/blob/main/rust/README.md"
+readme = "README.md"
+license = "MIT"
+keywords = []
+categories = []
+include = ["src/**/*.rs", "Cargo.toml", "README.md", "LICENSE-MIT"]
 
 [dependencies]
 thiserror = "2"
