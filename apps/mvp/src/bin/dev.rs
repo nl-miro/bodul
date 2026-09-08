@@ -23,7 +23,7 @@ use diesel::prelude::*;
 use diesel::sql_types::Text;
 use mvp::database::{DatabaseConfig, connect};
 use mvp::html_parser;
-use shared::retailer::RetailerCode;
+use bodul_shared::retailer::RetailerCode;
 use std::fs;
 use std::path::{Path, PathBuf};
 

@@ -18,7 +18,7 @@ COPY .cargo .cargo
 COPY Cargo.toml Cargo.lock ./
 COPY apps/mvp/Cargo.toml apps/mvp/Cargo.toml
 COPY lib/money/Cargo.toml lib/money/Cargo.toml
-COPY lib/shared/Cargo.toml lib/shared/Cargo.toml
+COPY lib/bodul_shared/Cargo.toml lib/bodul_shared/Cargo.toml
 COPY apps apps
 COPY lib lib
 

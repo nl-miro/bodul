@@ -8,8 +8,8 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use mvp::html_parser;
-use shared::retailer::RetailerCode;
-use shared::retailer::code_for_name;
+use bodul_shared::retailer::RetailerCode;
+use bodul_shared::retailer::code_for_name;
 
 fn main() {
     dotenvy::dotenv().ok();

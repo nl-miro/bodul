@@ -9,7 +9,7 @@
 use mvp::retailer_data_ingestion::Client;
 use rand::prelude::IteratorRandom;
 use serde::Deserialize;
-use shared::retailer::RetailerCode;
+use bodul_shared::retailer::RetailerCode;
 use std::collections::HashSet;
 use std::fs;
 use std::path::{Path, PathBuf};

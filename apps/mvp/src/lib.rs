@@ -76,7 +76,7 @@ pub mod schema;
 #[derive(Debug, thiserror::Error)]
 pub enum RecordMappingError {
     #[error("invalid retailer code in sitemap retrieval record: {0}")]
-    InvalidRetailerCode(#[from] shared::retailer::RetailerCodeConversionError),
+    InvalidRetailerCode(#[from] bodul_shared::retailer::RetailerCodeConversionError),
 
     #[error("invalid retrieval status in sitemap retrieval record: {0}")]
     InvalidStatus(#[from] crate::sitemap_discovery::io::RetrievalStatusConversionError),

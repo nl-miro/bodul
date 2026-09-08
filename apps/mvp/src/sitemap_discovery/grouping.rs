@@ -11,7 +11,7 @@ pub mod io {
 mod models {
     use kernel::{ApplicationCommand, ApplicationEvent};
     use serde::{Deserialize, Serialize};
-    use shared::retailer::RetailerCode;
+    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -47,8 +47,8 @@ mod models {
 
 mod grouping {
     use serde::{Deserialize, Serialize};
-    use shared::link::LinkKind;
-    use shared::retailer::RetailerCode;
+    use bodul_shared::link::LinkKind;
+    use bodul_shared::retailer::RetailerCode;
 
     use crate::lib_sitemap::io::SitemapDocument;
     use ::retailer_sourcing::registry::classify_link;
@@ -257,7 +257,7 @@ pub mod model {
     use crate::schema::grouped_sitemap_contents;
     use chrono::{DateTime, Utc};
     use diesel::{Insertable, Queryable, Selectable};
-    use shared::retailer::RetailerCode;
+    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Insertable)]

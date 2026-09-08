@@ -1,4 +1,4 @@
-use shared::retailer::RetailerCode;
+use bodul_shared::retailer::RetailerCode;
 use uuid::Uuid;
 
 #[derive(Debug, Clone)]

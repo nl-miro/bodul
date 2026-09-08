@@ -20,9 +20,9 @@ use crate::retailers::{
     },
 };
 
-use shared::SitemapConfig;
-use shared::link::LinkKind;
-use shared::retailer::RetailerCode;
+use bodul_shared::SitemapConfig;
+use bodul_shared::link::LinkKind;
+use bodul_shared::retailer::RetailerCode;
 
 /// Returns the offer-detail architecture for a retailer.
 pub fn architecture_for(retailer: RetailerCode) -> crate::parsing::structure::RetailerArchitecture {
@@ -206,8 +206,8 @@ pub fn cookie_env_var(_code: RetailerCode) -> Option<&'static str> {
 #[cfg(test)]
 mod tests {
     use super::{architecture_for, classify_link, cookie_env_var, sitemap_config};
-    use shared::link::LinkKind;
-    use shared::retailer::RetailerCode;
+    use bodul_shared::link::LinkKind;
+    use bodul_shared::retailer::RetailerCode;
 
     #[test]
     fn resolves_configuration_for_every_supported_retailer() {

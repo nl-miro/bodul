@@ -1,4 +1,4 @@
-use shared::link::LinkKind;
+use bodul_shared::link::LinkKind;
 
 /// Classifies Shopify storefront URLs by their path conventions, ignoring case.
 pub fn shopify_from_location(url: &str) -> LinkKind {

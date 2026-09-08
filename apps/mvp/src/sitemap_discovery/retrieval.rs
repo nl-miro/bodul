@@ -1,6 +1,6 @@
 use crate::RecordMappingError;
 use crate::sitemap_discovery::model::RetrievalStatus;
-use shared::retailer::RetailerCode;
+use bodul_shared::retailer::RetailerCode;
 
 pub const REQUEST_SITEMAP_RETRIEVAL_COMMAND: &str = "RequestSitemapRetrieval";
 pub const SITEMAP_RETRIEVED_EVENT: &str = "SitemapRetrieved";
@@ -30,7 +30,7 @@ mod models {
     use crate::sitemap_discovery::model::SitemapError;
     use kernel::{ApplicationCommand, ApplicationEvent};
     use serde::{Deserialize, Serialize};
-    use shared::retailer::RetailerCode;
+    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Debug, Clone, Serialize, Deserialize, new)]
@@ -247,7 +247,7 @@ mod eventing {
 
 mod entity {
     use super::super::model::RetrievalStatus;
-    use shared::retailer::RetailerCode;
+    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     pub struct SitemapRetrieval {
@@ -265,7 +265,7 @@ mod infra_sitemap_retrieval_model {
     use crate::schema::sitemap_retrievals;
     use chrono::{DateTime, Utc};
     use diesel::{Insertable, Queryable, Selectable};
-    use shared::retailer::RetailerCode;
+    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Insertable)]
@@ -341,7 +341,7 @@ mod infra_sitemap_retrieval_repository {
     use crate::RepositoryError;
     use diesel::RunQueryDsl;
     use diesel::prelude::*;
-    use shared::retailer::RetailerCode;
+    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     pub struct SitemapRetrievalRepository {
@@ -561,8 +561,8 @@ mod fetching {
     use crate::sitemap_discovery::model::SitemapError;
     use ::retailer_sourcing::registry::sitemap_config;
     use chrono::{DateTime, Utc};
-    use shared::SitemapConfig;
-    use shared::retailer::RetailerCode;
+    use bodul_shared::SitemapConfig;
+    use bodul_shared::retailer::RetailerCode;
     use std::collections::HashSet;
 
     pub fn fetch(retailer: &RetailerCode) -> Result<Vec<RawSitemapDocument>, SitemapError> {

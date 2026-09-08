@@ -18,7 +18,7 @@ use std::time::Instant;
 use kernel::io::{CommandError, CommandHandlerPort};
 use kernel::{EventError, EventSubscriberPort, NewEventEnvelope};
 use serde::de::DeserializeOwned;
-use shared::retailer::RetailerCode;
+use bodul_shared::retailer::RetailerCode;
 use uuid::Uuid;
 
 use crate::assembly::io::MvpEvent;

@@ -1,7 +1,7 @@
 use crate::lib_sitemap::io::{RawSitemapDocument, SitemapDocument};
 use crate::sitemap_discovery::model::SitemapError;
 use crate::sitemap_discovery::processing::sitemap::internal::SitemapDocumentFactory;
-use shared::SitemapConfig;
+use bodul_shared::SitemapConfig;
 
 pub fn document_from_raw(
     cfg: SitemapConfig,
@@ -21,7 +21,7 @@ mod internal {
     use crate::lib_sitemap::io::{RawSitemapDocument, SitemapDocument};
     use crate::sitemap_discovery::model::SitemapError;
     use chrono::{DateTime, Utc};
-    use shared::SitemapConfig;
+    use bodul_shared::SitemapConfig;
     use std::collections::{HashMap, HashSet};
 
     /// A child sitemap referenced by an index.

@@ -40,7 +40,7 @@ The core domain entities are:
 
 | Path                                  | Crate / module                        | Roadmap stage |
 | ------------------------------------- | ------------------------------------- | ------------- |
-| `lib/shared/`                         | Shared types and retailer config      | —             |
+| `lib/bodul_shared/`                         | Shared types and retailer config      | —             |
 | `lib/money/`                          | Exact money value type (Phase 1)      | —             |
 | `apps/mvp/`                           | MVP application crate                 | All stages    |
 | `src/sitemap_discovery/`              | Sitemap fetching, parsing, data model | B, C          |
@@ -189,7 +189,7 @@ flowchart LR
 
 Supporting infrastructure in place:
 
-- **Retailer configuration** (`lib/shared`): `RetailerCode` enum with 7 variants
+- **Retailer configuration** (`lib/bodul_shared`): `RetailerCode` enum with 7 variants
   (EU, US, UK, FR, CA, AU, and a generic `Minisforum` code), plus
   hardcoded sitemap URLs per region.
 - **HTTP client** (`src/retailer_data_ingestion/`): blocking `reqwest` client

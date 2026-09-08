@@ -4,5 +4,5 @@ members = [
     "apps/mvp",
     "lib/money",
     "lib/retailer-sourcing",
-    "lib/shared",
+    "lib/bodul_shared",
 ]

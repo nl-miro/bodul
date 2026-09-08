@@ -15,7 +15,7 @@ pub mod io {
 mod models {
     use kernel::{ApplicationCommand, ApplicationEvent};
     use serde::{Deserialize, Serialize};
-    use shared::retailer::RetailerCode;
+    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -276,7 +276,7 @@ mod handler {
     #[cfg(test)]
     mod tests {
         use super::*;
-        use shared::retailer::RetailerCode;
+        use bodul_shared::retailer::RetailerCode;
         use uuid::Uuid;
 
         #[test]

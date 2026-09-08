@@ -1,5 +1,5 @@
-use shared::SitemapConfig;
-use shared::link::LinkKind;
+use bodul_shared::SitemapConfig;
+use bodul_shared::link::LinkKind;
 
 pub fn sitemap_config() -> SitemapConfig {
     SitemapConfig {

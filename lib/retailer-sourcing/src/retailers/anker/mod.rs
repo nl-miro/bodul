@@ -1,4 +1,4 @@
-use shared::link::LinkKind;
+use bodul_shared::link::LinkKind;
 
 /// Classifies Anker storefront URL paths. Most Anker stores use Shopify-style
 /// plural paths; Korea also uses singular `/product/` paths.

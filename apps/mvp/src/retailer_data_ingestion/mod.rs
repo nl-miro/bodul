@@ -8,7 +8,7 @@ use std::io::Read;
 
 use flate2::read::GzDecoder;
 use reqwest::header::{COOKIE, HeaderValue};
-use shared::retailer::RetailerCode;
+use bodul_shared::retailer::RetailerCode;
 
 /// An error fetching a remote resource.
 #[derive(Debug, Clone)]

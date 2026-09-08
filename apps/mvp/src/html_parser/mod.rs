@@ -11,7 +11,7 @@
 
 use kuchiki::traits::*;
 use retailer_sourcing::architecture_for;
-use shared::retailer::RetailerCode;
+use bodul_shared::retailer::RetailerCode;
 
 mod blank;
 mod extract;
@@ -82,7 +82,7 @@ fn serialize_node(node: &kuchiki::NodeRef) -> Result<String, std::io::Error> {
 mod tests {
     use super::destructure;
     use serde_json::Value;
-    use shared::retailer::RetailerCode;
+    use bodul_shared::retailer::RetailerCode;
     use std::fs;
     use std::path::PathBuf;
 

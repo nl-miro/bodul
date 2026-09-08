@@ -8,8 +8,8 @@ use std::path::{Path, PathBuf};
 use ::retailer_sourcing::registry::classify_link;
 use mvp::lib_sitemap::io::SitemapDocument;
 use serde::Serialize;
-use shared::link::LinkKind;
-use shared::retailer::RetailerCode;
+use bodul_shared::link::LinkKind;
+use bodul_shared::retailer::RetailerCode;
 
 #[derive(Serialize, Default)]
 struct Group {

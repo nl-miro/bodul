@@ -1,4 +1,4 @@
-use shared::SitemapConfig;
+use bodul_shared::SitemapConfig;
 
 /// Minisforum's European sitemap entry point used for German pages.
 pub fn config() -> SitemapConfig {

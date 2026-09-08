@@ -7,7 +7,7 @@ use kernel::io::NewCommandMetadata;
 use mvp::assembly::boot;
 use mvp::assembly::io::{AppCommand, NewCommandEnvelope};
 use mvp::sitemap_discovery::io::RequestSitemapRetrieval;
-use shared::retailer::RetailerCode;
+use bodul_shared::retailer::RetailerCode;
 use uuid::Uuid;
 
 fn main() -> Result<(), Box<dyn Error>> {

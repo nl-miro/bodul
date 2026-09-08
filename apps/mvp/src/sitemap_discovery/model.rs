@@ -3,7 +3,7 @@ use crate::lib_sitemap::io::SitemapDocument;
 use crate::retailer_data_ingestion::FetchError;
 use crate::sitemap_discovery::processing::io::SitemapParseError;
 use chrono::{DateTime, Utc};
-use shared::retailer::RetailerCode;
+use bodul_shared::retailer::RetailerCode;
 use uuid::Uuid;
 
 #[derive(Debug, Clone, PartialEq)]

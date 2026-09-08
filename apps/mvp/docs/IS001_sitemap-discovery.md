@@ -25,7 +25,7 @@ One entry point:
 pub fn fetch_sitemap(retailer: RetailerCode) -> Result<SitemapDocument, SitemapError>;
 ```
 
-- Input is just the `RetailerCode` (from `lib/shared`).
+- Input is just the `RetailerCode` (from `lib/bodul_shared`).
 - The HTTP client is used internally — callers don't pass it in.
 - Returns the root `SitemapDocument` (§2) with its `children` already fetched and
   parsed, so the caller can query the whole tree as one node. Or a typed

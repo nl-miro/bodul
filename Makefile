@@ -8,31 +8,31 @@ DUMP_DIR ?= dumps
 fmt:
 	$(MAKE) -C apps/mvp fmt
 	$(MAKE) -C lib/money fmt
-	$(MAKE) -C lib/shared fmt
+	$(MAKE) -C lib/bodul_shared fmt
 	$(MAKE) -C lib/retailer-sourcing fmt
 
 test:
 	$(MAKE) -C apps/mvp test
 	$(MAKE) -C lib/money test
-	$(MAKE) -C lib/shared test
+	$(MAKE) -C lib/bodul_shared test
 	$(MAKE) -C lib/retailer-sourcing test
 
 check:
 	$(MAKE) -C apps/mvp check
 	$(MAKE) -C lib/money check
-	$(MAKE) -C lib/shared check
+	$(MAKE) -C lib/bodul_shared check
 	$(MAKE) -C lib/retailer-sourcing check
 
 cargo-fix:
 	cd apps/mvp && cargo fix --tests
 	cd lib/money && cargo fix --tests
-	cd lib/shared && cargo fix --tests
+	cd lib/bodul_shared && cargo fix --tests
 	cd lib/retailer-sourcing && cargo fix --tests
 
 clippy-fix:
 	cd apps/mvp && cargo clippy --fix --tests
 	cd lib/money && cargo clippy --fix --tests
-	cd lib/shared && cargo clippy --fix --tests
+	cd lib/bodul_shared && cargo clippy --fix --tests
 	cd lib/retailer-sourcing && cargo clippy --fix --tests
 
 check-strict:
