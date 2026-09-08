@@ -1,4 +1,4 @@
-.PHONY: fmt test check cargo-fix clippy-fix check-strict docker-build docker-up docker-down db-dump gomd wip
+.PHONY: fmt test check cargo-fix clippy-fix check-strict docker-build docker-up docker-down db-dump gomd wip package publish
 
 DB_SERVICE ?= db
 DB_USER ?= bodul
@@ -22,6 +22,12 @@ check:
 	$(MAKE) -C lib/money check
 	$(MAKE) -C lib/bodul_shared check
 	$(MAKE) -C lib/retailer-sourcing check
+
+package:
+	$(MAKE) -C lib/bodul_shared package
+
+publish:
+	$(MAKE) -C lib/bodul_shared publish
 
 cargo-fix:
 	cd apps/mvp && cargo fix --tests
