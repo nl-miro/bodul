@@ -13,6 +13,12 @@ pub fn classify_link(url: &str, source: &str, _image_count: usize) -> LinkKind {
 }
 
 pub fn from_location(url: &str, source: &str) -> LinkKind {
+    let path = url.to_lowercase();
+
+    if !path.starts_with("https://www.anker.com/de/") {
+        return LinkKind::NotInterested;
+    }
+
     let matced_by_source = match source {
         "https://www.anker.com/de/server-sitemap-index-pages.xml" => Some(LinkKind::NotInterested),
         "https://www.anker.com/de/server-sitemap-index-products.xml" => Some(LinkKind::Product),
@@ -20,14 +26,7 @@ pub fn from_location(url: &str, source: &str) -> LinkKind {
         "https://www.anker.com/de/server-sitemap-index-blog.xml" => Some(LinkKind::Content),
         _ => None,
     };
-
-    let path = url.to_lowercase();
-
     if let Some(y) = matced_by_source {
-        if !path.starts_with("https://www.anker.com/de/") {
-            return LinkKind::NotInterested;
-        }
-
         return y;
     }
 

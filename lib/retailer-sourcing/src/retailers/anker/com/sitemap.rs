@@ -26,7 +26,8 @@ pub fn from_location(url: &str) -> LinkKind {
         LinkKind::Content
     } else {
         let v = vec![
-            "/ca-fr/", "/eu-de/", "/eu-en/", "/eu-pl/", "/ae/", "/au/", "/ca/", "/fr/", "/my/", "/nz/", "/uk/", "/vn/",
+            "/ca-fr/", "/eu-de/", "/eu-en/", "/eu-pl/", "/ae/", "/au/", "/ca/", "/de/", "/fr/", "/my/", "/nz/", "/uk/",
+            "/vn/",
         ];
 
         if v.iter().any(|p| path.contains(p)) {
