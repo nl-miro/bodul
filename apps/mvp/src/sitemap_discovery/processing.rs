@@ -18,9 +18,9 @@ mod models {
 
     use crate::RepositoryError;
     use crate::sitemap_discovery::model::SitemapError;
+    use bodul_shared::retailer::RetailerCode;
     use kernel::{ApplicationCommand, ApplicationEvent};
     use serde::{Deserialize, Serialize};
-    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -72,10 +72,10 @@ mod handler {
     use crate::sitemap_discovery::processing::sitemap::document_from_raw;
     use crate::{IntoCommandError, RepositoryError};
     use ::retailer_sourcing::registry::sitemap_config;
-    use chrono::Utc;
-    use kernel::io::{CommandError, CommandHandlerPort};
     use bodul_shared::SitemapConfig;
     use bodul_shared::retailer::RetailerCode;
+    use chrono::Utc;
+    use kernel::io::{CommandError, CommandHandlerPort};
     use uuid::Uuid;
 
     type Error = ProcessSitemapError;
@@ -268,9 +268,9 @@ mod model {
     use crate::RepositoryError;
     use crate::lib_sitemap::io::SitemapDocument;
     use crate::schema::processed_sitemaps;
+    use bodul_shared::retailer::RetailerCode;
     use chrono::{DateTime, Utc};
     use diesel::{Insertable, Queryable, Selectable};
-    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Debug, Clone, Queryable, Selectable)]

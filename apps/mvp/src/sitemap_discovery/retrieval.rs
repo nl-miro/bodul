@@ -28,9 +28,9 @@ mod models {
 
     use crate::RepositoryError;
     use crate::sitemap_discovery::model::SitemapError;
+    use bodul_shared::retailer::RetailerCode;
     use kernel::{ApplicationCommand, ApplicationEvent};
     use serde::{Deserialize, Serialize};
-    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Debug, Clone, Serialize, Deserialize, new)]
@@ -263,9 +263,9 @@ mod infra_sitemap_retrieval_model {
     use super::{map_to_retrieval_code, map_to_retrieval_status};
     use crate::RecordMappingError;
     use crate::schema::sitemap_retrievals;
+    use bodul_shared::retailer::RetailerCode;
     use chrono::{DateTime, Utc};
     use diesel::{Insertable, Queryable, Selectable};
-    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Insertable)]
@@ -339,9 +339,9 @@ mod infra_sitemap_retrieval_repository {
     use super::entity::SitemapRetrieval;
     use super::infra_sitemap_retrieval_model::{NewSitemapRetrievalRecord, SitemapRetrievalRecord};
     use crate::RepositoryError;
+    use bodul_shared::retailer::RetailerCode;
     use diesel::RunQueryDsl;
     use diesel::prelude::*;
-    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     pub struct SitemapRetrievalRepository {
@@ -560,9 +560,9 @@ mod fetching {
     use crate::sitemap_discovery::io::{ChildRef, Parsed, parse};
     use crate::sitemap_discovery::model::SitemapError;
     use ::retailer_sourcing::registry::sitemap_config;
-    use chrono::{DateTime, Utc};
     use bodul_shared::SitemapConfig;
     use bodul_shared::retailer::RetailerCode;
+    use chrono::{DateTime, Utc};
     use std::collections::HashSet;
 
     pub fn fetch(retailer: &RetailerCode) -> Result<Vec<RawSitemapDocument>, SitemapError> {

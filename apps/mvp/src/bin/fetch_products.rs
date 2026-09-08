@@ -6,10 +6,10 @@
 //! detection files is fetched once. An optional first argument caps the number of
 //! downloads (handy for a quick test run): `fetch_products 20`.
 
+use bodul_shared::retailer::RetailerCode;
 use mvp::retailer_data_ingestion::Client;
 use rand::prelude::IteratorRandom;
 use serde::Deserialize;
-use bodul_shared::retailer::RetailerCode;
 use std::collections::HashSet;
 use std::fs;
 use std::path::{Path, PathBuf};

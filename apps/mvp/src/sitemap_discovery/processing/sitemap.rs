@@ -20,8 +20,8 @@ mod internal {
     use super::super::parse::{ChildRef, Parsed, parse};
     use crate::lib_sitemap::io::{RawSitemapDocument, SitemapDocument};
     use crate::sitemap_discovery::model::SitemapError;
-    use chrono::{DateTime, Utc};
     use bodul_shared::SitemapConfig;
+    use chrono::{DateTime, Utc};
     use std::collections::{HashMap, HashSet};
 
     /// A child sitemap referenced by an index.

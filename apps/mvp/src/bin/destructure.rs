@@ -7,9 +7,9 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use mvp::html_parser;
 use bodul_shared::retailer::RetailerCode;
 use bodul_shared::retailer::code_for_name;
+use mvp::html_parser;
 
 fn main() {
     dotenvy::dotenv().ok();

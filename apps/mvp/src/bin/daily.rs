@@ -3,11 +3,11 @@
 use std::error::Error;
 
 use ::retailer_sourcing::registry::sitemap_config;
+use bodul_shared::retailer::RetailerCode;
 use kernel::io::NewCommandMetadata;
 use mvp::assembly::boot;
 use mvp::assembly::io::{AppCommand, NewCommandEnvelope};
 use mvp::sitemap_discovery::io::RequestSitemapRetrieval;
-use bodul_shared::retailer::RetailerCode;
 use uuid::Uuid;
 
 fn main() -> Result<(), Box<dyn Error>> {

@@ -9,9 +9,9 @@
 //! `destructure` and `valueless` binaries); [`architecture_for`] returns it and
 //! [`destructure`] applies it to extract values.
 
+use bodul_shared::retailer::RetailerCode;
 use kuchiki::traits::*;
 use retailer_sourcing::architecture_for;
-use bodul_shared::retailer::RetailerCode;
 
 mod blank;
 mod extract;
@@ -81,8 +81,8 @@ fn serialize_node(node: &kuchiki::NodeRef) -> Result<String, std::io::Error> {
 #[cfg(test)]
 mod tests {
     use super::destructure;
-    use serde_json::Value;
     use bodul_shared::retailer::RetailerCode;
+    use serde_json::Value;
     use std::fs;
     use std::path::PathBuf;
 

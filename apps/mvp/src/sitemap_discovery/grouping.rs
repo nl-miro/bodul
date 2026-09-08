@@ -9,9 +9,9 @@ pub mod io {
 }
 
 mod models {
+    use bodul_shared::retailer::RetailerCode;
     use kernel::{ApplicationCommand, ApplicationEvent};
     use serde::{Deserialize, Serialize};
-    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -46,9 +46,9 @@ mod models {
 }
 
 mod grouping {
-    use serde::{Deserialize, Serialize};
     use bodul_shared::link::LinkKind;
     use bodul_shared::retailer::RetailerCode;
+    use serde::{Deserialize, Serialize};
 
     use crate::lib_sitemap::io::SitemapDocument;
     use ::retailer_sourcing::registry::classify_link;
@@ -255,9 +255,9 @@ pub mod model {
     use super::super::model::GroupedSitemapContent;
     use crate::RepositoryError;
     use crate::schema::grouped_sitemap_contents;
+    use bodul_shared::retailer::RetailerCode;
     use chrono::{DateTime, Utc};
     use diesel::{Insertable, Queryable, Selectable};
-    use bodul_shared::retailer::RetailerCode;
     use uuid::Uuid;
 
     #[derive(Insertable)]

@@ -6,10 +6,10 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use ::retailer_sourcing::registry::classify_link;
-use mvp::lib_sitemap::io::SitemapDocument;
-use serde::Serialize;
 use bodul_shared::link::LinkKind;
 use bodul_shared::retailer::RetailerCode;
+use mvp::lib_sitemap::io::SitemapDocument;
+use serde::Serialize;
 
 #[derive(Serialize, Default)]
 struct Group {

@@ -4,8 +4,8 @@ use crate::retailers::{
     // anker::{my as ankermy},
     anker::{
         au as ankerau, ca as ankerca, com as ankercom, de as ankerde, eu as ankereu, fr as ankerfr,
-        italycom as ankeritalycom, japancom as ankerjapancom, kr as ankerkr,
-        nordicscom as ankernordicscom, nz as ankernz, pl as ankerpl, uk as ankeruk, vn as ankervn,
+        italycom as ankeritalycom, japancom as ankerjapancom, kr as ankerkr, nordicscom as ankernordicscom,
+        nz as ankernz, pl as ankerpl, uk as ankeruk, vn as ankervn,
     },
     micom,
     minisforum::{
