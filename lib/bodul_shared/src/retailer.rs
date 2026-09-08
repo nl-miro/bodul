@@ -1,3 +1,5 @@
+use thiserror::Error;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub enum RetailerCode {
     MinisForumEu,
@@ -115,16 +117,9 @@ pub fn code_for_name(name: &str) -> Option<RetailerCode> {
     RetailerCode::from_str(&name.to_lowercase()).ok()
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Error, Debug, PartialEq)]
+#[error("unknown retailer code: {0}")]
 pub struct RetailerCodeConversionError(String);
-
-impl std::fmt::Display for RetailerCodeConversionError {
-    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(formatter, "unknown retailer code: {}", self.0)
-    }
-}
-
-impl std::error::Error for RetailerCodeConversionError {}
 
 impl TryFrom<&str> for RetailerCode {
     type Error = RetailerCodeConversionError;
@@ -300,6 +295,7 @@ mod tests {
         assert_eq!(retailer_code, RetailerCode::MinisForumEu);
     }
 
+    // Proves invalid retailer slugs are rejected with the expected error payload.
     #[test]
     fn rejects_unknown_retailer_code() {
         let error = RetailerCode::try_from("unknown").unwrap_err();
@@ -307,10 +303,19 @@ mod tests {
         assert_eq!(error, RetailerCodeConversionError("unknown".to_string()));
     }
 
+    // Proves a retailer enum converts back to its lowercase slug string.
     #[test]
     fn converts_retailer_code_to_string_with_try_into() {
         let retailer_code: String = RetailerCode::MinisForumEu.try_into().unwrap();
 
         assert_eq!(retailer_code, "minisforumeu");
+    }
+
+    // Proves the Australian retailer slug maps to the correct enum variant.
+    #[test]
+    fn converts_minisforumau_string_to_retailer_code() {
+        let retailer_code = RetailerCode::try_from("minisforumau".to_string()).unwrap();
+
+        assert_eq!(retailer_code, RetailerCode::MinisForumAu);
     }
 }
