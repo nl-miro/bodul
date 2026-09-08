@@ -18,12 +18,15 @@
 //! dev valueless -r admhr       # -> data/offers-valueless/admhr/… (+ -segments/, all pages)
 //! ```
 
+use bodul_html_extractor::html_extractor::ExtractionResult;
+use bodul_html_extractor::{ExtractError, html_extractor};
+use bodul_shared::retailer::RetailerCode;
 use clap::{Parser, Subcommand};
+use development::io::RetailerOutcome;
 use diesel::prelude::*;
 use diesel::sql_types::Text;
 use mvp::database::{DatabaseConfig, connect};
 use mvp::html_parser;
-use bodul_shared::retailer::RetailerCode;
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -58,7 +61,16 @@ enum Command {
         /// Max pages per retailer to process (0 = all).
         #[arg(default_value = "0")]
         count: usize,
-        /// Retailer slug(s) to target (e.g. admhr); repeatable. Omit for all.
+        /// Retailer slug(s) to target (e.g. ankercom); repeatable. Omit for all.
+        #[arg(short, long = "retailer")]
+        retailers: Vec<String>,
+    },
+    /// Extract dumped offer pages into data/offers-destructed/{retailer}/{page}.json
+    Extract {
+        /// Max pages per retailer to process (0 = all).
+        #[arg(default_value = "0")]
+        count: usize,
+        /// Retailer slug(s) to target (e.g. ankercom); repeatable. Omit for all.
         #[arg(short, long = "retailer")]
         retailers: Vec<String>,
     },
@@ -67,7 +79,7 @@ enum Command {
         /// Max pages per retailer to process (0 = all).
         #[arg(default_value = "0")]
         count: usize,
-        /// Retailer slug(s) to target (e.g. admhr); repeatable. Omit for all.
+        /// Retailer slug(s) to target (e.g. ankercom); repeatable. Omit for all.
         #[arg(short, long = "retailer")]
         retailers: Vec<String>,
     },
@@ -126,6 +138,7 @@ fn main() {
             dump(&rows, "offers", "html");
         }
         Command::Destructure { count, retailers } => process_offers(count, &retailers, Processing::Destructure),
+        Command::Extract { count, retailers } => process_offers(count, &retailers, Processing::Extract),
         Command::Valueless { count, retailers } => process_offers(count, &retailers, Processing::Valueless),
     }
 }
@@ -197,6 +210,7 @@ fn dump(rows: &[DumpRow], kind: &str, ext: &str) {
 enum Processing {
     /// Destructure pages into JSON under `data/offers-destructed/`.
     Destructure,
+    Extract,
     /// Blank pages into `data/offers-valueless/` (+ lifted `-segments/`).
     Valueless,
 }
@@ -233,6 +247,7 @@ fn process_offers(count: usize, retailers: &[String], mode: Processing) {
         for path in pages.into_iter().take(limit) {
             let result = match mode {
                 Processing::Destructure => destructure_page(&path, slug, retailer),
+                Processing::Extract => extract_page(&path, slug, retailer),
                 Processing::Valueless => valueless_page(&path, slug, retailer),
             };
             match result {
@@ -296,6 +311,31 @@ fn destructure_page(path: &Path, slug: &str, retailer: RetailerCode) -> Result<P
     let json = serde_json::to_string_pretty(&destructured).map_err(|error| error.to_string())?;
 
     let output_dir = PathBuf::from("data/offers-destructed").join(slug);
+    fs::create_dir_all(&output_dir).map_err(|error| format!("creating {}: {error}", output_dir.display()))?;
+    let stem = path.file_stem().and_then(|stem| stem.to_str()).unwrap_or("page");
+    let out_path = output_dir.join(format!("{stem}.json"));
+    fs::write(&out_path, json).map_err(|error| format!("writing {}: {error}", out_path.display()))?;
+    Ok(out_path)
+}
+
+/// Extract one page into `data/offers-extracted/{slug}/{stem}.json`.
+fn extract_page(path: &Path, slug: &str, retailer: RetailerCode) -> Result<PathBuf, String> {
+    let html = fs::read_to_string(path).map_err(|error| error.to_string())?;
+
+    let architecture = match ::bodul_html_extractor::architecture_for(retailer) {
+        Ok(architecture) => architecture,
+        Err(error) => return Err(error.to_string()),
+    };
+
+    let extractor = html_extractor::Backend::Kuchiki;
+
+    let extracted: ExtractionResult = extractor
+        .extract(&html, &architecture)
+        .map_err(|error| error.to_string())?;
+
+    let json = serde_json::to_string_pretty(&extracted.json).map_err(|error| error.to_string())?;
+
+    let output_dir = PathBuf::from("data/offers-extracted").join(slug);
     fs::create_dir_all(&output_dir).map_err(|error| format!("creating {}: {error}", output_dir.display()))?;
     let stem = path.file_stem().and_then(|stem| stem.to_str()).unwrap_or("page");
     let out_path = output_dir.join(format!("{stem}.json"));
