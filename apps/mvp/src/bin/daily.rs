@@ -22,26 +22,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     // let retailer_codes = RetailerCode::ALL;
     // TODO
-    let retailer_codes = vec![
-        // RetailerCode::AnkerCa,
-        // RetailerCode::AnkerFr,
-
-        // RetailerCode::AnkerUk,
-        // RetailerCode::AnkerItalyCom,
-        // RetailerCode::AnkerNordicsCom,
-        // RetailerCode::AnkerJapanCom,
-        // RetailerCode::AnkerKr,
-
-        // RetailerCode::AnkerVn,
-        // RetailerCode::AnkerNz,
-        RetailerCode::AnkerCom,
-        RetailerCode::AnkerEu,
-        RetailerCode::AnkerDe,
-        RetailerCode::AnkerPl,
-        RetailerCode::AnkerAu,
-        // I dont think it exists anymore
-        // RetailerCode::AnkerMy,
-    ];
+    let retailer_codes = vec![RetailerCode::AnkerCa];
 
     for retailer_code in retailer_codes {
         if sitemap_config(&retailer_code).is_none() {
