@@ -1,9 +1,10 @@
 //! Registry of retailer sourcing configurations.
 
 use crate::retailers::{
+    // anker::{my as ankermy},
     anker::{
         au as ankerau, ca as ankerca, com as ankercom, de as ankerde, eu as ankereu, fr as ankerfr,
-        italycom as ankeritalycom, japancom as ankerjapancom, kr as ankerkr, my as ankermy,
+        italycom as ankeritalycom, japancom as ankerjapancom, kr as ankerkr,
         nordicscom as ankernordicscom, nz as ankernz, pl as ankerpl, uk as ankeruk, vn as ankervn,
     },
     micom,
@@ -71,7 +72,7 @@ pub fn architecture_for(retailer: RetailerCode) -> crate::parsing::structure::Re
         RetailerCode::AnkerPl => ankerpl::prelude::offer_detail_architecture_v1(),
         RetailerCode::AnkerAu => ankerau::prelude::offer_detail_architecture_v1(),
         RetailerCode::AnkerNz => ankernz::prelude::offer_detail_architecture_v1(),
-        RetailerCode::AnkerMy => ankermy::prelude::offer_detail_architecture_v1(),
+        // RetailerCode::AnkerMy => ankermy::prelude::offer_detail_architecture_v1(),
         RetailerCode::AnkerVn => ankervn::prelude::offer_detail_architecture_v1(),
     }
 }
@@ -126,7 +127,7 @@ pub fn sitemap_config(code: &RetailerCode) -> Option<SitemapConfig> {
         RetailerCode::AnkerPl => ankerpl::prelude::sitemap_config(),
         RetailerCode::AnkerAu => ankerau::prelude::sitemap_config(),
         RetailerCode::AnkerNz => ankernz::prelude::sitemap_config(),
-        RetailerCode::AnkerMy => ankermy::prelude::sitemap_config(),
+        // RetailerCode::AnkerMy => ankermy::prelude::sitemap_config(),
         RetailerCode::AnkerVn => ankervn::prelude::sitemap_config(),
     };
 
@@ -189,7 +190,8 @@ pub fn classify_link(code: RetailerCode, url: &str, source: &str, image_count: u
         RetailerCode::AnkerPl => ankerpl::prelude::classify_link(url, source, image_count),
         RetailerCode::AnkerAu => ankerau::prelude::classify_link(url, source, image_count),
         RetailerCode::AnkerNz => ankernz::prelude::classify_link(url, source, image_count),
-        RetailerCode::AnkerMy => ankermy::prelude::classify_link(url, source, image_count),
+        // Doesnt exist anymore, it redirect to lazada.com webshop
+        // RetailerCode::AnkerMy => ankermy::prelude::classify_link(url, source, image_count),
         RetailerCode::AnkerVn => ankervn::prelude::classify_link(url, source, image_count),
     }
 }

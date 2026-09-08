@@ -51,7 +51,7 @@ pub enum RetailerCode {
     AnkerPl,
     AnkerAu,
     AnkerNz,
-    AnkerMy,
+    // AnkerMy,
     AnkerVn,
 }
 
@@ -103,7 +103,7 @@ pub const RETAILERS: &[(&str, RetailerCode)] = &[
     ("AnkerPl", RetailerCode::AnkerPl),
     ("AnkerAu", RetailerCode::AnkerAu),
     ("AnkerNz", RetailerCode::AnkerNz),
-    ("AnkerMy", RetailerCode::AnkerMy),
+    // ("AnkerMy", RetailerCode::AnkerMy),
     ("AnkerVn", RetailerCode::AnkerVn),
 ];
 
@@ -179,7 +179,7 @@ impl TryFrom<&str> for RetailerCode {
             "ankerpl" => Ok(Self::AnkerPl),
             "ankerau" => Ok(Self::AnkerAu),
             "ankernz" => Ok(Self::AnkerNz),
-            "ankermy" => Ok(Self::AnkerMy),
+            // "ankermy" => Ok(Self::AnkerMy),
             "ankervn" => Ok(Self::AnkerVn),
 
             unknown => Err(RetailerCodeConversionError(unknown.to_string())),
@@ -203,7 +203,7 @@ impl From<RetailerCode> for String {
 
 impl RetailerCode {
     /// Every known retailer code.
-    pub const ALL: [RetailerCode; 47] = [
+    pub const ALL: [RetailerCode; 46] = [
         RetailerCode::AnkerCom,
         RetailerCode::AnkerJapanCom,
         RetailerCode::AnkerKr,
@@ -217,7 +217,8 @@ impl RetailerCode {
         RetailerCode::AnkerPl,
         RetailerCode::AnkerAu,
         RetailerCode::AnkerNz,
-        RetailerCode::AnkerMy,
+        // They moved everything but the content pages to some local distributer. Since Malaysia is not a target market, skipping it for now
+        // RetailerCode::AnkerMy,
         RetailerCode::AnkerVn,
         RetailerCode::MiCom,
         RetailerCode::MinisForumEu,

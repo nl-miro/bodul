@@ -130,11 +130,11 @@ impl InMemoryRetailerRepository {
                 name: "AnkerNz".to_string(),
                 code: RetailerCode::AnkerNz,
             },
-            Retailer {
-                id: Uuid::parse_str("fc80b8a2-df02-43db-bf03-3406ea920006").unwrap(),
-                name: "AnkerMy".to_string(),
-                code: RetailerCode::AnkerMy,
-            },
+            // Retailer {
+            //     id: Uuid::parse_str("fc80b8a2-df02-43db-bf03-3406ea920006").unwrap(),
+            //     name: "AnkerMy".to_string(),
+            //     code: RetailerCode::AnkerMy,
+            // },
             Retailer {
                 id: Uuid::parse_str("c36ec54e-e8a8-42a4-bb9e-7c3d4bc55d11").unwrap(),
                 name: "AnkerVn".to_string(),
