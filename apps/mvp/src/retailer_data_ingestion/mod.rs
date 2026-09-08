@@ -8,7 +8,7 @@ use std::io::Read;
 
 use bodul_shared::retailer::RetailerCode;
 use flate2::read::GzDecoder;
-use reqwest::header::{COOKIE, HeaderValue};
+use reqwest::header::{ACCEPT, ACCEPT_LANGUAGE, CACHE_CONTROL, COOKIE, HeaderMap, HeaderValue, PRAGMA};
 
 /// An error fetching a remote resource.
 #[derive(Debug, Clone)]
@@ -33,6 +33,31 @@ const USER_AGENT: &str =
 /// A minimal blocking HTTP client for fetching retailer resources.
 pub struct Client {}
 
+/// Headers matching a real browser navigation, needed to get past mi.com's
+/// Akamai bot protection, which 403s a bare User-Agent-only request.
+///
+/// `Accept-Encoding` is deliberately left unset: [`decode_body`] only knows how
+/// to gunzip, so advertising `br`/`zstd` support would let a server send a
+/// compression we can't decode.
+fn micom_akamai_headers() -> HeaderMap {
+    let mut headers = HeaderMap::new();
+    headers.insert(
+        ACCEPT,
+        HeaderValue::from_static("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),
+    );
+    headers.insert(ACCEPT_LANGUAGE, HeaderValue::from_static("en-US,en;q=0.9"));
+    headers.insert(PRAGMA, HeaderValue::from_static("no-cache"));
+    headers.insert(CACHE_CONTROL, HeaderValue::from_static("no-cache"));
+    headers.insert("Upgrade-Insecure-Requests", HeaderValue::from_static("1"));
+    headers.insert("Sec-Fetch-Dest", HeaderValue::from_static("document"));
+    headers.insert("Sec-Fetch-Mode", HeaderValue::from_static("navigate"));
+    headers.insert("Sec-Fetch-Site", HeaderValue::from_static("none"));
+    headers.insert("Sec-Fetch-User", HeaderValue::from_static("?1"));
+    headers.insert("Sec-GPC", HeaderValue::from_static("1"));
+    headers.insert("Priority", HeaderValue::from_static("u=0, i"));
+    headers
+}
+
 /// The first two bytes of every gzip stream (RFC 1952).
 const GZIP_MAGIC: [u8; 2] = [0x1f, 0x8b];
 
@@ -56,12 +81,13 @@ impl Client {
     }
 
     fn get_with_cookie(url: &str, cookie: Option<&str>, retailer: Option<RetailerCode>) -> Result<String, FetchError> {
-        let client = reqwest::blocking::Client::builder()
-            .user_agent(USER_AGENT)
-            .build()
-            .map_err(|error| FetchError {
-                message: error.to_string(),
-            })?;
+        let mut builder = reqwest::blocking::Client::builder().user_agent(USER_AGENT);
+        if retailer == Some(RetailerCode::MiCom) {
+            builder = builder.default_headers(micom_akamai_headers());
+        }
+        let client = builder.build().map_err(|error| FetchError {
+            message: error.to_string(),
+        })?;
 
         let mut request = client.get(url);
 

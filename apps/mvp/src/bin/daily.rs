@@ -22,7 +22,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     // let retailer_codes = RetailerCode::ALL;
     // TODO
-    let retailer_codes = vec![RetailerCode::AnkerCa];
+    let retailer_codes = vec![RetailerCode::MiCom];
 
     for retailer_code in retailer_codes {
         if sitemap_config(&retailer_code).is_none() {
