@@ -1,0 +1,10 @@
+[workspace]
+members = [
+    "retailer-management",
+    "retailer-sourcing",
+    "retailer-data-ingestion",
+    "product-information-management",
+    "retailer-offer",
+]
+
+resolver = "2"
